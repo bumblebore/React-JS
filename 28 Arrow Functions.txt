@@ -1,0 +1,39 @@
+What is arrow function? 	Fat Arrow
+HacksbyMozilla arrow function
+
+
+Shorter way of writing a JS function
+
+var numbers = [3,56,2,48,5]
+
+1) normal way js function
+	function square(x) {
+	return x*x;
+}
+
+2) anonymous function
+	const newNumbers = numbers.map(function (x) {	//no name
+	return x*x;
+}) 
+				
+3) Arrow function			//what is this part? function
+const newNumbers = numbers.map( (x) =>{  return x*x;}	//no name for function
+or	const newNumbers = numbers.map( x =>  return x*x);	
+Other functions using arrow functions
+
+1) map function:
+const newNumbers = numbers.map( x -> x * x);
+
+console.log(newNumbers);
+
+2) Filter	
+const newNumbers = numbers.filter(num => num <10)
+
+3) Reduce
+const newNumbers = numbers.reduce((accumulator, currentNumber) => {return accumulator + currentNumber);
+
+4) Find
+const newNumbers = numbers.find(num => num >10 );}
+
+5) FindIndex
+const newNumber = numbers.findIndex(num => num >10);

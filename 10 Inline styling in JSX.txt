@@ -1,0 +1,45 @@
+How to add styling?
+1) JSX Attributes
+2) inline styles
+______________________
+Inline Styles
+How to add inline style in html
+<h1 style="color: red ">Hello World! </h1>
+
+But is below html?NO it is JSX
+	What error? Style property expects mapping from style properties to values
+							       not to string
+		//what is string? color: red
+		//string is as value to attribute: "style"
+		Value should be JS object
+			for ex
+				{
+				  color: value,
+				  width: 100
+				}
+		//Insert key value instead of string //note write JS object inside curly braces (total,2 )	//JS object inside curly braces
+<h1 style="{{color: value}}">Hello World! </h1>
+ReactDOM.render(<h1 style="color: red ">Hello World! </h1>, document.getElementById("root"))
+_________________________
+When to use inline styling?
+	To change things dynamically
+	User does something-> Time/Hour changes -> Trigger change in style
+For ex
+
+1) Create your custom style 
+const customStyle = { 
+color: "red", 
+fontSize: "20px";
+border: "1px solid black"
+}
+
+2) insert object as a style
+	<h1 style={customStyle}>Hello World! </h1>,
+	 document.getElementById("root")
+);
+
+
+3) how to change style when user touches?
+	Update the properties of customStyle object
+	How? dot notation
+	customStyle.color = "blue";

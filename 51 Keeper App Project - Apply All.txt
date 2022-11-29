@@ -1,0 +1,436 @@
+1) Give keeper app some functionality
+
+1) Add note to keeper app
+2) Delete notes from keeper app // using delete Button
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+A) Add Note
+ 
+1) KEEP TRACK OF TITLE AND CONTENT
+
+a) CreateArea component
+b) create a  form with input and textArea
+c) Create constant 	for title and content		//can we hav eseparate constants?yes but more work
+	const [note, setNote] = useState()
+	What will be initial state? object with title and content as "" //empty string
+	
+	const [note, setNote] = useState({
+	title: ""
+	content: ""
+});
+
+d) Use note in input/text area in the form
+	How to use? value = {note.title} and value = {note.content}
+	//Inputs are now controlled!!
+
+e) Update input when get changed., 
+	How to update when changed? onChange and event
+	 onChange = {}
+	What happens onChange? handleChange() triggered
+	//What happens when button is pressed in a form>
+
+f) What handleChange will do? Receive event from button onClick
+	What do we need from event? name and value
+	how to get these values from event? destructured object
+
+	const {name, value} = event.target;
+	We have got name and value from button
+
+g) What to do with this name and value? Add it to prevNote
+	put [name] like this. Why? turns name key from string to actual value of name constant //not takes literally
+	all key values currently in note are in note const
+	use spread operator to spread them out
+
+
+TEST: start typing 	
+	This is a title
+	This is the content 
+
+
+	Components 
+	   App
+	    Header
+	    CreateArea ->
+			props
+			  new prop : ""
+			hooks
+			  State: Object
+			    title: "This is a title"
+			    content: "This is the content" 
+	    Note key="1"
+	    Footer
+
+	NOTE IS LOGGED
+
+2) PASS THE NEW NOTE TO APP
+a) Where is note in const note.
+	How to add note? Add buttong
+
+b) <button onClick={}>Add</button>
+	What will happen when button clicked? 	function submitNote() triggered
+	also what is default behaviour when button clicked in form? page refreshes
+		Test it out:  type and press Add -> Entire screen flashes
+	How to avoid this page refresh? event.preventDefault
+	 What will submit note use?button click event (triggered from onClick)
+	Pass the event to submit note. why need event? to use preventDefault()
+
+ function submitNote(event) {
+  event.preventDefault();
+}
+		Test it out again:
+		sdfgfd
+		sdfgfd	
+			-> Add
+			-> Screen does not refresh anymore
+
+c) Pass the note to app.jsx
+	How to pass? function addNote(note) {
+	Where is this note added? value to one of the props in CreateArea		//onAdd
+	Why doint this? to add note as value in CreateArea
+	          <CreateArea onAdd={addNote} /> 
+	
+	TEST: //Our create area has got a prop under property name onAdd
+			What does it get as value? function addNote() from app.js
+	  App	
+		Header
+		CreateArea
+			props:
+				onAdd: addNote()
+				new prop : ""
+		Note key="1"
+		Footer	
+
+d) Trigger the addNote() why? get hold of onAdd why get hold of onAdd? to passnote 
+				functionCreateArea(props)	//get hold of props that are passed
+				function submitNote(event) { props.onAdd}	//get hold of onAdd
+
+		We have successfully called function addNote(note) from App.jsx
+
+e) Pass the current created note in onAdd();
+	why? to add the note
+
+TEST out in App.js
+   function addNote(note) {
+	console.log(note);		//try logging the note
+}
+
+Type -> Add -> Console:   Object {title: sdfsdf", content: "sdfsdf"}
+			title: "sdfsdf"		
+			content: "sdfsdf"
+
+WE HAVE RECEIVED THE NOTE INTO APP.js
+
+
+3) Add new note to an array (App.jsx)
+Where will we create the array? app.jsx => addNote -> 
+	setNotes(prevNotes => {
+	return	[...prevNotes, newNote];	//return the array
+	});
+
+where to store the notes array?	const [notes, setNotes ]
+How to add our new note at the end?
+Where is note value coming from? props.onAdd(note);
+
+	   
+
+	function App() {
+	  const [notes, setNotes] = useState([]);
+	  
+	  function addNote(newNote) {
+	   setNotes(prevNotes => {
+		[...prevNotes, newNote];
+});
+}
+}
+
+
+4) Render separate note components for each item(noteItem) in array(notes)
+Where is the sample note?
+<Note key={1} title="Note title" content="Note content" />
+What we want? different note component for each item in array 
+How to get hold of each item in array? map
+What once we have hold of each item -> execute a function
+	What will we execute? return new Note Component
+	What properties to pass to Note component? title  ---> pass value noteItem.title
+					           content = {noteItem.content}
+
+
+Earlier we were displaying? Static notes
+<Note key={1} title="Note title" content="Note content" />
+
+Now? Displaying notes dynamically from create note component
+TEST:
+Title: This is a new note
+         Here's some content ---> Add
+Note gets added
+
+Debug:	//Our array has got new object with dynamic title and content
+App
+	Header
+		props
+			new prop : ""
+		hooks
+			State : Array
+			      0 : Object
+			         title: "This is a new Note"
+			   content: "Here's some content"
+	
+	CreateArea
+	Note
+	Footer
+
+
+B) Delete Notes
+How to implement delete note functionality?
+
+
+1) How to trigger delete function? Get  callback()from Note component -> triggers a delete function (in App.jsx)
+
+a) We have a delete button inside note component (note.jsx)
+	What will delete button trigger? function in App.jsx , which function? handleClick
+	What will handleClick() do? inside it there is function 
+			 How is this function passed? via props
+			 What will that function do? delete this note from array
+	How will the button trigger the function? props
+		onClick Attribute
+		
+
+function Note(props) {
+function handleClick() {
+
+}
+  return (
+   <div className="note">
+     <h1>{props.title} </h1>
+     <p>{props.content}</p>
+     <button onClick={handleClick}> DELETE </button>
+   </div>
+);
+}
+
+The note is received by function deleteNote in app.jsx
+What does function need? id of note to delete it
+function deleteNote(id) {}
+After getting id this function passed to each note that is rendered as a property
+
+How is function passed to each note? property onDelete	//in createArea notes.map....
+	onDelete={deleteNote} in app.jsx
+
+TEST:
+sdffsd
+sdffsd
+Click ->Add
+ -> App	//Can see onDelete triggering deleteNote function() in App.jsx
+	Header
+	CreateArea
+	Note
+		props
+			content: "sdffsd"
+			onDelete: deleteNote()
+			title: "sdffsd"
+			new prop: ""
+	Footer
+a) What will deleteNote function do?	//in App.jsx
+
+[I]
+function deleteNote(id) {
+console.log("Delete was triggered");	//for testing
+
+//TEST it out
+dfgdfg
+dfgdfg
+	-> Add
+
+//Note gets added
+//Click delete
+Console: Delete was triggered
+//Successfully can trigger deleteNote() function in App component
+
+[II]
+2) how to filter item? filter function
+function deleteNote(id) {
+console.log("Delete was triggered");	//for testing
+				//delete note from array. how? setNotes()
+
+  setNotes(prevNotes => {		//prevNotes is the array //loop using filter function
+       prevNotes.filter((noteItem, index) => {			//Add arrow function as argument
+					//What are arguments? value currently looping in array, index of item
+	return index !== id;			//Array contains everything except item whose index match id	
+})})}}
+
+[III]
+
+//Call this function in Notes.jsx
+function handleClick() {
+ 	props.onDelete();
+}
+
+
+iV)
+Pass key and id to note component	
+How to create this id? uuid
+map function similar to filter, and we can index of current item as we are looping through
+
+notes.map((noteItem, index) => {
+//we will use   //pass index of note item from notes array as id
+return(
+<Note
+	key = {index}
+	id = {index}
+	title={noteItem.title}
+	content= {noteitem.content}
+	onDelete={deleteNote}
+	/> }}	//recognize code as javascript
+
+
+
+3) pick index and id in  Note component -> trigger delete -> pass id back to App component 
+	
+ how to pick index / id in note component?
+	props.onDelete(props.id);
+When we trigger on delete => we send it back
+TEST:
+
+A new title	
+A new Note -> Add
+
+Click delete ->  Disappears from array
+
+----------------------------------------------------
+
+How to clear title and content after note created?
+//Clear out the const note object
+//set it to "" as beginning
+
+So Basically
+CreateArea.jsx
+inside 
+function submitNote(event) {
+  props.onAdd(note);	//note gets added to App.jsx
+  setNote({		//Set note state to empty title and content
+	title: "",
+	content: ""
+})
+  event.preventDefault();
+  }
+//Since in CreateArea <input... value={note.title} and
+		<textArea... value={note.content}	//it will reflect state of notes
+TEST
+sdfsdf
+sdfsdf -> Add
+//both go back to blank
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Code:
+
+1) index.js
+
+import React from "react"
+import ReatDOM from "react-dom";
+import App from "./components"
+
+
+ReactDOM.render(<App />, document.getElmentById("root"));
+---------------------------------------------------------------------
+2) CreateArea.jsx
+
+import React from "react";
+
+function CreateArea(props) {
+
+const [note, setNote] = useState({
+	title: ""
+	content: ""
+});
+
+function handleChange() {
+   const {name, value} = event.target;
+   
+   setNote(prevNote => {
+	return	[...prevNotes, newNote];	//return the array	
+});
+}
+
+function submitNote(event) {
+	props.onAdd(note)	;
+	setNote({		//Set note state to empty title and content
+		title: "",
+		content: ""
+})
+	event.preventDefault();
+}
+
+  return ( 
+   <div>
+      <form>
+         <input name= "title" onChange={} value = {note.title}placeholder="Title" />
+         <textarea name="content" onChange={} value = {note.content} placeholder="Take a note..." rows = "3"	
+        <button onClick={submitNote}> Add </button>
+    </form>
+  </div>
+);
+}
+export default CreateArea;
+------------------------------------------------------------------------------------
+App.jsx
+
+import Note from"./Note"
+import CreateArea from "./CreateArea";
+
+function App() {
+
+   function addNote(note) {
+	console.log(note);		//try logging the note
+}
+function deleteNote(id) {
+console.log("Delete was triggered");
+setNotes(prevNotes => {
+  return prevNotes.filter((noItem, index) => {
+	return index!== id;
+});
+});
+}
+     return (
+       <div>
+          <Header />
+          <CreateArea onAdd={addNote} /> 
+           {notes.map((noteItem)) => {
+	return (
+	<Note
+	key = {index}
+	id = {index}
+	title={noteItem.title}
+	content= {noteitem.content}
+	onDelete={deleteNote}
+	/> }}	//recognize code as javascript
+}
+	
+         //<Note key={1} title="Note title" content="Note content" />
+         <Footer />
+         </div>
+);
+}
+export default App;
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Note.jsx
+import React from "react";
+
+function Note(props) {
+
+function handleClick() {
+ 	props.onDelete(props.id);
+}
+
+  return (
+   <div className="note">
+     <h1>{props.title} </h1>
+     <p>{props.content}</p>
+     <button > DELETE </button>
+   </div>
+);
+}
+
+export default Note;

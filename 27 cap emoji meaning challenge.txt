@@ -1,0 +1,22 @@
+Objective: cap all meanings to 100 chars and then  truncate them
+HOW?
+1) Map to entire array,  limit to 100 char	
+			using subString() method -> what substring does?  
+						if str ='Mozilla';
+							str.substring(1,3)	//prints 1 to 3
+
+What does map function do?
+	new array after doing some operation on all items
+	
+
+
+index.js
+
+import emojipedia from "./emojipedia"
+
+					//we know we get array from map -> build cont to store that array
+const newEmojipedia = emojipedia.map(function(emojiEntry) {
+ return  emojiEntry.meaning.substring(0,100)			//limit to 100 char
+})
+
+console.log(newEmojipedia)

@@ -1,0 +1,65 @@
+Windows
+//no need for sandbox
+
+1) instal node
+	node --version
+	if not Download from nodejs-org	
+	Why we need node?NPM for installing packages w react
+
+2) Install Hyperterminal
+
+4) Install VS Code
+
+
+5) Extensions
+	Install Babel Extension: sublime-babel-vscode
+	preferences -> extension
+	VS Code: Sublime Babel By Josh Peng
+
+	VSCode Icon Extension
+	
+6) Install React
+	 npx create-react-app my-app-name			//What is npx? package runner -> comes with npm	
+	 	//Creates app, //Installs packages : react, react-dom & react-scripts
+
+
+	npm install						          //Scripts required to run react-app locally
+
+6.1) how to install npm from zip downloaded
+	cd Downloads/KeeperApp
+	npm install
+	npm start
+
+7) Run App
+	cd to my-app using BASH
+	$ cd /c/Users/P.D/my-app		//Navigate
+	npm start				//npm start	//Uses react script package to run script and open app
+	
+	localhost:3000
+
+	
+8) open my-app folder		//prepackaged files
+	node_modules
+	public
+	src	
+				//note: delete photos + robot.txt(for indexing)
+
+
+9) public/index.html				//Add index.js as script to index.html
+	//Add index.js script to react
+
+	<!DOCTYPE html>
+	<html lang="en">	 
+	<head>
+	 <title> React App </title>
+ 	</head>
+	<body>
+	  <script src="./"src/index.js></script>		//Add index.js as script to index.html
+	<div id="root"></div>
+	</html>
+
+10) index.js
+	import React from 'react'
+	import ReactDOM from 'react-dom';
+	
+	ReactDOM.render(<h1> Hello World </h1>, document,getElementById('root'));

@@ -1,0 +1,103 @@
+Original Objective: pull out below
+	Destructure the array inside practive.js	
+
+ Brand		Top Speed	Top Color
+Tesla Model 3	150		red
+Honda Civic	140		black
+
+// ReactDOM.render(
+//   <table>
+//     <tr>
+//       <th>Brand</th>
+//       <th>Top Speed</th>
+//     </tr>
+//     <tr>
+//       <td>{tesla.model}</td>
+//       <td>{teslaTopSpeed}</td>
+//       <td>{teslaTopColour}</td>
+//     </tr>
+//     <tr>
+//       <td>{honda.model}</td>
+//       <td>{hondaTopSpeed}</td>
+//       <td>{hondaTopColour}</td>
+//     </tr>
+//   </table>,
+//   document.getElementById("root")
+// );
+1) practice.js
+
+const cars  [
+ 	{
+	model: "Honda Civic"
+	coloursByPopularity: ["black", "silver"],
+	speedStats : {
+	  topSpeed: 140,
+	  zeroToSixty: 8.5
+	}
+},
+{
+	model: "Tesla Model 3"
+	coloursByPopularity: ["red", "white"],
+	speedStats : {
+	  topSpeed: 150,
+	  zeroToSixty: 3.2
+	}
+	}
+];
+
+export default cars;
+
+
+2) Access Brand / Model
+    import React from "react";
+    import ReactDOM from"react-dom";
+    import cars from "./practice";
+
+
+    console.log(cars);		//array with 2 item objects w properties and nested objects	//Looks like stuff we got from API
+
+/*First we need model.How to pulll out model? Destructure cars array
+		assign some var name to 1st and 2nd item
+		/inn  our array : 1st object =honda 2nd = tesla */
+
+const  [honda,  tesla] = cars;
+   console.log(honda)	//output Honda civic object
+
+3) Access Top Speed from speedStats nested //Destructure more
+ import React from "react";
+    import ReactDOM from"react-dom";
+    import cars from "./practice";
+
+
+    console.log(cars);		//array with 2 item objects w properties and nested objects	//Looks like stuff we got from API
+    const  [honda,  tesla] = cars;
+   console.log(honda)	//output Honda civic object
+   const {speedStats: {topSpeed: hondaTopSpeed}} = honda;		//now that we have access too honda calltopSpeed and call it HondaTopSpeed
+   const {speedStats: {topSpeed: teslaTopSpeed}}  = tesla			//Do same for tesla
+   const  {coloursByPopularity: [hondaTopColour] } = honda;  
+   const  {coloursByPopularity: [teslaTopColour] } = tesla;  
+//We will see below output
+Brand	TopSpeed	Top Colour
+Tesla..      150		red
+Honda..    140		black	
+
+// ReactDOM.render(
+//   <table>
+//     <tr>
+//       <th>Brand</th>
+//       <th>Top Speed</th>
+//     </tr>
+//     <tr>
+//       <td>{tesla.model}</td>
+//       <td>{teslaTopSpeed}</td>
+//       <td>{teslaTopColour}</td>
+//     </tr>
+//     <tr>
+//       <td>{honda.model}</td>
+//       <td>{hondaTopSpeed}</td>
+//       <td>{hondaTopColour}</td>
+//     </tr>
+//   </table>,
+//   document.getElementById("root")
+// );
+)

@@ -1,0 +1,94 @@
+2 ways of styling
+1) JSXX Attributes
+2) Inline Style
+______________________
+JSX Attributes
+
+Objective 1
+Summary: How to target classes? specify in css and apply in JSX using className attribute
+	 How to target ID?
+	 How to target HTML elements directlyl? normal css
+		for ex ul {color: blue'}
+
+What are elements? <div>
+
+	We are using html elements in JS using JSX
+		How to style these html elements
+How to change h1 color to red
+1) add class attribute name as heading
+	.heading {
+ 	  color; red;
+	}
+WARNING1
+What problem -> Console -> Invalid DOM property class
+We know the ReactDOM is rendering html to JS
+it cannot understand class, in js we have classname
+	React has solved for you by understanding  and considering class 
+
+2) 1) add class attribute className as heading
+	.heading {
+ 	  color; red;
+	}
+WARNING2 : Cannot understand angle bracket <>
+Why? Browser cant understand <>??
+	Browser doesnt know this is jsx file(html + js) and not normal JS file
+
+How to tell browser this is JSX?
+In index.html
+  //How we add js as script 	in html file? provide source and type
+    <script src="../src/index.js" type="text/javascript"></script>		//the type is text file with jS code
+								//our file is text but not JS file -> it is jsx file
+
+    <script src="../src/index.js" type="text/JSX"></script>		//Change to JSX
+//Warning solved
+
+What writing convention for HTML inside JSX? follor JS -> camel case
+Why camel case is imp? if not camelcase: -> html wont work in JSX
++++++++++++++++++++++++++++++++++++
+index html
+----------------------------------------------------------
+iomport React from "react"
+import ReactDOM from "ReactDOM"
+
+React.DOM.render(
+<div>
+<h1 className = "heading">My favourite Foods</h1>
+<ul>
+<li> Bacon </li>					//note <li /> is also called self closing tag
+<li> Jamon </li>
+<li> Noodles </li>
+ </ul>
+</div>
+,document.getElementById("root")
+);
+
+++++++++++++++++++++++++++++++++
+Styles.css
+.heading {
+   color; red;
+_____________________________________________________________________
+Objective 2:
+Replace elements in ul with images from google	? using <img>
+Use CSS to change image size 100x100
+
+
+
+
+React.DOM.render(
+<div>
+<h1 className = "heading">My favourite Foods</h1>
+<div>
+	<img className = "food-img" src="https://hips..."
+	<img className = "food-img" src="https://xycs..."
+	<img className = "food-img" src="https://asdd..."
+</div>
+</div>
+,document.getElementById("root")
+);
+
+----
+styles.css
+.food-img {			//CSS variable name = kebab-case
+  height: 100px;
+  width: 100px;			//Use alt click to select all 3 src -> add attribute: className= "food-img"
+} 

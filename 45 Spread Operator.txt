@@ -1,0 +1,169 @@
+Reduce the complex state code : 2-3 lines!!!
+Spread operator
+
+
+index.js
+import React
+import ReactDOM
+import App
+
+ReactDOM.render(<App /> document.getElementById("root"));
+
+const citrus = ["Lime" , "Lemon" , "Orange"];
+const fruits = ["Apple", "Banana", "Coconut"];
+
+1) Suppose we have an array citrus and fruits
+	How to add contents from citrus to fruit?
+		1) push items from citrus to fruits individually
+		2) Spread operator : ...array_name_to_add
+			const fruits = ["Apple", "Banana", "Coconut" ...citrus];
+		Other ways
+				const fruits = ["Apple",  ...citrus  "Banana", "Coconut"];
+		  console.log(Fruits);
+			//O/p  ["Apple", "Banana", "Coconut", "Lime", "Lemon", "Orange"] 
+
+
+2) What does the spread do?
+	expand citrus array into individual items
+
+3) What can we use with? Objects
+
+const fullName = {
+	fName: "James"
+	lName: "Bond"
+}
+
+const user = {
+	...fullName,
+	id: 1,
+	username: "jamesbond007"
+}
+
+console.log(user);
+// { fName: "James"
+      lName:Bond"
+      id: 1,
+      username: "jamesbond007"
+}
+
+4) What if insert directly object in object? it will nest wont add attributes
+
+Object {fullName: Object, id:1, 
+username: "jamesbond007"}
+fullName: Object	//fullName key with value Object
+fName: "James"
+lName: "Bond"
+      id: 1,
+      username: "jamesbond007"
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+5) How was this a pain point in our previous app?
+a) What changes could be done?
+ remove all if statments a
+
+    setContact(prevValue => {
+	return {
+	  	...prevValue,		//lName, fName, email whatever
+	 	name: value		//name = whichever name of input  //value: user typed in
+	};
+    });	 
+}
+
+b) Console: As soon as we start typing -> name key gets added to object
+	Why happening? interprets name: value as new key value pair
+		const {name , value} = event.target;	//declared but never read
+		//Will this solution work? event.target.name : value	//Doesnt work //why? doesnt work in setContact
+	What is solution? Add value in array syntax
+		[name] : value
+
+	EVERYTHING STARTS WORKING
+
+	App
+	  props
+	    new prop: ""
+
+	hooks	
+	  State: Object
+		fName: ""
+		lName: ""
+		email: "" 	
+		name: "k"
+
+
+c) STACK OVERFLOW DOUBT
+A guy has key varible and wants to use as key when creating new object , but key taken literally
+var key = "happyCount";
+myArray.push ({ key : someValueArray });
+
+Solution;
+1) B4 ES6
+	var key = "happyCount"
+	var obj = {};			//Create new object
+	obj[key] = someValueArray;		//Set as key of object, using array syntax
+	myArray.push(obj);
+
+2) After ES6
+
+{
+[yourKeyVariable]: someValueArray,
+}
+
+import React, { useState } from "react";
+
+function App() {
+  const [fullName, setFullName] = useState({
+    fName: "",
+    lName: ""
+  });
+
+  function handleChange(event) {
+    const { name, value} = event.target
+
+    setContact(prevValue => {
+	return {					//When can get rid of  return? when 1 line
+	  	...prevValue,
+	 	//name: value
+		[name]: value			//Remember [] to hold value of variable
+	};
+    });	 
+}
+  return (
+    <div className="container">
+      <h1>
+        Hello {fullName.fName} {fullName.lName}
+      </h1>
+      <form>
+        <input
+          onChange={handleChange}
+          value={contact.fName}
+          name="fName"
+          onChange={handleChange}
+          placeholder="First Name"
+        />
+        <input
+          onChange={handleChange}
+          value={contact.lName}
+          name="lName"
+          onChange={handleChange}
+          placeholder="Last Name"
+        />
+        <input
+          onChange={handleChange}
+          value={contact.email}
+          name="email"
+          onChange={handleChange}
+          placeholder="EMail"
+        />
+        <button>Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
+===========================================================
+
+Summary:
+
+1) passfunction to setContact
+	what function does? returns JS object : all items prevValue + name of event.target:  new value typed in

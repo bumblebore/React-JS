@@ -1,0 +1,205 @@
+What can be destructured? objects / arrays / properties
+Objective: pull out below
+	Destructure the array inside practive.js	
+
+ Brand		Top Speed	Top Color
+Tesla Model 3	150		red
+Honda Civic	140		black
+
+practice.js
+const cars = [
+  {
+    model: "Honda Civic",
+    //The top colour refers to the first item in the array below:
+    //i.e. hondaTopColour = "black"
+    coloursByPopularity: ["black", "silver"],
+    speedStats: {
+      topSpeed: 140,
+      zeroToSixty: 8.5
+    }
+  },
+  {
+    model: "Tesla Model 3",
+    coloursByPopularity: ["red", "white"],
+    speedStats: {
+      topSpeed: 150,
+      zeroToSixty: 3.2
+    }
+  }
+];
+
+index.js
+// ReactDOM.render(
+//   <table>
+//     <tr>
+//       <th>Brand</th>
+//       <th>Top Speed</th>
+//     </tr>
+//     <tr>
+//       <td>{tesla.model}</td>
+//       <td>{teslaTopSpeed}</td>
+//       <td>{teslaTopColour}</td>
+//     </tr>
+//     <tr>
+//       <td>{honda.model}</td>
+//       <td>{hondaTopSpeed}</td>
+//       <td>{hondaTopColour}</td>
+//     </tr>
+//   </table>,
+//   document.getElementById("root")
+// );
+
+++++++++++++++++++++++++++++++++++
+Solution
+//for practice use data.js
+1)data.js
+const animals = [
+	{name: "cat",  sound: "meow"},	
+	{name:} "dog", sound: "woof"}
+];
+
+export default animals;
+
+
+
+2) index.js
+DESTRUCTURING AN ARRAY
+a)Destructure the array animals into variables: cat and dog
+b) reach inside the animals array pull out first item -> name as cat
+			      pull out 2nd item  -> name as dog
+	How? destructuring animals into cat and dog	//names must be unique
+			const[cat, dog] = animals;
+
+import animals from "./data"
+
+console.log(animals);
+
+const[cat, dog] = animals;
+
+console.log(cat);
+
+DESTRUCTURING AN OBJECT
+how to destructure object cat  /dog?
+
+import animals from "./data"
+
+console.log(animals);
+
+const[cat, dog] = animals;
+
+console.log(cat);
+		//How many properties cat object have? 2 : name and sound
+		DESTRUCTURE CAT
+const {name , sound} = cat;		//equivalent : cat.name and cat.sound
+console.log(sound);		//meow
+
+
+WHY WE DID?
+Earlier we would have had to
+animals[0].sound
+
+WILL THE BELOW WORK FOR DESTRUCTURING ARRAY? YES Output : still Cat object
+console.log(animals);
+const [c, d] = animals;
+console.log(c);
+
+const { name, sound } = cat;
+console.log(sound);
+BUT CANNOT DO FOR DESTRUCTURING OBJECT? has to be same name as property names 	//There is a way though see below
+const {name, animalSound} = cat;	//wont work
+console.log(animalSound);
+
+const { name, sound } = cat;
+console.log(sound);		//works
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+What other uses of destructuring? Providing alternative names to properties
+if want to give const { name, sound } = cat;
+//different names
+				//When is this used? getting hold of data from public apis
+					we dont get a chance to name the properties inside JSONs
+Solution:
+const { name: catName, sound: catSound } = cat;
+console.log(catSound);		//output : meow
+console.log(catName);		//output : cat 
+
+
+//How to give name and sound a custom value? Equal sign
+const {name = "Fluffy", sound= "Purr"} = cat;
+console.log(name);			//output: cat	//in data.js
+				//But if no name { name: "", sound: "meow"},
+					            { name: "dog", sound" "woof" }
+				//output: fluffy
+				//Useful when getting data from internet and fields in data.js not filled
+				So give a default value
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+What if we have a nested object?
+
+for ex
+data.js
+//Basically we have object inside an object
+const animals = [
+	{ name: "cat", sound" "meow",
+	 feedingRequirements : {
+	  food: 2
+	  water: 3
+	} },
+	{ name: "dog", sound: "woof" }
+]
+
+How to destructure this nested object?	//for ex log out no. of times you  have to feed cat -> which is 2 from what we can see above
+EXTENSIVE DESTRUCTURING
+
+1) Destructure animals to name ,sound and feeding requirements and set to cat
+
+index.js
+console.log(animals);
+const [cat, dog] = animals;
+console.log(cat);
+
+const {name, sound, feedingRequirements} = cat;
+console.log(feedingRequirements);
+	//Output	food: 2
+		water: 3
+
+How to get food?
+1) console.log(feedingRequirements.food);
+or
+2) const {name, sound, feedingRequirements: {food, water}} = cat;
+	console.log(food);
+
+Is it necessary to do for all keys and values? NO
+Can also do for:
+const {feedingRequirements: {food, water}}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+How useState Hook might work ?
+
+For ex
+in data.js
+apart from objects cat w properties we have: 
+
+function useAnimals(animal) {	//returns array with 2 elements name of animal and function returning sound
+  return [
+	animal.name,
+	function() {
+	  console.log(animal.sound);
+}	
+];
+}
+
+
+If we export this function
+	export { useAnimals };
+and import in index.js
+
+import animal, {useAnimals} from "./data"
+
+//we try to use this function
+
+console.log(useAnimals(cat));
+	Output:	["cat", function()]
+		0:"cat"	
+		1: function() {}		//We know that output is array -> so destructure it
+
+const [animal, makeSound] = useAnimals(cat);
+console.log(animal);		//Output : cat
+makeSound();			//Output : meow

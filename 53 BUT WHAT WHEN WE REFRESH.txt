@@ -1,0 +1,2 @@
+When we add notes ---> then refresh page , notes disappear
+REACT IS FRONT END LIBRARY: Not reponsible for saving your data

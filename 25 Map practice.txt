@@ -1,0 +1,169 @@
+1) Create a Emoji dictionary
+
+2) turn dictionary terms  ---->   component <Entry />
+3) Pass props 
+
+Given: emojipedia.js
+	const emojipedia = [{id:1,emoji: ,name: , meaning: }, {{id:2,emoji: ,name: , meaning: }, {{id:3,emoji: ,name: , meaning: }.....]
+	//note: export default emojipedia;	//why? to import in app.jsx for mapping
+
+Main function:  just add emoji object to emojipedia.js and it should get added to page
+//note: Below
+	What is reusable? div term
+	What is not reusable? Icon,name,description
+
+ <dl className="dictionary">
+  <div className="term">
+   <dt>
+    <span className="emoji" role="img" aria-label="Tense Biceps"
+	
+   </span>
+   <span> Tense Biceps </span>
+  </dt>
+  <dd>You can do it come on.</dd>
+ </div
+</dl>
+__________________________________________________________________________
+
+Solutiion:
+
+1) Create separate component : Entry
+
+<Entry
+App.jsx
+
+
+2) Create props
+
+
+3) import & Map through emojipedia array
+	render components
+
+
+4) Entry.jsx = repeated part
+	place repeated part in entry.jsx
+Entry.jsx 
+
+function Entry() {
+return ( 
+<div className="dictionary">
+  <div className="term">
+   <dt>
+    <span className="emoji" role="img" aria-label="Tense Biceps"
+	
+   </span>
+   <span> Tense Biceps </span>
+  </dt>
+  <dd>You can do it come on.</dd>
+ </div
+</dl>
+}
+
+5) Render Entry component 3rice
+App.js
+
+function App() {
+  return( 
+   <div>
+    <h1>
+         <span> emojipedia </span>  
+    </h1>
+   <dl className="dictionary">  
+     <Entry />
+     <Entry />
+    <Entry />
+   </dl>
+   </div>
+)
+}
+
+
+6) Create custom properties / props to replace hardcoded data
+	Catch props using "props"
+		Render props at right places : {props.emoji}
+function App() {
+  return( 
+   <div>
+    <h1>
+         <span> emojipedia </span>  
+    </h1>
+   <dl className="dictionary">  
+     <Entry emoji=" " name= " " description= " "/>
+     <Entry />
+    <Entry />
+   </dl>
+   </div>
+)		
+
+
+
+function Entry() {
+return ( 
+<div className="dictionary">
+  <div className="term">
+   <dt>
+    <span className="emoji" role="img" aria-label="Tense Biceps"
+	{props.emoji}
+   </span>
+   <span> {props.name} </span>
+  </dt>
+  <dd>{props.description}</dd>
+ </div
+</dl>
+}
+
+7) Send first emoji data
+
+function App() {
+  return( 
+   <div>
+    <h1>
+         <span> emojipedia </span>  
+    </h1>
+   <dl className="dictionary">  
+     <Entry emoji="cU " name= "Tense biceps " description= " You can do it"/>
+     <Entry />
+    <Entry />
+   </dl>
+   </div>
+)	
+
+8) why update all 3 one by one
+	map through emojipedia
+App.jsx
+import emojipedia
+
+9) Map through array
+	Render <entry .../> components
+		emojipedia.map
+		What map outputs? objects one by one from emojipedia.js list of objects
+	How to catch these terms? createEntry function
+		What will this function return? entry component with props = one from the map output object
+			When using map add key
+			Check js object prop names to map here
+
+		 Entry component will be rendered for every single term
+		DATA PULLED IN DYNAMICALLY
+App.jsx
+import emojipedia
+
+function createEntry(emojiTerm) {
+	return<Entry
+	   key= {emojiTerm.id}
+	   emoji= {emojiTerm.emoji}
+	   name= {emojiTerm.name}
+	   description= {emojiTerm.meaning}
+	/>
+}
+
+function App() {
+return (
+  <div>
+    <h1>
+      <span>emojipedia<span>
+    </h1>
+   <dl className=dictionary">
+	{emojipedia.map(createEntry)}
+)
+}
+

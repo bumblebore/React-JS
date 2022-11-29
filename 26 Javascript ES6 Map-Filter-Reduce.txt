@@ -1,0 +1,104 @@
+Dont memorize know the goals of all functions
+We dont do memorization in post google world
+Most useful JS functions:
+	MDN Dev docs: Map filter and reduce
+		Can also check browser compatibility	
+
+Other array functions
+1) Map: whatever function passed into map ->maps to all elements		//map concise than for-each
+								//what is map output ? after appliying to all elements output is array
+var numbers = {3, 56, 2, 48, 5}
+
+
+function double(x) {
+  returrn x*2;	
+}
+
+const newNumbers = numbers.map(double);
+console.log(newNumbers);
+
+
+OR
+
+
+
+const newNumbers = numbers.map(function (x) {
+  returrn x*2;	
+});
+
+
+
+
+2) using for -each							//have to create empty array
+								What is foreach output? just appllies to all elements, no final output , hence have to push
+var newNumbers = [];
+
+function double(x) {
+  newNumbers.push(x*2)
+}
+numbers.forEach(double);
+
+
+
+3) filter()
+3.1)
+how to filter an array?
+Output of filter()? array
+var numbers =[3,56,2,48,5]
+
+const newNumbers = numbers..filter(function(num){
+   return num  < 10;
+})
+
+console.log(newNumbers);
+
+3.2) filter using forEach()
+
+var newNumbers = [];
+numbers.forEach(function(num){
+ if (num < 10) {
+  newNumbers.push(num);
+}
+})
+
+4) Reduce function
+What is output of reduce?
+
+4.1) 
+var number = [3, 56, 2, 48, 5]
+var newNumber = numbers.reduce(function(accumulator, currentNumber){
+console.log(accumulator);		//3 -> 59 ->61 -> -> 109 	//accumulator = accumulator + currentNumber
+console.log( currentNumber);
+  return accumulator + currentNumber; 
+})
+
+4.2) reduce using for-each
+
+var number = [3, 56, 2, 48, 5];
+
+var newNumber = 0;
+numbers.forEach(function(currentNumber){		//currentNumber = number being looped through
+  newNumber += currentNumber;
+})
+
+
+5) Find function	//finds value based on condition, stops once condition returned true
+
+var numbers = [3,56,2,48,5];
+
+
+const newnumber = numbers.find(function(num){
+   return num >10;
+})
+console.log(newNumber);	//56
+
+
+6) Findindex function	//finds value based on condition, stops once condition returned true
+
+var numbers = [3,56,2,48,5];
+
+const newnumber = numbers.find(function(num){
+   return num >10;
+	})
+
+console.log(newNumber);	//1 //index

@@ -1,0 +1,94 @@
+Detect when user interacts with your app/components	
+Render based on events
+
+Objective:  hover on submit button -> turn black
+	  hover away  	          -> turn white
+
+App.jsx
+import React from "react";
+
+function App() {
+  return (
+    <div className="container">
+      <h1>Hello</h1>
+      <input type="text" placeholder="What's your name?" />
+      <button>Submit</button>
+    </div>
+  );
+}
+
+export default App;
+++++++++++++++++++++++++++++++++++++++++++
+
+Ex of event : button click
+how to tap into events? html attributes for that html element
+
+   <button onClick>Submit</button>	//note onClick turns camel case
+
+---------------------------------------------------------------------------
+Trigger any code on button click
+1) function handleClick() triggered on button click
+	whenever button clicked -> console : clicked
+
+2) Change h1 text
+3) Create state for headingText and method for setting heading text
+	give starting value as Hello
+
+4) Set hello to Submitted. Set state, How? setHeadingText method
+//Whenever we click on button -> h1 updated to new value submitted
+
+5) What other events can be responded to? (like button click)
+
+HTML Event Attributes:
+	Window Event Attributes, Form Event atr, Keyboard Event Atr, Mouse Event Atr, Drag Event Atr
+	We use onmouseout and onmouseover
+
+6) How will we change style?
+<button style= {{backgroundColor: "white"}}
+Apply onmouseover event to our button	///onMouseOver
+Trigger function handleMouseOver() on onmouseover 	//onMouseOver={handleMouseOver}
+
+7) Create var to hold state
+	const [isMousedOver, setMouseOver] = useState(false);
+	  setMouseOver(true); in called function
+8) render backgroundcolor based on isMousedOver
+	apply logic:
+	if isMousedOver state var is true -> set as black
+	if isMousedOver state var is false -> set as white
+ style= {{backgroundColor:  isMousedOver? "black": "white"}}
+
+9) But how to change back when mouse hovered out
+	use onmouseout event
+'	trigger handleMouseOut() function to set property
+---------------------------------------------------------------------------------
+import React, { useState } from "react";
+
+function App() {
+
+const [headingText, setHeadingText] = useState("Hello")
+const [isMousedOver, setMouseOver] = useState(false);
+
+function handleClick() {
+  setHeadingText("Submitted");	//Whenever we click on button -> h1 updated to new value submitted
+}
+function handleMouseOver() {
+  console.log("Moused over");
+  setMouseOver(true);
+}
+function handleMouseOut() {
+  setMouseOver(false);
+}
+  return (
+    <div className="container">
+      <h1>{headingText}</h1>
+      <input type="text" placeholder="What's your name?" />
+      <button 
+       style= {{backgroundColor:  isMousedOver? "black": "white"}}
+       onClick={handleClick} 
+       onMouseOver={handleMouseOver}
+       onMouseOut = {handleMouseOut}
+>Submit</button>
+        </div>
+  );
+}
+

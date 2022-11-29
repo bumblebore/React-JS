@@ -1,0 +1,26 @@
+
+e) Can we do renderConditionally() inline? NO
+  return <divclassName="container">{if(isLoggedIn.......)}</div>
+	Why not works? not an expression
+			in jsx : all inside {} should be expression	//expression resolves to single value
+
+	Can we have expression for this? Yes
+		Solution ternary Operator
+
+TERNARY OPERATOR
+ check what    if true?	 if false?		
+CONDITION ? DO IF TRUE : DO IF FALSE			//All 3 can be expressions
+
+isCloudy === true ? bringUmbrella() : breingSunscreen() 
+		
+f) Use in our code
+App.jsx
+
+var isLoggedIn = true;
+
+isLoggedIn === true ?<h1>Hello <h1> : <Login />
+
+}</div>;
+
+export default App;
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

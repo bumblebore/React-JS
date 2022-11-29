@@ -1,0 +1,104 @@
+What to keep in component? All that is same template for each instance
+	Can we reuse component? yes that is the function
+
+What are Props? Custom attributes of  in React
+	name,img,tel,email are all together props
+	<Card name ="Beyonce" img = "https://....." tel = " +123456789" email = "b@beyonce.com  "/>
+
+How to access  individual properties of props? props.property_name
+	{props.name} ---> Beyonce
+	
+
+Suppose you are creating 3 contacts:
+	each contact: photo,
+
+	Solution: React components : Card Component
+1) Return 1 image and 2 paragraphs from card component	// Common Template
+2) Create 3 card components
+
+3) How to have custom attrbutes in each instance of component?
+	How to send data to component?
+
+ 3.1) Cant define custom attributes in html
+	How we send custom data in html element?attributes
+	How to access that element? chrome dev tools ->
+  	Console:
+	var input = document.getElementById(')
+	Are these attributes custom? No predetermined : MDN Docs
+	Can we define custom attributes in html? NO	
+
+
+ 3.2) Can define custom attributes in React components. PROPERTIES / PROPS
+ 	a) <Card name="Beyonce"/>		//from ReactDOM.render()
+	b) 	function Card(props) {			//props can be anything //custom to call props
+			console.log(props);
+}		//
+	Output:
+		 Object {name: "Beyonce"}			//property name set to beyonce
+	c) use props in card component
+		function Card(props) {			//pass custom props to function module //props can be anything //custom to call props
+		 return (
+		 <div>
+		  <h2>{props.name}</h2>	
+		</div>
+)}
+ 3.3) Can we add customs styling? yes but only to main function, not custom card component
+		Why cant add to custom components? all html attributes it considers -> as function component properties under props object
+								that we pass 	
+		how to add custom style to components then? inline Style 
+_____________________________________________
+//Create a new component Card
+
+import React from "react"
+import ReactDOM from "react-dom"
+
+//Card Component
+function Card(props) {
+  return  <div>
+   <h2> {props.name}</h2>
+   	<img 
+	   src={props.img}
+	   alt="avatar_img"
+/>
+<p> {props.tel} </p>
+<p> {props.email} </p>
+</div>
+}
+//Create cards and render
+
+ReactDOM.render(
+  <div>
+     <h1>My Contacts</h1>	
+     <Card name ="Beyonce" img = "https://....." tel = " +123456789" email = "b@beyonce.com  "/>	//Pass Props
+     <Card name ="Jack bauer" img = "https://....." tel = " +989765461" email = "j@bauer.com  "/>	
+  </div>
+  document.getElementById("root")
+)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Summary:
+HTML Attributes
+<input 
+   id="email"
+   placeholder="Your email"
+   value = "angela@email.com"
+/>
+
+document.getElementById("email")
+	.id
+	.placeholder
+
+REACT PROPS
+function Card(props) {
+   return <div>
+	<h2>{props.name}</h2>
+	<h2>{props.tel}</h2>
+	<h2>{props.email}</h2>
+  </div>
+}
+
+<Card
+	name="beyonce"
+	tel="+123456789"
+	email="b@beyonce.com"
+/>
+

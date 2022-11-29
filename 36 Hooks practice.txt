@@ -1,0 +1,53 @@
+Hooks practice
+Objective:
+1)  Click button get time to update to latest time
+2) Update time dynamically every second
+
+
+Solution: 1
+1) get time on console
+2) call updateTime function on button click
+3) how will update time? setTime function from useState Hook to newest time
+4) How to get newest time?   new Date.toLocaleTimeString();
+5) Value re-rendered on click
+
+Solution: 2
+1) use setInterval function to dynamically update on some time interval
+	what will this function do? update updateTime() function with new time on regular interval
+2) Call updateTime() function in setInterval()
+setInterval(updateTime, 1000); 
+
+
+Summary 
+basically
+on click updateTime() called
+
+and for dynamically
+every second updateTime() called using setInterval(updateTime, 1000); 
+_______________________________________________________________________________________________________________
+App.jsx
+
+import React, {useState} from "react"
+
+function App() {
+
+setInterval(updateTime, 1000); 
+
+ const now = new Date().toLocaleTimeString();
+ const [time, setTime] = useState(now);
+ console.log(now);
+
+function updateTime() {
+   const newTime = new Date.toLocaleTimeString();
+   setTime(newTime);
+}  
+
+ return (
+   <div className= "container">
+     <h1>{time}<h1>	
+      <button onClick= {updateTime}> Get Time </button>
+    <div>
+ );
+
+}
+export default App;

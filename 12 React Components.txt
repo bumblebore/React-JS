@@ -1,0 +1,105 @@
+Our dynamic style code was out of hands/ too long
+	Why?	
+	Solution? Split code into components
+
+How to write / structure your React code? Airbnb github
+__________________________________________________________
+A) Creating a component + Using
+1) How to create a component? Make the part output of function
+ function Heading() {
+ return  <h1 className = "heading">My favourite Foods</h1>;	
+}
+
+
+2)How  use heading component inside react code
+	How react differentiates bw custom component and normal HTML elements? Pascal case //starting capital letter
+
+
+import React from "react"
+import ReactDOM from "ReactDOM"
+
+React.DOM.render(
+<div>
+  <Heading> </Heading> or <Heading />
+<h1 className = "heading">My favourite Foods</h1>	//Our heading component might get longer in future
+<ul>
+<li> Bacon </li>					//note <li /> is also called self closing tag
+<li> Jamon </li>
+<li> Noodles </li>
+ </ul>
+</div>
+,document.getElementById("root")
+);
+_______________________________________________________________________________
+++++++++++++++++++++++++++++++++++++++++++++++++
+B) Import component from separate file
+-----------
+B1.1) Create and export component
+	//Separate components = separate jsx files
+
+//All components inside index.js //move them out and import into index.js
+1) Create a new file
+	 Heading.jsx
+
+2) Heading.jsx
+import React from "react";			//Why import? using html + js in jsx file
+	 function Heading() {
+	 return  <h1 className = "heading">My favourite Foods</h1>;	
+	}
+
+export default Heading;		//Why no parenthesis () -> because we want to use it as a component and NOT return immediately
+---------------
+B1.2) import component in index.js	//import filename from "file path from home directory"	//extension is optional
+Index.js
+
+import React from "react";
+importReactDOM from "react-dom";
+import Heading from "./Heading"
+
+ReactDOM.render(
+<div>
+  <Heading />
+  <ul>
+     <li> Bacon </li>
+     <li> Jamon </li>
+     <li> Noodles </li>
+  </ul>
+</div>
+ document.getElementById("root')
+)
+_______________________________________________________________________________
+++++++++++++++++++++++++++++++++++++++++++++++++
+C) Create custom component List
+	What list contains? 3 list items
+	
+Final Output
+index.js
+
+
+import React from "react";
+importReactDOM from "react-dom";
+import Heading from "./Heading"
+import List from "./List:"
+
+ReactDOM.render(
+  <div>
+    <Heading/>
+    <List/>
+  </div>
+  document.getElementById("root")
+); 
+_____________________________________________
+List.jsx
+import React from "react";
+
+function List(){
+  return(
+<ul>
+     <li> Bacon </li>
+     <li> Jamon </li>
+     <li> Noodles </li>
+  </ul>
+);
+}
+export  default List;
+

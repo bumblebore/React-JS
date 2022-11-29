@@ -1,0 +1,70 @@
+How to find what property rendered by which component
+ReactDevTools : Chrome  ---> Components tab
+	How to select react components? select tool -> find in right
+Shows ReactDOM tree
+
+	//Where are html elements in this tree?	for ex Card Component -> div,h2
+	//below only shows react components
+		if want -> settings -> filter
+App
+  Card
+    Avatar
+  Card
+    Avatar
+  Card
+    Avatar
+
+How to peek what props  passed to each component?
+For ex what properties i can use in card component, using props?
+	Click component in tree -> see all props passed
+How to see who is rendering  a component? 
+	Check component in tree -> see rendered By: App	
+
+Why react dev tool?	Debug if app goes wrong
+			 works on other websites that are not developed using react
+		
+if visit airbnb.com -> react dev button turns blue (React in production)
+	Dev tools -> Components -> airbnb also made of react components
+	Use selector tool -> check each tile elements
+		Each component has props  + source url	
+
+How to view source code? <> button
+	shows the file that is rendering that component
+
+How to change value of attributes in dev tools? just change the props in dev tools
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1) Create separate avatar.jsx for img element
+	Why? everywhere needed a circle image with white border
+	
+Avatar.jsx
+	import React from "react"
+	
+	function Avatar() {
+	   return 
+   	 <img					//Contact Image section
+		className="circle-img"
+		src={props.img}															
+		alt=":avatar_img"
+		/>
+}
+____________________________________________________________________________________________
+Card.jsx
+import React from "react"
+import Avatar from "./Avatar";
+
+
+function Card(props) {
+  return  (
+	<div className="card">			//Card section
+	  <div className="top">			//top section
+	    <h2 className="name">{props.name}</h2>		//Name section
+	    <img					//Contact Image section
+		className="circle-img"
+		src={props.img}															
+		alt=":avatar_img"
+		<Avatar img={props.img}/>
+	  </div>
+	  <div className="bottom">		//bottom section
+	    <p className="info">{props.tel}</p>		//bottom info
+	    <p className="info">{props.email  }</p>
+	</div>

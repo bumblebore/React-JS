@@ -1,0 +1,40 @@
+codesandbox.io
+
+npm support + dependencies, 
+Can embed in medium blog posts, web pages, buld and deploy  in same application 
+
+Help learn quicker
+
+Can see files included
+
+preview of website
+
+
+How to save work in codesandbox? 
+	1) sign in w github
+	2) fork/create own copy of sandbox
+
+
+How to add dependency?
+Add a dependency ->search => add
+
+
+Middle pane/where to write code
+Code editor
+
+Right pane : Live preview
+Auto refresh, most updated version
+
+
+right bottom pane:Console
+If want to use chrome -> open in new window(full glory)
+
+
+		Problems;
+		Errors
+
+
+How to share code?
+	Share -> Editor URL
+
+File-> preferences 

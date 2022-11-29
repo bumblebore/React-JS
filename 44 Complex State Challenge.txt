@@ -1,0 +1,120 @@
+Objective: contact object
+	Use values that user has typed  into 3 inputs
+	Put these into h1 / new paragraph element
+	//i.e show firstName lastName and email on top
+Use ReactDev Tools : peek what state looks like
+
+
+1) const contact has 3 properties that we want to update
+	How to update? setContact
+	When will they update? When inputs get changed
+
+	How to detect input change? onChange
+	Calls what? method handleChange()
+	<input onChange=name="fName" placeholder="First Name" />
+
+2) in handleChange() function -> create destructured object
+	What to destructure? event.target 
+	destructure into what? name and value
+		we only want .name and .value
+
+3) use destructured constant in code to handle Change
+	How to update contact object (only changed fields)?
+
+	call setContact()  + get hold of previous value of contact
+
+4) How to get hold of previous value of contact? Arrow function
+return name and value of properties
+
+
+	setContact(prevValue) => {
+	  if(name === "fName") { //only change fName with value
+}
+})elseif(name === "lName") {
+ 	change lName with value
+}else if(name === "email") {
+	change email with value
+}
+
+5)TEST APP
+Components
+
+App
+	Props
+		new prop:
+
+	Hooks 
+		State: Object
+		  fName: "Angela"
+		  lName: "Yu"
+		  email: "angela@gmail.com"
+
+6) Remember to add value attribute to each input
+	Why? to keep them tied to state 	value={contact.fName}
+OBJECTIVE ACHIEVED
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+App.jsx
+
+import React, { useState } from "react";
+
+function App() {
+  const [fullName, setFullName] = useState({
+    fName: "",
+    lName: ""
+  });
+
+  function handleChange(event) {
+   const {name, value} = event.target. 
+
+	setContact(prevValue) => {
+	  if(name === "fName") { //only change fName
+	   fName: value,
+	   lName: prevValue.lName,
+	   email: prevValue.email 
+	}
+	})elseif(name === "lName") {
+ 	   fName: prevValue.fName,
+	   lName: value,
+	   email: prevValue.email 
+}
+	}else if(name === "email") {
+	   fName: prevValue.fName,
+	   lName: prevValue.lName,
+	   email: value
+}
+}
+
+  return (
+    <div className="container">
+      <h1>
+        Hello {fullName.fName} {fullName.lName}
+      </h1>
+      <form>
+        <input
+          onChange={handleChange}
+          value={contact.fName}
+          name="fName"
+          onChange={handleChange}
+          placeholder="First Name"
+        />
+        <input
+          onChange={handleChange}
+          value={contact.lName}
+          name="lName"
+          onChange={handleChange}
+          placeholder="Last Name"
+        />
+        <input
+          onChange={handleChange}
+          value={contact.email}
+          name="email"
+          onChange={handleChange}
+          placeholder="EMail"
+        />
+        <button>Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;

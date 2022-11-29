@@ -1,0 +1,88 @@
+Objective:
+h1 element shows: Good Morning if current time =  12 AM - 12 PM
+	              Good Afternoon if current time=  12 PM - 06 PM
+		Good Evening if current time =   06 PM - 12 AM 
+How user will get time?
+	const date = new Date(2019, 1, 1, 19
+)
+
+Apply a style =? Change color dynamically of h1 . How? inline style changed dynamically
+						Use customStyle object as inline style
+						Change custom style from JS logic
+			morning: red, Afternoon: green Night: Blue
+style.css
+  
+ .heading {
+  font-size:
+  font-weight: bold;
+  border-bottom: 5px solid: black; 
+}	
+++++++++++++++++++++++++++++++++++++++++++++++
+CODE:
+
+import React from "react"
+import ReactDOM from "react-dom"
+
+const  date= new  Date();				//new date object
+const currentTime = date.getHours();
+
+let greeting;
+
+if(currentTime < 12){				//JS logic	 to decide what greeting
+  greeting= "Good Morning" 	  
+}
+else if (currentTime <18)
+{
+    greeting = "Good Afternoon"
+}  else {
+    greeting  = "Good Night"
+}
+
+
+						//Insert greeting in style in JSX						
+console.log(currentTime)
+ReactDOM.render(					//Since single html element -> no div required
+	<h1 className="heading"> greeting </h1>,
+	document.getElementById("root")
+)
+_________________________________________________
+Styles.css						//Apply common style
+//How to apply style to our h1? className
+.heading {
+  font-size:
+  font-weight: bold;
+  border-bottom: 5px solid: black; 
+}
+_________________________________________________
+						//Apply Dynamic style? Inline Style -> Add customStyle JS object
+
+import React from "react"
+import ReactDOM from "react-dom"
+
+const  date= new  Date();				//new date object
+const currentTime = date.getHours();
+
+let greeting;
+
+if(currentTime < 12){				//JS logic	 to decide what greeting
+  greeting= "Good Morning" 	  
+ customStyle.color = "red";
+}
+else if (currentTime <18)
+{
+    greeting = "Good Afternoon"
+customStyle.color = "green";
+}  else {
+    greeting  = "Good Night"
+customStyle.color = "blue";
+}
+
+
+const customStyle = {
+   color: ""
+}
+ReactDOM.render(
+							
+	<h1 className="heading" style={customStyle}>{greeting}</h1>,
+	document.getElementById("root")
+)

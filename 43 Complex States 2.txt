@@ -1,0 +1,248 @@
+1) lets remove duplicate code for lName, change constant as fullName
+	return also       <h1>Hello {fullName.fName}{fullName.lName} </h1>
+2) Specify initial state object fullName
+3) how to set this to new object?
+4) Call just 1 method: handleChange()
+5) If either input changes -> call same function by passing event that caused the change
+	get hold of event.target.value into new var const newValue
+	
+6) 	How to add the parts that are changed -> if firstName changed -> change only fName
+					      if lastName changed -> change only lName
+				Keept other part as it is
+	How to get hold of previous value of fullName
+	i.e below object
+const [fullName, setFullName] = useState({
+	fName: "",
+	lName: "",
+	How to find which input triggered handleChange()?
+		using name attribute of input	//log and check		
+			
+		function handleChange(event) {
+		  const newValue = event.target.value;
+		  const inputName = event.target.name;
+		
+		console.log(newValue);
+		console.log(inputName);
+		}})		
+
+7) Test:
+	if type "a " in firstName
+		a	
+		fName	
+
+	if type "l " in lastName
+		l	
+		lName'
+	But not showing in input field: what is being typed
+		why?
+	The below is a controlled component, i.e they are setting values of fullName.fName
+	But initial value "" and "" printed because
+	no function on how to set fullName? no way yet	hence showing initial value
+  <form>
+        <input name="fName" onChange= {handleChange} placeholder="First Name" value={fullName.fName}/>
+        <input name="lName" onChange= {handleChange} placeholder="Last Name" value={fullName.lName}/>
+        <button>Submit</button>
+      </form>
+
+8) TESTING
+	a) comment out  value -> makes it uncontrollable component
+	<input name="fName" onChange= {handleChange} placeholder="First Name" /*value={fullName.fName}*//>'
+	NOW WE CAN TYPE in BOX
+
+
+	Check console:
+			Whatever typed= newValue		//event.target.value
+			 fName = inputName
+
+9) Use newValue and inputName   (what typed, which section typed it)
+	Create new object using this
+	
+ if(inputName === "fName") {	/means first name was typed
+	setFullName({fName: newValue});
+} else if(inputName == "lName") {
+  	settFullName(lName: newValue});
+}
+
+TEST THIS:
+	type fName: shows : Hello Angela
+	type lName: shows : Hello Yu		//Previous value got deleted
+
+Why previous value is getting deleted? Debug
+	ReactDevTools (Components)
+	App
+		props
+	
+		hooks
+		  State: Object
+			fName: " "		
+			lName: " "
+but when we type in fName   //lName gets deleted
+		only fName is kept		and vice versa
+
+App
+		props
+	
+		hooks
+		  State: Object
+			fName: "Angela "		
+Why getting deleted?
+when we call SetFullName({fName: newValue}); in our logic
+	we replace entire object with object of only 1 property
+
+Lets only add to the part that was changed.	using prevValue
+How ? pass arrow function to setFullName
+			
+	FLOW:
+	fName input edited -> handleChange() called -> pass event that led to change
+	-> call setFullName() -> pass a function that gets hold of previous value of full name
+//Function
+
+  setFullName ((prevValue => {
+    console.log(prevValue); 
+}))
+//Output
+	Object {fName:"", lName: ""}
+	 fName: ""
+	 lName: ""
+
+So,
+1) When we type in input -> react re-renders app component
+2) App has state -> remembers value of object
+3) We will use this remembered value
+How
+			FINAL LOGIC
+  setFullName ((prevValue => {
+    if (inputName === "fName") {
+	return (
+	  fName :newValue,			//We create an object and only update the part that has been updated by user
+	  lName: :prevValue.lName	
+)	else if (inputName === "lname") {
+	  return {
+	     fName: prevValue.fName,
+	     lName: newValue
+}
+}
+}
+}))
+//remember to uncomment  value={fullName.fName}
+//Why? so values of input can correspond to latest state and we control this input using our state
+
+}
+TEST AGAIN:
+	type first name:  Hello Angela
+	Type last name : Yu
+
+App
+		props
+	
+		hooks
+		  State: Object
+			fName: "Angela "	
+			lName: "Yu"	
+
+WORKING PERFECT
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+import React, { useState} from "react";
+	const [fullName, setFullName] = useState({
+	fName: "",
+	lName: "",
+
+})		
+
+function handleChange(event) {
+  const newValue = event.target.value;
+  const inputName = event.target.name;
+ 
+  console.log(newValue);		//Whatever typed
+  console.log(inputName);		//fName
+  console.log(prevValue);
+
+ setFullName ((prevValue => {
+    if (inputName === "fName") {
+	return (
+	  fName :newValue,			//We create an object and only update the part that has been updated by user
+	  lName: :prevValue.lName	
+)	else if (inputName === "lname") {
+	  return {
+	     fName: prevValue.fName,
+	     lName: newValue
+}
+}
+}
+}))
+
+function App() {
+  return (
+    <div className="container">
+      <h1>Hello {fullName.fName}{fullName.lName} </h1>
+      <form>
+        <input name="fName" onChange= {handleChange} placeholder="First Name" value={fullName.fName}/>
+        <input name="lName" onChange= {handleChange} placeholder="Last Name" value={fullName.lName}/>
+        <button>Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+easier way for above code 
+1) Destructure object
+2) IMPORTANT NOTE: DONT TRY TO ACCESS EVENT inside STATEFUL SETTER (like setFullName)
+	if inside we try  ---> ERROR : Synthetic Events being reused //Check Docs
+			//when we pass via event listeners -> that is not a real but synthetic event //react created
+					//Should not try to acces them in stateful setters
+	 if (event.target.name === "fName") {		
+	return (
+	  fName : value,
+	  lname :
+	};
+
+import React, { useState} from "react";
+	const [fullName, setFullName] = useState({
+	fName: "",
+	lName: "",
+
+})		
+
+function handleChange(event) {
+ // const newValue = event.target.value;
+  //const inputName = event.target.name;
+ //replace with
+
+  const {value, name} = event.target;	//Using event outside of setFullName is ok
+
+  console.log(newValue);		//Whatever typed
+  console.log(inputName);		//fName
+  console.log(prevValue);
+
+ setFullName ((prevValue => {
+    if (name === "fName") {
+	return (
+	  fName : value,			//We create an object and only update the part that has been updated by user
+	  lName: :prevValue.lName	
+	};
+)	else if (inputName === "lname") {
+	  return {
+	     fName: prevValue.fName,
+	     lName: value
+};	
+}
+}
+}))
+
+function App() {
+  return (
+    <div className="container">
+      <h1>Hello {fullName.fName}{fullName.lName} </h1>
+      <form>
+        <input name="fName" onChange= {handleChange} placeholder="First Name" value={fullName.fName}/>
+        <input name="lName" onChange= {handleChange} placeholder="Last Name" value={fullName.lName}/>
+        <button>Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;

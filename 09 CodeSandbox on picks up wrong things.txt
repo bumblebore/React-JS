@@ -1,0 +1,5 @@
+1) Writing alt text in img element for people looking at website through screenreader
+	 <img src={img + ?grayscale"}/>
+
+2) 
+  

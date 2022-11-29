@@ -1,0 +1,16 @@
+1) Registration screen
+2) Clock app
+3) Emoji dictionary
+4) Beauty TodoList
+5) Google Keep clone
+
+
+What will we learn:	JSX,Props,Components,Containers, Virtual DOM
+		State management, declarative programming
+		React Hooks : use state
+		ES6, ES2015 concepts
+
+		JS: Destructuring, spread operator,map, filter, import export
+
+
+BUILD BEAUTIFUL FRONTEND

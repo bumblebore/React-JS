@@ -1,0 +1,130 @@
+Objective: Create login Flow
+If user logged in -> Show login screen	//Login form
+if user not logged in -> show welcome screen	//greet
+
+i.e show different react components based on condition
+
+1) Create a var that will switch to true
+
+import React from react
+
+var isLoggedIn = true; 
+
+function App() {
+  return (
+	<div className="container">
+	<h1>Hello </h1>					//Greeting
+	<form, className="form">				//Form
+	  <input type="text" placeholder="Username" />
+ 	  <input type="password" placeholder="Username" />
+	</button type="submit">Login</button>
+  </form>
+ </div>
+);
+}
+
+2) Check Condition
+	Create a function to check condition
+	call function in app
+
+function renderConditional() {
+if(isLoggedIn === true){
+  return <h1>Hello <h1>					//greeting
+} else {
+	<form, className="form">				//Form
+	  <input type="text" placeholder="Username" />
+ 	  <input type="password" placeholder="Username" />
+	</button type="submit">Login</button>
+}	</form>
+}
+
+function App() {
+  return <divclassName="container">
+   {renderConditionally()]
+  {}
+ </div>
+}
+
+
+3) Modularize by creating separate form component 
+	Each component should have single responsibility
+
+
+Create login component -> Create input component
+
+a)  Login.jsx	//login component
+		put form html in login
+
+	import react from react
+	function Login () {
+	return 	<form, className="form">	
+		<input type="text" placeholder="Username" />
+ 	  	<input type="password" placeholder="Username" />
+		</button type="submit">Login</button>
+		</form>
+}
+export default Login;
+
+
+b) Use Login component
+App.jsx
+
+import React from "react";
+import Login from"./Login"
+
+var isLoggedIn = false;
+
+function renderConditional() {
+if(isLoggedIn === true){
+  return <h1>Hello <h1>					//greeting
+} else {
+	return <Login />	
+}
+}
+
+function App() {
+  return <divclassName="container">
+   {renderConditionally()]
+  {}
+ </div>
+}
+export default App;
+
+
+c) extract input component
+input.jsx
+
+import react from react
+import Input from "./Input"
+
+function  Input(props) {						//catch the props
+  return <input type="props.type" placeholder={props.placeholder}/>			//2 types of inputs : text and password
+}
+
+export default Input;
+
+
+
+
+
+d) Use Input component
+Login.jsx
+
+
+	import react from react
+	function Login () {
+	return 	<form, className="form">	
+		<Input
+		  type="text"	
+		  placeholder= "username"
+		 />					//passprops because different types of input
+		<Input
+		  type="password"	
+		  placeholder= "Password"
+		 />
+		</button type="submit">Login</button>
+		</form>
+}
+export default Login;
+}
+

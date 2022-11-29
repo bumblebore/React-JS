@@ -1,0 +1,33 @@
+1) Rule 1: can use familiar html attributes like src, href in JSX
+2) Rule 2: attributes with >1word -> use camelCase
+3) Rule 3: Can use JS expression as attribute values but inside {}
+
+
+
+Lorem picsum
+1) store lorem picsum in variable		const img ="https://picsum.photos/200"
+2) add source to img element		<img src={img}> </img>
+
+Q1) Will below work?	 Works in HTML : Yes	//html is forgiving
+			
+			 No in JSX. Why? need self closing
+<img src={"https://picsum.photos/200"}> 
+___________________________
+1)
+import React from "react"
+import ReactDOM from "react-dom"
+
+const img ="https://picsum.photos/200"		//Paste lorem picsum link in img tag
+
+const  name = "Angela"
+const currentDate = new Date();
+const year = currentDate.getFullYear();
+
+ReactDOM.render(
+<div>
+	<h1 className="heading">My Favourite Foods</h1>
+ 	<img src={img}> </img>
+</div>,
+document.getElementById("root")
+)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

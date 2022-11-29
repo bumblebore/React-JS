@@ -1,0 +1,21 @@
+//Save time
+	no need to calc next expressio
+&& in JS
+
+(EXPRESSION && EXPRESSION)
+(x > 3 && x< 7)
+
+_____________________
+
+&& in React
+CONDITION && EXPRESSION
+
+true && EXPRESSION
+
+false && EXPRESSION(not eval)	//expression not evaluated in this case
+
+
+const currentTime = new Date(2019, 11, 1, 9).getHours();
+currentTime > 12 && <h1> Why are you still working? </h1> 
+
+//RHS skipped

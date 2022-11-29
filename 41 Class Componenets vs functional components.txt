@@ -1,0 +1,100 @@
+How do we add state in react?
+1) Functional Components : split components into functions
+			code inside function component
+
+import React from "react";
+
+function	App() {
+   return <h1>Hello</h1>
+}
+
+export default App;
+
+
+2) Class Components
+	no parenthesis ()
+	class must extend component 	//turns app class to react component class
+	add code in render method to render
+
+import React from "react";
+
+class App extends React.Component {
+ 
+ render() {
+   return <h1>Hello </h1>
+}
+}
+
+export default App;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1) Why convert functional component to class component?
+	Necessary to have state
+	Check state & lifecycle documentation
+		To use state : have to convert function to class
+
+2) How to manage state in class? Use same way as functional component : Add with self closing tag
+	Use class component in render to replace h1
+	  return <ClassComponent />;
+
+3) What is the class component helping render?
+	h1 and button
+	When button clicked -> call increase function -> increase calls setState function
+		Setstate passes new values (this.state.count +1) to  count stored in state
+
+4) Disadvantages of using class?
+	have to write "this" a lot more
+	requires binding
+	complicated when using state functionality across components
+	Hooks save a lot of code //less boiler plate
+		State in one constant
+	
+
+5) 2018  React team Solved it using Hooks (Introducing Hooks)
+	Write hoooks over classes -> if new code //Clearer
+	CAN only use HOOKS with FUNCTIONCAL COMPONENTS and if NEEDED - CLASS  COMPONENTS
+			
+
+CREATE REACT APPS USING FUNCTIONAL COMPONENTS
+people will tell to use class components to set state for app
+	but can do using UseState hook	
+
+
+For ex
+we have ClassComponent.jsx and App.jsx
+
+ A )ClassComponent.jsx
+	// Single button increasing no. of count
+	
+
+class ClassComponent extends React.component {
+  constructor() {
+	super();
+	this.state = {
+		count : 0;
+}
+	this.increase = this.increase.bind(this);
+}
+
+ increase() {
+   this.setState(this.state.count +1);
+}
+
+render() {
+  //return 	//<h1> {this.state.count} </h1>//
+ <button onClick={this.increase}>+</button>
+ </div>
+ }
+
+}
++++++++++++++++++++++++++++++++++++
+App.jsx
+import React from "react";
+import ClassComponent from "./ClassComponent";
+import functionalComponent from "./FunctionalComponent";
+
+class App extends React.component {
+  render() {
+    return<ClassComponent/>
+}
+}
+export default App;

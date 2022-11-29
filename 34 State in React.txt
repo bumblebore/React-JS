@@ -1,0 +1,100 @@
+1) built components
+2) extract components to small pieces
+3) pass properties to components to customize and reuse
+
+How to make app more interactive?
+
+State: UI or current front view  =  function(state)
+
+For ex
+frontend is variant of state //atwe	
+Ice/ water = function (termperature)
+
+_________________________________________________________________
+For ex a todo list app
+1) App component
+	 ListItem Component
+		Paragraph text
+
+Interactiveness ex : user clicks on text => text strikes out
+
+
+2) var isDone = false;
+   	if user clicks on button, change /switch value to true
+    var isDone = true;
+
+How to achieve this? DECLARATIVE PROGRAMMING	
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+App.jsx	//Set property inline via State variable
+
+import React from "react"
+
+function App() {
+var isDone = false;
+
+						//How to render below only when var is true? Ternary operator
+	
+const strikeThrough = { textDecoration: "line-through };	//State variable
+						//UI is dependent on state variable	
+  return <p style={{isDone ? strikeThrough : null}}> Buy Milk </p>
+} 
+
+export default App;
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+IMPERATIVE PROGRAMMING : Getting hold of that exact item and setting property
+//Imperative = v crucial
+//tap into properties -> 
+document.getElementById("root").style.textDecoration = "line-through";	
+
+import React from "react"
+ 
+function strike() {
+ document.getElementById("root").style.textDecoration = "line-through";	
+}
+
+function unstrike() {
+ document.getElementById("root").style.textDecoration = "null";
+}
+
+function App() {
+return (						
+  <div>	
+  <p> Buy Milk </p>
+  <button onClick={strike}> Change to strike through </button>
+ </div>
+} );
+
+export default App;
+
++++++++++++++++++++++++++++++++++++++++++++++++
+The rendered elements are not changeable. They have to be re-rendered on screen (for change in properties)
+
+Hence below wont work
+
+import React from "react"
+
+var isDone = false;
+
+function strike() {
+ isDone = true;
+}
+
+function unstrike() {
+ isDone = false;
+}
+
+function App() {
+return (						
+  <div>	
+  <p style={{isDone ? {text-decoration: "line-through"} : null}}> Buy Milk </p>
+  <p> Buy Milk </p>
+  <button onClick={strike}> Change to strike through </button>
+  <button onClick={unstrike}> Change ba ck  </button> 
+</div>
+}
+
+
+How to change rendered elements then without re-rendering to display change in properties(for ex style)?
+HOOKS
+

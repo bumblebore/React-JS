@@ -1,0 +1,36 @@
+1) /map emoji term properties to a prop 
+
+function CreateCard(contact) {
+  return( 
+   <Entry
+	key={emojiTerm.id}
+  	name={contact.name} 
+  	img={contact.imgURL
+  	tel={contact.phone}
+  	email={contact.email}
+/>
+);
+}
+
+
+2)	//Anonymous function removed.
+	//can also delete return keyword	//Entry component is considered single line of code 
+function App() {
+  return( 
+ <div>
+   <h1>
+	<span>emojipedia</span>
+	</h1>
+  <dl className="dictionary">{emojipedia.map(emojiTerm => {return<Entry
+	key={emojiTerm.id}
+  	emoji={emojiTerm.emoji} 
+  	name={emojiTerm.name}
+  	description={emojiTerm.meaning}
+  	/>
+);
+})}</dl>
+	</div>
+
+
+)
+}

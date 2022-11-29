@@ -1,0 +1,56 @@
+Many places can be reusable components
+
+For ex paragraph -> can also be component
+
+Rule: if you find creating same thing over and over again -> Separate out into component + pass properties to it
+
+for ex
+instead of paragraph, 2 detail component with properties passed (tel and email)
+	-> render as separate components
+Card.jsx
+___________________________
+import React
+import React-dom
+import detail from "./Detail"
+function Card(props) {
+  return (
+    <div className="card">
+	<div className="top">
+	     <h2> className= "name"> {props.name} </h2>
+	     <Avatar img= {props.img} />
+	</div>
+	<div className="bottom">
+	  <Detail 						//Detail Component 1
+	   detailInfo={props.tel}
+	/>
+	<Detail						//Detail Component 2 
+	   detailInfo={props.email}
+	/>
+	/>
+	//<p className = "info"> {props.tel}</p>		//Paragraphs repeting- > create component Detail instead
+	//<p className= "info">{props.email}</p>
+	<div>
+              </div>
+);
+}
+____________________________
+Detail.jsx
+import React
+
+function Detail(props) {
+return <p className = "info"> {props.detailInfo}</p>	
+
+}
+
+export default Detail;
+__________________________
+DOM Tree structure
+
+App
+  Card  
+     Avatar
+     Detail 
+	props: detailInfo
+	rendered By Card, App
+     Detail
+  Card

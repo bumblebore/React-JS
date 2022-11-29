@@ -1,0 +1,50 @@
+OBJECTIVE: if we click a todoItem it crosses out, then uncrosses
+Manage state inside ToDoItem
+
+  
+
+6) How is state handled across ToDoItem components
+ToDoItem Component is a stateless componentWhy? it is not manipulating anything
+				receives read only props -> displays them
+
+	Will the below work? NO Cannot  change props (READ ONLY)
+	function ToDoItem(props) {
+	  return (
+	  <div>
+	    <input
+ 	      onChange={() => {
+	         props = "new Thing";
+	}}
+/>
+ <li> {props.text} </li>
+</div>
+);
+
+7) when div is clicked -> on click -> call function handleClick() -> Set boolean to true/false, why?
+
+8) Conditionally render text decoration
+	if isDone is true -> cut
+	else set to none;
+
+
+1) Using inline style
+
+import React from "react";
+
+function ToDoItem(props) {
+  
+  const [isDone, setIsDone]  =  useState(false); 
+
+   function handleClick() {
+	setIsDone((prevValue) => {
+	  return !prevValue;
+})
+}
+   return (
+       <div onClick={handleClick}>
+          <li style={{textDecoration: isDone ? "line-through" : "none"}}> {props.text}</li>
+       </div>
+  );
+}
+
+export default ToDoItem

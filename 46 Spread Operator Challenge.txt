@@ -1,0 +1,145 @@
+ToDoApp
+1) Track state of input
+	how? by changing state
+
+2) When app button pressed -> item added to array
+
+3) Display all unordered list items as separate list items  
+_____________________________________________________________________________________
+Solution:
+1) Track state of input
+  	//const []InputText, setInputText] = useState("")
+
+2) Add value property to input
+	Why? to tie input to inputText state	//Controlling the input
+					//input value inline with input text
+
+3) When to change input text / When to call setInputText
+	onChange function  --> handleChange(event) triggered	//<input onChange={handleChange}type="text" value ={inputText} />
+
+4) hold on to new value of input	
+	const newValue = event.target.value;
+      Since only 1 input -> name of input is not important
+	No need for destructuring
+	
+5) Call SetInputText(newValue)	//pass the new value to it
+				//Do we need old value
+	//Since we dont have to mutate/manipulate setInputText this time
+				//We dont need previous value, want to give new values (what user is typing)
+
+6) Chrome Developer tools -:>
+	props
+		new prop : ""
+	hooks
+	            -> State : ""		//State is initiailly empty
+
+	START TYPING
+	            -> State : "Atwe"
+SUCCESSFULLY TRACKED STATE in INPUT TEXT
+-----------------------------------------------------------------------------------------
+7) Press Add button -> pass current data in input to the array
+      create new const[items, setItems] = useState([]);	 //empty at first
+						//what is use of this array? render all li items
+						//to contain text inside each item 
+						//get access to each item using map function 
+
+       <ul>	
+	{items.map((todoItem) => {			//each item is todoItem  /ouput after mapping
+	   return <li>{todoItem}</li>;			//return each item as text	//put todoItem in li
+} ) }
+
+8) When add button pressed -> Call a function addItem  
+<button onClick={addItem}>
+
+//Create function to addtext from input to items array
+	get previous items -> add new items to end of array
+function addItem() {
+ setItems( (prevItems) => {
+    return [...prevItems, inputText];
+})
+}
+
+Type in input : Buy Milk
+	props:
+	
+	hooks:
+	   State: "Buy Milk"
+	   State: Array
+
+Type in input : Buy Egg
+	props:
+	
+	hooks:
+	   State: "Buy Egg"
+	   State: Array
+	
+Click Add button -> Array gets the value -> State gets updated -> triggers map function -> creates a new list item
+
+	props:
+	
+	hooks:
+	  State: "Buy Milk"
+	  State: "Array"
+	      0:    "Buy Milk"		
+
+
+8) But the input is not clearing after item gets added
+How to clear the input after adding an item?
+do it inside addItem() function:
+	After input text sent to items array
+	setInputText as empty string
+
+function addItem() {
+  setItems(prevItems => {
+    return [...prevItems, inputText];
+});
+setInputText("");
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Index.js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App";
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+App.jsx	
+import React from "react";
+
+function App() {
+const [InputText, setInputText] = useState("")
+
+ function handleChange(event) {
+const newValue = event.target.value;
+}
+
+function addItem() {
+  setItems(prevItems => {
+    return [...prevItems, inputText];
+});
+setInputText("");
+}
+
+  return (
+    <div className="container">
+      <div className="heading">
+        <h1>To-Do List</h1>
+      </div>
+      <div className="form">
+        <input onChange={handleChange}type="text" value ={inputText} />
+        <button onClick={addItem}>
+          <span>Add</span>
+        </button>
+      </div>
+      <div>
+        <ul>
+          <li>A Item</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default App;

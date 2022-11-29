@@ -1,0 +1,176 @@
+Why use over Bootstrap/fav-icons? In react : Javascript,html and css are in 1 component
+	Can add functional components //NO NEEED TO CODE
+
+Add some dependencies, why? to get hold of some components 
+How to make apperence little better?
+
+1) Logo Icon
+2) input expanding feature
+3) Add button hover effect
+4) Background pattern	: transperent textures	//add background image to url
+
+
+How to achieve? prebuilt components
+			Add dependencies
+
+
+Which dependencies to add?
+Add dependencies -> Material UI
+	use material-ui/core and material-ui/icons component
+
+
+	How to install
+		if locally -> install using npm
+		npm install@material-ui/core
+
+		
+
+What is material UI? react components that are preBuilt
+MaterialUI -> Components -> Icons
+
+
+How to import?
+
+import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+import ThreeDRotation from '@material-ui/icons/ThreeRotation;
+
+
+How to use? Like react component
+
+<DeleteForeverIcon />
+
+
+Forex
+
+Note.jsx
+//Copy from material ui icon
+import DeleteIcon from '@material-ui/icons/Delete";
+
+Earlier :
+<button onClick={handleClick}>DELETE</button>
+
+Now:
+<button onClick={handleClick}>
+<DeleteIcon />
+</button>
+
+
+TEST:
+Create a note and see icon
+________________________________________________________________
+
+NO NEED TO CODE ex
+Change Add icon
+//The below add is fancy 	//changes color and all
+
+			//pops up with animation
+//Can also use Floating action buttons
+CreateArea.jsx
+
+import AddIcon from "@material-ui/icons/Add";
+import Fab from '@material-ui/coreFab';
+
+<button onClick={submitNote}>
+ <AddIcon />
+</button>
+OR
+
+<Fab onClick={submitNote}>
+ <AddIcon />
+</Fab>
+
+---------------------------------------
+Check + button section -> in code see Zoom component used	<Zoom..../>
+Search Zoom component in material UI
+
+import Zoom from '@material-ui/core/Zoom':
+	//use with in prop
+	if in is true -> component will transition
+
+Applying Zoom Component;
+<Zoom in={true}>
+<Fab onClick={submitNote}>
+ <AddIcon />
+</Fab>
+</Zoom>
+-----------------------------------
+What if we want to zoom only when we click
+conditional rendering
+
+/?When clicked we want 3 rows
+in CreateArea.jsx
+<textarea
+  name="content"
+  onChange={handleChange}
+  value= {note.content}
+  placeholder="Take a note.."
+  rows= "3"
+
+//Also zoom in only when clicked
+<Zoom in={true}>
+<Fab onClick={submitNote}>
+ <AddIcon />
+</Fab>
+</Zoom>
+______________________________________________
+Solution:
+1) Hold state , to check wheather create area is expanded or not
+//initial value = false
+CreateArea.jsx	
+
+const [isExpanded, setExpanded] = useState(false);
+
+<textarea
+name = "content"
+onClick={}
+onChange= {handleChange}
+value={note.content}
+placeholder="Take a note"
+rows="3";
+
+
+
+2) Only when text area is clicked want to expand
+//on click -- Call method expand 
+const setExpanded ---> true
+
+function expand() {
+  setExpanded(true);
+}
+
+
+3) Once the setExpanded(true) -> render input
+other wise dont render anything
+
+CreateArea.jsx
+
+return (
+ <div>
+  <form className="create-note"
+{isExpanded ? <input
+   name= "title"
+   onChange{handleChange}
+   value={note.title}
+   placeholder="Title"
+/> : null }
+  )
+
+
+NOW INPUT WILL ONLY SHOW WHEN WE CLICK ON TEXT AREA
+ALSO TURN ROWS 3 WHEN CLICKED
+<textarea
+name = "content"
+onClick={}
+onChange= {handleChange}
+value={note.content}
+placeholder="Take a note"
+rows="isExpanded? 3 : 1";
+
+FAB BUTTON SHOWS and ZOOMSs ONLY WHEN expanded
+
+//Also zoom in only when clicked
+<Zoom in={isExpanded}>
+<Fab onClick={submitNote}>
+ <AddIcon />
+</Fab>
+</Zoom>

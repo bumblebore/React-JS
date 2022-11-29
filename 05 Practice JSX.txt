@@ -1,0 +1,29 @@
+Create webstie  w react: 
+	h1 heading
+	unordered list
+	3 list elements
+
+My Favourite Foods
+
+   * Bacon
+   * Jamon
+   *Noodles
+
+__________________________________
+
+import React from "react"
+import ReactDom from "react-dom";
+
+
+React.DOM.render(
+<div>
+<h1>My favourite Foods</h1>
+<ul>
+<li> Bacon </li>					//note <li /> is also called self closing tag
+<li> Jamon </li>					//When turns into self closing tag? when no children or nothing bw opening and closing
+<li> Noodles </li>
+ </ul>
+</div>
+,document.getElementById("root")
+);
+_________________________________________

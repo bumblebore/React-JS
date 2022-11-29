@@ -1,0 +1,8 @@
+QUICKLY GET INTO FEEDBACK LOOP
+ok to have ambitious goals
+but have small functional goals 
+
+Product dev cycle
+1) Build Core functionality
+2) Build -> get feedback -> improve
+3) See what things to improve

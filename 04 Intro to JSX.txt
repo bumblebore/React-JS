@@ -1,0 +1,122 @@
+How to save your work? fork + login
+
+What is body div? root of react application
+		What is root? All react things are under root
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>React App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script src="../src/index.js" type="text/javascript"></script>
+  </body>
+</html>
+
+
+
+
+Since react is JS library, where will we write all our code? index.js
+
+Summary: How will we use react to write html in JS code? write all html inside single div
+
+1) Require react and reactdom modules
+	react@16.11.0
+	react-dom16.11.0		
+	require react & react dom + bind to React & ReactDOM keyword / modules
+	Old Way:
+	
+	var React = require("react");
+	var ReactDOM = require("react-dom");
+	----------------------------------
+	New way: import/export
+	import 	React 	   from "react"
+	iimport 	ReactDOM from "react-dom";
+		
+
+2) Use react						//no need rn
+	ReactDOM.render(WhatToShow, WhereToShow, WhenRenderFunctionCompleted)			//What are we rendering? whatToshow inside where tos how
+			//h1	        //using getElementById									html <h1>inside root <div>
+	Where is render method ? In ReactDOM
+	What we achieve by React here? We wrote Plain HTML in JS file
+				//no need for fancy <% %> EJS
+	
+	What is in React module? Babel
+		What is Babel? JS Compiler , compiles advanced JS to bog standard normal JS(browser compatible)
+			What are these files? JSX 
+				What is JSX? JS + HTML (Syntax extension)		(index .js is JSX file)
+
+
+				How? html picked by compiler/Babel -> compiled to actual JS
+				Where is compiler understanding this html as JS? React module
+				
+				Babel can understand next gen JS and compile to all browser understand JS
+
+	Ex Use Babeljs.io
+		var obj = {			var obj = {
+		  shorthand,			 shorthand = shorthand,
+		  method() {			 method:  function method() {
+			return " :)" ;		return ":)";
+}						}
+}						};
+
+
+
+Why use React modules? Write ES6/ES2015 code without worrying if it will run on internet explorer etc
+			Write easy code with html : JSX File
+-----------------------------------------------------------------------------------------------------------------------------------
+What Babel compiler does?
+	ReactDOM.render(<h1>Hello World </h1>,	ReactDOM.render(React.createElement("h", null, "Hello World!"),
+	document.getElementById("root"));		document.getElementById("root"));
+						//createElement : Vanilla JS method
+What we aviod by using Babel?
+Writing Vanilla JS 3x code
+
+Pure JS										HTML inside JS
+var h1 = document.createElement("h1");				}
+h1.innerHTML = "Hello World! ";					}		ReactDOM.render(<h1>Hello World!</h1>,document.getElementById("root"));
+document.getElementById("root").appendChild(h1);			}
+
+//Output: Hello World
+
+
+What other things Babel compiles except JSX? 
+Render JSX
+ES2015		map functions, arrow functions
+ES6
+
+What to learn? JS ES6 latest feat
+---------------------------------------------------------------------------------------------------------------------------------------
+Can we render multiple html elements in render method of React module? inside WhatToRender
+
+ReactDOM.render(<h1>Hello World </h1><p> paragraph </p><,document.getElementById("root"))
+XX  NO  XX
+Code Crash why?
+render method takes single html element
+
+What solution?
+	Convert 2 html elements to 1
+		How?
+		   Embed html1 and html2 inside 1 single div
+
+	ReactDOM.render(<div>	single div
+	<h1>Hello World </h1>	html 1
+	<p> paragraph </p>	html 2
+	</div> 
+	,document.getElementById("root"))
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+code
+
+
+var React = require("react");
+var ReactDOM = require("react-dom");
+
+ReactDOM.render(<h1>Hello World!</h1>,document.getElementById("root"));			//Where will hello world be? at some html element	//root div
+
+
+

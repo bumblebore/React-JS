@@ -1,0 +1,63 @@
+What is use of React? Build user interfaces for website and web apps
+			website + User Interface =>  interactive website
+			Best Web framework after jQuery
+
+What is React? JS Library for building user interfaces
+		Breaks down complex UI into component tree
+
+What is reused and customized ? components			
+
+What is component? html + css +js	-> each component is functional
+	Create several components
+	Each component -> different function + different appearence
+
+
+Why use component tree? simplifies structure of website	
+		Earlier Navbar : Lots of html 
+		in react Navbar = <Navbar> Component	-> becomes an html element
+		Keeps code clean and reusable and modular
+
+Ex of component in use?
+	Twitter website -> when scroll bottom of feed
+			how new tweets load
+			without entire page updating/reloading
+			Detect if user at bottom of screen -> make request to server -> populate feed component with more data
+
+	FB -> pop up notif on fb friend request -> Had to refresh to see
+		notification component -> listens to change in server -> update itself
+		FB entire made of components
+			news feed, post(update itself), chat
+
+How does component updates itself?	
+	Comparing changes
+	If change happens => compare new DOM tree to  Old DOM Tree
+			Spot the difference
+			Update only the changed components
+			Web app becomes interactive
+			Web app becomes faster 
+
+Why use react? Clean code
+		Earlier Navbar : Lots of html 
+		in react Navbar = <Navbar> Component	-> becomes an html element
+		Keeps code clean and reusable and modular
+
+	Makes easy and fast to build user interfaces: AirBNB
+	Helps to build repetitive units
+		Building single component and then customize
+		
+		for ex individual stays on airbnb
+		Each stay different 
+		parameters work same though
+
+
+
+Component tree
+				Web app
+			/			\
+		Nav bar				TodoList	
+						  |
+						ListItem
+					         /		\
+					Checkbox	ItemText 
+________________________________________________________________________________________________________________
+

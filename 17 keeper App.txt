@@ -1,0 +1,110 @@
+Objective:
+How to open project folder? drag drop to vscode
+HeaderComponent
+
+ Note Component
+
+Footer Component
+//All 3 component in app component
+
+
+++++++++++++++++++++++++++++++++++++
+1) What to link to html? fonts, stylesheet and index.js
+2) Create app.js component in components folder
+	 import & Render app component in index.js		
+4) Create Header jsx component -> Renders header element
+	import & Render Header component in app.js	
+	//Note: CSS is already created
+
+5) Create Footer component
+	for dynamic year , how to get dynamic year? .getFullYear();
+			how to print in component? {}
+	import & Render Footer component in app.js	
+
+6) Create note component 
+	import & Render note component in app.js	
+	Tip:
+		How can we apply style to custom component?
+		<Note className="note"/>	THIS DOESNT WORK XX
+			//HTML Attributes should NOT be in Custom Component
+			HTML Attributes can apply only to html element
+			 for ex div inside Note module, instead of <Note className="note" />
+			
+
+____________________________________________________________
+index.html
+	<!DOCTYPE html>
+	<html lang="en">	 
+	<head>
+	 <title> Keeper App </title>
+ 	<link>										//Embed Fonts
+	  href="https://fonts.googleapis.com/css/css?family=Mclaren....
+	  rel="stylesheet"
+	 />
+	<link rel = "stylesheet" href="styles.css" />						//Stylesheet link
+	</head>
+	<body>
+	<div id="root"></div>
+	  <script src="./"src/index.js></script>		//Add index.js as script to index.html		//index.js file link
+	</html>
+_______________________________________________________________
+index.js
+
+import React from "React";
+import ReactDOM from "react-dom";
+import App from :./components/App";
+
+ReactDOM.render(<App />, document.getElementById("root"));
+_________________________________________________________________________________________
+App.jsx
+import React from "React";
+import Header from :./Header";
+import Note from "./Note";
+
+function App() {
+  return <div>
+    <Header />
+    <Note /<>
+   <Footer />
+   </div>
+}
+
+export default App;
+_________________________________________________________________________________________
+Header.jsx
+
+import React from "react"
+function Header() {				//custom element pascalcase
+  return <header> 				//html lowercase 
+ <h1> Keeper </h1>
+  </header>
+}
+
+export default Header;
+__________________________________________________________________________________________
+Footer.jsx
+
+import React from "react"
+function Footer(){
+
+const currentYear = new Date().getFullYear();
+ 
+ return <footer>				//Why wrap in footer element? used in styles.css
+  <p> Copyright  {currentYear} </p>
+   </footer>			
+}	
+
+export default Footer;
+
+__________________________________________________________________________________________
+Note.jsx
+
+import React from "react"
+function Note(){
+  return	<div className = "Note">
+	<h1> This is the title </h1>
+ 	<p> This is the content </p>
+ 	</div>
+}
+
+export default Note;

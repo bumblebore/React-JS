@@ -1,0 +1,209 @@
+Objective: Make website interactive
+	 Have changeable state (Since state cannot be changed and has to be re-rendered)
+
+How to change rendered elements then without re-rendering to display change in properties(for ex style)?
+HOOKS
+
+Functions that allow to hook into/read/modify state of app
+
+1) Use state Hooks
+Goal: How to make button trigger update to number? (Press + to increment)
+
+1) Given:
+index.js	//note code in index.js this time :)
+
+import React from react
+import ReactDOM from "react-dom";
+
+
+ReactDOM.render(
+  <div className = "container">
+    <h1>0 </h1>		
+    <button>+</button>
+   </div>
+   document.getElementById("root")
+)
+
+
+2) Remove hardcoded value
+index.js	//note code in index.js this time :)
+
+import React from react
+import ReactDOM from "react-dom";
+
+var count = 0;
+
+ReactDOM.render(
+  <div className = "container">
+    <h1>0 </h1>		
+    <button>{count}</button>
+   </div>
+   document.getElementById("root")
+)
+
+
+3) 
+a) Use on-click attribute of button to trigger some function
+b) function will be: 	console.log 
+c)  Assign the function	  <button onClick= {increase} 
+d) New message everytime button clicked
+e) increase value of count //count++	//value increased in console //how to increase on UI?
+
+Increase Count on UI
+Why do we have to re-render? We are not writing HTML elements. We rely on React-DOM to render these
+----------------------------------------------------------------------------------------------------------------------
+M1) Render all elements again in function increase() which is called on first render
+	//Works //Everything re-rendered on screen	//repetition
+
+
+index.js	//note code in index.js this time :)
+
+import React from react
+import ReactDOM from "react-dom";
+
+var count = 0;
+
+function increase() {
+   count ++;
+  console.log("I got clicked");
+ReactDOM.render(
+  <div className = "container">
+    <h1>0 </h1>		
+    <button onClick= {increase} > {count}</button>	//in react on-click becomes onClick
+   </div>
+   docum
+
+}
+
+ReactDOM.render(
+  <div className = "container">
+    <h1>{count} </h1>		
+    <button onClick= {increase} >+</button>	//in react on-click becomes onClick
+   </div>
+   document.getElementById("root")
+}
+----------------------------------------------------------------------------------------------------------------------
+M2) Hooks
+useState Hook
+ 
+1)Use hook where? in functional component
+		 how? create a new function component
+			how? move entire code to app,jsx
+
+index.jsx
+import React from react
+import ReactDOM from "react-dom";
+import App from "./components/App"
+
+ReactDOM.render(
+   <App />,	
+   document.getElementById("root")
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\
+App.jsx
+Summary: Why hooks? update value of h1 directly on render
+		is state update -> rerener h1
+		//only needed parts are changed/re-rendered
+1) return instead of render since component
+2) create function App()
+3) declare const state = React.useState();	//from React module , can also just import React, {useState} from "react"
+	What is useState? try console.log(state); 
+		Array w 2 items
+		[undefined, function bound dispatchAction() ]}
+		tru useState(123);
+		[123,function bound dispatchAction() ]
+
+	What is this? this is our starting state
+		try console.log(state[0]) -> ouputs 123
+
+4) instead of {count} or hardcoded 0
+	tap into state variable
+	See 123 value on screen
+
+5) useState() hook
+
+the state[0] array is confusing, doesnt tell what are we accessing
+Solution: destructure the array  +   give names to each element of array
+name will map to each corresponding value
+
+if const state = useState(34223);
+instead use
+const [red, green , blue] = [9, 132, 227]
+now we can console.log(blue);
+
+How to use this in our count var?
+instead of const state =React.useState(34223)
+const [count] = React. useState(34223);
+
+function increase() {
+  /count++
+}
+
+-------------------------------------------------------------------------------
+why 2 items not printed? we assigned only first name in destructuring
+
+
+import React from "react";
+function App() {
+const [count] = React. useState(34223);
+
+ console.log(state);
+ 
+function increase() {
+   count ++;
+  console.log("I got clicked");
+}
+
+return(
+  <div className 	= "container">
+    <h1>{count}</h1>		
+    <button onClick= {increase} >+</button>	//in react on-click becomes onClick
+   </div>
+);
+}
+}
+
+export default App;
+----------------------------------------------------------------------------------------------
+6) how to update useState value? use second param/function (setCount) in useState
+what are 2 params in useState? value and function
+const [count] = React. useState(34223);
+ const [count, setCount] = React. useState(34223);
+
+
+when click + button -> increase() called -> value set to whatever setCount set to
+	We set it to current value of count  + 1
+
+How to decrease instead? create function decrease() in app.js
+ what will this function do? set UseState to count -1	
+
+import React from "react";
+function App() {
+const [count, setCount] = React. useState(34223);
+
+ console.log(state);
+ 
+function increase() {
+  console.log("I got clicked");
+  setCount(count + 1);
+}
+
+function decrease() {
+  setCount(count - 1);
+}
+
+return(
+  <div className 	= "container">
+    <h1>{count}</h1>		
+    <button onClick= {increase} >+</button>	//in react on-click becomes onClick
+    <button onClick= {decrease} >-</button>	//in react on-click becomes onClick   
+</div>
+);
+}
+}
+
+export default App;
+
+
+
+OBJECTIVE : INTERACTIVITY ACHIEVED

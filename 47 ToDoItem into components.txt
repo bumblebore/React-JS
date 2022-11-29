@@ -1,0 +1,104 @@
+Previously we had a single App component
+Divide the app into separate components
+
+1) Create a functional component toDoItem that creates a text
+2) import into App.jsx	
+3) Use the component in place of li
+	<ToDoItem 
+	text={todoItem} />
+4) pass the text (which text) todoItem to display as a property
+<ToDoItem 
+	text={todoItem} />
+	/>
+
+5) Receive the text as 1 of the props
+	functionToDoItem(props) {
+	  return <li>props.text </li>
+}
+  
+6) How is state handled across ToDoItem components
+ToDoItem Component is a stateless componentWhy? it is not manipulating anything
+				receives read only props -> displays them
+
+	Will the below work? NO Cannot  change props (READ ONLY)
+	function ToDoItem(props) {
+	  return (
+	  <div>
+	    <input
+ 	      onChange={() => {
+	         props = "new Thing";
+	}}
+/>
+ <li> {props.text} </li>
+</div>
+);
+
+
+
+ToDoItem.jsx
+import React from "react"
+
+functionToDoItem(props) {
+  return <li>{props.text}</li>;
+}
+
+export default ToDoItem;
+___________________________________________________________
+App,.jsx
+
+
+import React, { useState } from "react";
+import ToDoItem from "./ToDoItem";
+
+function App() {
+  const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
+
+  function handleChange(event) {
+    const newValue = event.target.value;
+    setInputText(newValue);
+  }
+
+  function addItem() {
+    setItems(prevItems => {
+      return [...prevItems, inputText];
+    });
+    setInputText("");
+  }
+
+  return (
+    <div className="container">
+      <div className="heading">
+        <h1>To-Do List</h1>
+      </div>
+      <div className="form">
+        <input onChange={handleChange} type="text" value={inputText} />
+        <button onClick={addItem}>
+          <span>Add</span>
+        </button>
+      </div>
+      <div>
+        <ul>
+          {items.map(todoItem => (
+            <TodoItem 
+	<ToDoItem 
+	text={todoItem} />
+	/>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+-------------------------------------------------------------------------------
+TodoItem.jsx
+
+import React from "react"
+
+function ToDoItem(props) {
+  return <li>{props.text}</li>
+}
+
+export default TodoItem;

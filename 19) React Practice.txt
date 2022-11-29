@@ -1,0 +1,80 @@
+1) Create a completely reusable card component. Use the props
+Card.jsx
+
+function Card(props) {
+  return  (
+	<div className="card">			//Card section
+	  <div className="top">			//top section
+	    <h2 className="name">{props.name}</h2>		//Name section
+	    <img					//Contact Image section
+		className="circle-img"
+		src={props.img}															
+		alt=":avatar_img"
+		/>
+	  </div>
+	  <div className="bottom">		//bottom section
+	    <p className="info">{props.tel}</p>		//bottom info
+	    <p className="info">{props.email  }</p>
+	</div>
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2) App.jsx	//contains app component	//Contains custom card
+		//Use contacts from contacts.jsx to create cards
+
+import React from "react"
+import Card from "./Card"
+import App from "./components/App"
+import contacts from "../contacts"
+
+function App() {
+
+ console.log(contacts);
+
+return (
+	<div>	
+	  <h1 className="heading">My Contacts</h1>
+	  <Card
+	      name="{contacts[0].name}"
+	      img={contacts[0].imgURL}
+	      tel={contacts[0].phone}
+	      email= {contacts[0].email}
+/>
+  <Card
+	      name="{contacts[1].name}"
+	      img={contacts[1].imgURL}
+	      tel={contacts[1].phone}
+	      email= {contacts[1].email}
+/>
+  <Card
+	      name="{contacts[2].name}"
+	      img={contacts[2].imgURL}
+	      tel={contacts[2].phone}
+	      email= {contacts[2].email}
+/>
+</div>
+) ;
+}
+export default App;	
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+index.js		//contains main App render
+import App from "./components/App"
+import ReactDOM from "react-dom"
+
+ReactDOM.render(<App />, document.getElementsById("root"));
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Contacts.js file	//Array of JS objects
+
+const contacts = [
+{
+ name="Beyonce"
+	      img"https://..."
+	      tel="+123456789"
+	      email= "b@b.com"},
+{ name="Joe"
+	      img"https://..."
+	      tel="+1237659"
+	      email= "c@c.com"}
+];
+
+export  default contacts;

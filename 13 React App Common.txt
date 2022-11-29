@@ -1,0 +1,30 @@
+Index.js	: Does not have custom code
+_______________________________________
+import React from "react";
+importReactDOM from "react-dom";
+import App from "./App"
+
+ReactDOM.render(
+<App />					//Only App component in index.js
+document/getElementById("root");
+)
+----------------------------------------
+App.jsx
+________________________________________
+import React from "react";
+import Heading from "./Heading"
+import List from "./List"
+					//Component tree in App.jsx
+function App() {				//List and heading components in App component
+ return <div>
+   <Heading />
+   <List />
+ </div>
+};
+)
+export default App;
++++++++++++++++++++++++++
+
+Where to keep all our numerous components?
+in a folder: components				//Can be login screen components, registration screen components and other subdivisions
+		App,Heading,List			//Change import paths accordingly

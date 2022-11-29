@@ -1,0 +1,80 @@
+imp note
+	var react = require("react"); 	//Node	//not sure ES6 always works
+	import React from react	`//ES6	//React ES6 works 80% browser	/Using ES6 cuz relying on Babel into renderable format
+  but require function -> from node not JS
+ 
+  	
+
+Q1) What happens when we import react from react module
+
+Q2) Can we export from js file instead of jsx module file ?Yes
+math.js
+const pi = 3.1415962
+
+export default pi;
+----------------------------------------
+
+import React from "react"
+import ReactDOM from "ReactDOM"
+import pie from "/math.js"	//can name anything since default is imported
+
+React.DOM.render(
+<div>
+  <Heading> </Heading> or <Heading />
+<h1 className = "heading">My favourite Foods</h1>	//Our heading component might get longer in future
+<ul>
+<li> {pie} </li>					//note <li /> is also called self closing tag
+<li> 2</li>
+<li> 3 </li>
+ </ul>
+</div>
+,document.getElementById("root")
+);
+++++++++++++++++++++++++
+Q3) How to export multiple? another export statement with {}
+math.js
+const pi = 3.1415962
+
+function doublePi() {
+ return pi*2;
+}
+
+function triplePi {
+  return pi*3;
+}
+export default pi;
+export { doublePi , triplePi};
+
++++++++++++++++++++++++
+
+import React from "react"
+import ReactDOM from "ReactDOM"
+import pie. {doublePi, triplePi} from "/math.js"	//can name anything since default is imported	//names matter for non default ones
+
+React.DOM.render(
+
+<ul>
+<li> {pie} </li>					//note <li /> is also called self closing tag
+<li> {doublePi()}</li>
+<li> {triplePi()} </li>
+ </ul>
+</div>
+,document.getElementById("root")
+);
++++++++++++++++++++++++++
+Q4) How to import all files together? * Wildcard
+	Disadvantage? no single default export	
+			//cannot import only the things i need
+
+import React from "react"
+import ReactDOM from "ReactDOM"
+import * as pi from "./math.js";
+
+ReactDOM.render(
+ <ul>
+   <li>{pi.default} </li>
+   <li>{pi.doublePi()} </li>
+   <li>{pi.triplePi()} </li>
+</ul>,
+document.getElementById("root')
+)

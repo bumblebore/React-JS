@@ -1,0 +1,549 @@
+Q) What is state management in react?
+react components -> have state object
+
+What is state? JS data structure
+
+
+Peek into react
+Q) Why state management? 
+______________________________________________
+React apps made of components
+if less component -> easy to track state
+
+Q 0) Main Feature of React? React DOM updates DOM to match React elements
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q 1) How to render React element?
+	a) <div id ="root"></div>
+	b) Pass DOM element to  ReactDOM.createRoot()
+		const root = ReactDOM.createRoot( document.getElementById('root'));	//returns the root div
+	
+	c) Pass React element to root.render()
+	     const element =  <h1> Hello World  </h1>
+	     root.render(element);
+
+Final code:
+HTML:
+<div id="root"></div>
+JS:
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+const element = <h1>Hello, world</h1>;
+root.render(element);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q 2) How we updated UI in react usually? Cannot render normally (react element is imutable)
+Solution : create new element and pass to root.render()	
+
+ root.render (element). 
+	What is element? contains the HTML in variable const element 	//Like a single frame(What we want to see) in a movie, UI at a point of time	//can also contain functional component in element
+		Lets say we have html = new Date().toLocaleTimeString() inside element in a  <h2> </h2>
+	
+	THIS WILL PRINT THE LATEST TIME. How to make the clock tick?
+		the const element variable (with HTML) and  root.render(element) both are ina function tick()
+
+	We use setInterval(tick, 1000)	//function tick() called every 	second/1000ms using callback
+     
+		
+Final Code:
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+
+function tick() {
+  const element = (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {new Date().toLocaleTimeString()}.</h2>
+    </div>
+  );
+  root.render(element);
+}
+
+setInterval(tick, 1000);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q 0) Main Feature of React?
+ a) React DOM compares element and children to previous one
+ b) Applies DOM updates necessary
+ c) bring DOM to desired state	
+
+
+Q4) How to check this that only desired children in element gets updated??
+
+Open Final Code in browser tool
+ONLY THE TEXT NODE, whose COMPONENTS CHANGED GETS UPDATED BY ReactDOM
+
+<div id="root">
+ <div data-react-root>
+   <h1> Hello, World</h1>
+      <h2>
+	<!-- react-text: 4 -->
+	"It is"
+	<!-- react-text: 5 -->'
+	"12:26:49 PM"			//ONLY THIS PART GETS UPDATED IN CHROME DEV TOOLs -> Console
+	<!-- react-text: 4 -->
+	<!-- react-text: 4 -->
+    </h2>
+  </div>
+</div>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PRO TIP Think about how UI should look atany given moment , Dont worry about how you will change it over time 	//Solves many bug
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+COMPONENTS AND PROPS
+
+Basic Flow: Elements -> Functional Components -> Pass props from elements into functional components
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+What are functional  components? JS Functions  //Reusable pieces
+
+basically helps to think each piece in isolation
+
+what input in function? props  //arbit inputs
+what output/return? react elements
+
+Q1) how to define function component?
+
+Method 1 : Using Functional Components 
+function Welcome(props) {			//Plain JS function or Functional Component
+  return <h1>Hello, {props.name}</h1>;	//props
+}						//What is props? We get them from elements
+ 
+Method 2:
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;	//this.props
+  }
+}
+
+
+Q2) How to render this defined function component
+
+function Welcome(props) {				//COMPONENT
+  return <h1>Hello, {props.name}</h1>;
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));		//ROOT
+const element = <Welcome name="Sara" />;					// Element using functional components with props
+root.render(element);							//RENDER
+
+//What is happening?
+1) root.render() -> calls element <Welcome name="Sara" />. This React Element uses functional component Welcome.  What after element is called? 
+	2)  call element -> React calls Welcome Component, passes on props = Sara into Welcome component
+	 	3) Welcome component does its job of returning Hello, {props.name} -> and returns <h1>Hello, Sara</h1>	
+			3) React DOM updates DOM from to Hello Sara by 
+						getting props from element -> passing props into function components -> return html -> update only what was changed
+
+
+Q3) We  saw only 1 component, Welcome
+Objective: Create app component that renders Welcome component many times
+
+
+function Welcome(props) {				//DefineWelcome function component
+  return <h1>Hello, {props.name}</h1>;
+}
+
+function App() {					//Create  App function component		////React apps have single app component
+  return (
+    <div>
+      <Welcome name="Sara" />			//Render Welcome  function  component inside App function Component
+      <Welcome name="Cahal" />			
+      <Welcome name="Edite" />
+    </div>
+  );
+}
+		Note: to integerate React in a existing app -> startbottom-up for ex at button component --> and gradually work up hierarchy
+
+Note:  Ex splitting components into finer components	//DONT BE AFRAID
+
+Q4) How to extract component from a component?
+
+Given: 
+function Comment(props) {
+  return (
+    <div className="Comment">			//Comment
+      <div className="UserInfo">			  //UserInfo
+        <img className="Avatar"			     //Avatar
+          src={props.author.avatarUrl}
+          alt={props.author.name}
+        />
+        <div className="UserInfo-name">
+          {props.author.name}
+        </div>
+      </div>
+      <div className="Comment-text">
+        {props.text}
+      </div>
+      <div className="Comment-date">
+        {formatDate(props.date)}
+      </div>
+    </div>
+  );
+
+
+
+1) Extract Avatar component only from Comment component	
+Q) Does avatar component need to know it is rendered inside Comment?NO   //give him generic props		//what to name prop? name component's perspective
+Code becomes:
+
+function Avatar(props) {
+  return (
+    <img className="Avatar"
+      src={props.user.avatarUrl}
+      alt={props.user.name}
+    />
+  );
+}
+function Comment(props) {
+  return (
+    <div className="Comment">
+      <div className="UserInfo">
+        <Avatar user={props.author} />		/**/
+        <div className="UserInfo-name">
+          {props.author.name}
+        </div>
+      </div>
+      <div className="Comment-text">
+        {props.text}
+      </div>
+      <div className="Comment-date">
+        {formatDate(props.date)}
+      </div>
+    </div>
+  );
+
+
+2) Extract UserInfo component from Comment, Code becomes:
+
+function Avatar(props) {
+  return (
+    <img className="Avatar"
+      src={props.user.avatarUrl}
+      alt={props.user.name}
+    />
+  );
+}
+function UserInfo(props) {
+  return (
+    <div className="UserInfo">
+      <Avatar user={props.user} />
+      <div className="UserInfo-name">
+        {props.user.name}
+      </div>
+    </div>
+  );
+}
+function Comment(props) {
+  return (
+    <div className="Comment">
+      <UserInfo user={props.author} />					//Note how Avatar came inside User Info and didnt even know it was in User info
+      <div className="Comment-text">
+        {props.text}
+      </div>
+      <div className="Comment-date">
+        {formatDate(props.date)}
+      </div>
+    </div>
+  );
+
+
+Extracting Components: may look like grunt work , but having palette of reusable components pays off in larger apps
+	Rule: If any part is used many times for ex Button / is complex for ex App  ----> Extract it into separate component
+
+
+
+Q5) BIG QUESTION. about Props
+	should a function component change props?  NO
+		function component should never modify its own props
+
+for ex //pure -> dont change input, always return same result
+function sum(a, b) {
+  return a + b;
+}
+//impure function
+function withdraw(account, amount) {
+  account.total -= amount;
+}
+
+
+Q6) What basic Rule in react? 
+All React components must act like pure functions with respect to their props.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+STATE:
+Basically this.state checks for current state automatically, and helps us avoid writing props in element for ex root.render(<Clock />);
+
+Q1) How did we update the UI? root.render() call multiple times
+
+Q2) How do we automate clock component to update itself
+
+Objective: just write root.render(<Clock />);
+
+1) encapsulate how clock looks like. //wrap data in single unit in form of variables and method
+a) function clock
+function Clock(props) {
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {props.date.toLocaleTimeString()}.</h2>		
+    </div>
+  );
+}
+
+b) function tick		//renders Clock component
+function tick() {
+  root.render(<Clock date={new Date()} />);		//but here we still have to pass newDate in clock component, NOT our final objective
+}
+
+c) setinterval() method
+setInterval(tick, 1000);
+
+
+SOLUTION???? Add STATE to Clock component
+
+a) Convert clock function component into a class
+
+	a.1) Create ES6 class clock //same name as component
+	a.2) add empty render method()
+	a.3) move body of function into render() method
+	a.4) replace props with this.props in render() body
+	a.5) Delete the remaining empty function declaration.
+
+class Clock extends React.Component {
+  render() {			//when is this render method called? each time update happens in  root.render(<Clock />);		//on condition: We render <Clock/> int same DOM node
+    return (			
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+
+Q3) How to add local state to class?
+1) Replace this.props.date with this.state.date in the render() method:
+2) Add a class constructor that assigns the initial this.state:
+3) Remove the date prop from the <Clock /> element:
+
+
+1)
+class Clock extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>		//earlier had this.props.date
+      </div>
+    );
+  }
+}
+
+2)
+class Clock extends React.Component {
+  constructor(props) {					//Why added class contructor? initializes local state -> pass props to base constructor
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+root.render(<Clock />);			##
+
+OBJECTIVE ACHIEVED
+_______________________________________________________________________________________________________________________________________________________________________
+Final Code
+
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Clock />);
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Q) How to make clock update itself? Add lifecycle methods
+	How to setup timer when clock is rendered to DOM first time   //MOUNTING
+	How to clear timer when clock is removed with DOM	       //UNMOUNTING
+
+	Special methods() -> Run some code when component mounted/unmounted
+
+	//Also implement a method tick()
+
+For ex
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {			//Lifecycle method 1	//Runs when? after output rendered to Dom  //Set the timer here
+  componentDidMount() {
+    this.timerID = setInterval(						//timer id is stored here  /setup timer
+      () => this.tick(),							//call tick method once every second
+      1000
+    );
+  }
+  }
+
+  componentWillUnmount() {			//lifecycle method 2	//Runs when?s
+   clearInterval(this.timerID);						//tear down timer here
+  }
+ tick() {					//tick() method definition
+    this.setState({					//tick method calls SetState // contains object with current time   //SET STATE Detects when time changed -> calls render again
+      date: new Date()
+    });
+  }
+  render() {				//render() method
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+} 
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Clock />);
+
+
+
+
+What is the final order?
+1) <Clock /> passed to root.render
+2) Since no props in element, constructor of clock component called
+	this.state initialized with current time object
+	
+3) render() method from Component class is called, React figures out what to be displayed on screen
+	React updates DOM  with clock's render output (matches)
+
+4) After Clock output done, call componentDidMount() lifecycle method 
+				sets up timer in browser -> calls tick() method
+
+	when tick() called every second
+	     set state called with input as current time	
+		every 1 ms time gets updated -> setState detects that state is changed 
+			calls render again when state change
+				DOM updates, Output changes on screen
+
+
+if clock component is removed from DOM -> componentWillUnmount() lifecycle method is called() -> timer stops
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+RULES OF STATE
+
+this set.state is such a mystery:What imp to know?
+
+1) Use this.setState() to modify state
+for ex
+Dont modify
+	this.state.comment = 'Hello'	//Incorrect
+instead use
+	this.setState({comment: 'Hello'});
+
+
+2) multiple setState() in 1 single update for performance done async
+	Dont rely on state values for calculation
+
+for ex //may fail
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});
+
+Solution: use second form of setState() that accepts a function rather than an object
+	arg1 = previous state  ,  props =  update
+
+for ex
+// Correct
+this.setState(function(state, props) {
+  return {
+    counter: state.counter + props.increment
+  };
+});
+
+OR 
+//using arrow function
+// Correct
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+
+
+3) What if multiple variables in state? dont worry update independently, they are merged later
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      comments: []
+    };
+  }
+
+Solution: update independently with separate setState() calls:
+
+ componentDidMount() {
+    fetchPosts().then(response => {
+      this.setState({
+        posts: response.posts
+      });
+    });
+
+    fetchComments().then(response => {
+      this.setState({
+        comments: response.comments
+      });
+    });
+  }
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+State is not accessible to any other component except the one who sets it
+	it can pass it down to props if needed
+
+basically, below FormatterDate component will receive date in props
+	BUT it wont know where it came from. Clock's state / Clocks props/ hand typed
+
+<FormattedDate date={this.state.date} />
+
+
+THIS IS UNIDIRECTIONAL FLOW . Why? bottom elements dont know from where top data is coming
+			data from a state, can only affect components below it
+
+If you imagine a component tree as a waterfall of props, each component’s state is like an additional water source that joins it at an arbitrary point but also flows down.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Basically
+Is component stateful/stateless is just implementation detail and arbit (may change over time)
+
+Feel free to use stateless inside stateful and vice versa
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Stateful component:
+
+A component that manages the state in class-based with state or functional with useState.
+In some component, the data keeps changing, for example, watching the cricket score etc.
+In most of the cases, the class-based components extend react component.
+Stateful components can use react life cycle hooks
+In stateful components it good to use the this instance
+Stateless component:
+
+A component that has no internal state management in it.
+In some component, the data remains the same, for example, showing the static data.
+Function components are simply functions that receive the props and return the JSX code.
+Stateless components can not use the react life cycle hooks
+Here need not to use this instance, they just receive the props as an argument

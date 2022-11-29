@@ -1,0 +1,208 @@
+What if we want to delete text from items array?
+1) Have to reach from toDoItem to App Component -> change items array
+	//Delete isDone component and inline style
+
+Objective: Click item + add button -> to add to an array
+	Click on item  -> to delete it
+
+1) What else can we pass via components? props and functions
+	functions can be called via child components
+	for ex when we create , add another property onChecked and set it to function
+	 <ToDoItem
+	   text={todoItem}
+	  onChecked={deleteItem}		//set this to a function
+	/>
+
+2) Create a function delete items
+	Pass this function to child toDoItem
+	onChecked={deleteItem}
+
+Now instead of triggering function handleClick from toDoItem.jsx
+Trigger {props.onChecked}   -----> which triggers deleteItem() (WHere? in app component)
+
+TEST:
+Add "Buy Milk"
+Console ->  "item called delete"	//printed from function DeleteItems -> So All WOrking
+
+3) Now specify what to do when item deletes itself'
+How to delete item from Items array
+//get hold of previous items
+setItems((prevItems) =>{
+		//Which items are we deleting? Find id
+		//we forgot to add key , so add an id
+		//Set key to what? index of toDoItem from item array
+		//How to access index of toDoItem from item array? map function
+			What data we provide in callback function?  value of each item from array
+			Now we provide index as well. index will be the key	//ideally not recommended
+							//Keys are usually unique string	//uuid package npm
+			Pass index toDoItem as id
+			ToDoItem receives the id in props
+
+			[items.map(toDoItem, index )=> (
+				<ToDoItem key={index} id={index} text={todoItem} onChecked={deleteItem} />
+	))]
+
+})
+//TEST
+Test if ToDoItem receives the id as a props
+ToDo List	
+dgfgdg , rweoriwu   -> Add
+	//They get some text and onChecked method as shown below	
+	<ToDoItem key={index} id={index} text={todoItem} onChecked={deleteItem} />
+	//Components -> Click ToDoItem key="0"
+					props
+						id: 1
+						onChecked: deleteItem()
+						text: "sdsdf"
+						new prop : ""
+					renderedBy
+						App
+
+			       ToDoItem key="1"
+	//id passed as 0
+	//We now have access to id, can we pass directly back like below? NOT EXACTLY
+		<div onClick={props.onChecked(props.id)}		//Wont work, why?
+		
+		function deleteItem(id) {
+		  setItems(prevItems => {});
+}
+	//TEST: asfdsdf -> Add ->
+		console:    0		//immediately id printed
+				onChecked(props.id) is calling the function 	
+				What we wanted? pass the function
+		Solution? create a function in onClick()={() => {
+		props.onChecked(props.id);
+}}
+		//How is this the solution? this function is only called when onClick is triggered
+						after called -> tap into props ->props.onChecked(props.id);
+		//the function wont be called until div detects the click
+		//To Compare in hindsight: Earlier we were doing
+			Click Add button -> render toDoItem component -> trigger props.onChecked immediately
+			Now props.onChecked only called when we click item
+	     		  <div 
+			           onClick = {props.onChecked(props.id)}>
+	 	                <li >{props.text}</li>
+		   </div>
+
+	//TEST Again
+	asdfadf -> Add -> Click item
+	Console: 0	//We have got hold of ID
+
+//DELETE ITEM
+How to delete the item?//Use filter function to delete the one that matches the id
+
+Syntax: var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])
+
+function deleteItem(id) {
+  setItems(prevItems => {
+       return prevItems.filter(		//loop through prevItems -> tap into item and index 
+	(item, index  ) => {
+	  return index!== id
+		
+}
+)	//Array will be filtered
+});
+}
+
+//TEST AGAIN
+Open ReactDev Tool:
+
+Buy Milk -> Add
+
+
+				props
+						id: 0
+						onChecked: deleteItem()
+						text: "Buy Milk"
+						new prop : ""
+					renderedBy
+						App
+
+			       ToDoItem key="1"
+
+SUMMARY:
+GENERAL FLOW:
+1) Add new item -> item goes in array at index 0, id 
+	/index passed to ToDoItem component as a prop
+	OnChecked prop also passes deleteItem() function from App.jsx
+2) When item ToDoItem clicked -> trigger deleteItem() -> Pass id as input
+	receive  id in function deleteItem(id)	, id is the index of item
+	Call SetItems() and update list of items
+	filter list of items without the passed index !== id
+
+//All this is functional programming hat we see a lot in REACT (passing function in function in function......)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+import React from "react";
+
+function ToDoItem(props) {
+  
+
+}
+   return (
+       <div onClick={() => {	//Create a function 
+	props.onChecked(props.id);
+}}>
+          <li >
+ 	{props.text}
+          </li>
+   </div>
+  );
+}
+
+export default ToDoItem
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+App,.jsx
+
+
+import React, { useState } from "react";
+import ToDoItem from "./ToDoItem";
+
+function App() {
+  const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
+
+  function handleChange(event) {
+    const newValue = event.target.value;
+    setInputText(newValue);
+  }
+
+  function addItem() {
+    setItems(prevItems => {
+      return [...prevItems, inputText];
+    });
+    setInputText("");
+  }
+
+function deleteItems() {
+   console.log("item called delete");
+}
+
+  return (
+    <div className="container">
+      <div className="heading">
+        <h1>To-Do List</h1>
+      </div>
+      <div className="form">
+        <input onChange={handleChange} type="text" value={inputText} />
+        <button onClick={addItem}>
+          <span>Add</span>
+        </button>
+      </div>
+      <div>
+        <ul>
+          {items.map(todoItem => (
+            <TodoItem 
+	<ToDoItem 
+	key={}
+	text={todoItem} />
+	onChecked={deleteItem}
+	/>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default App;

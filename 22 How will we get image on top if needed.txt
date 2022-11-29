@@ -1,0 +1,14 @@
+Objective : Add a photo on top of card in our tree
+. Use avatar component with different props
+
+
+1) import Avatar  in App.jsx
+
+2) in function App() 	//in app.jsx
+{
+
+3) Provide props to avatar component
+<Avatar
+img="https..."
+/>
+} 

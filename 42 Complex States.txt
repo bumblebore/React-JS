@@ -1,0 +1,60 @@
+Complext State -> JS object where we have to retrieve previous value of object
+Understand when and why complex piece of state needed
+
+How to retrieve previous value of object?
+For ex
+type Firstname: Angela -> h1 -> Hello Angela
+type Lastname:  Yu        -> h1 -> Hello Angela Yu	//Firstname is still stateful
+__________________________________________________________________
+1) Make a form with 2  inputs and submit button
+2) make a var (stateful const) to hold values types in inputs ->using useState()
+	const [fName, setFName] = useState()
+3)  Use stateful const fName as value for input
+     Use stateful const fName and add to h1
+	//Do same for lName
+
+4) Add onChange prop to input	//        <input name="fName" onChange= {updateFName	} placeholder="First Name" value={fName}/>
+    Get hold of event + use it to call function updateFName(event) {}		
+    	What will the function do? updateFName
+		const firstName = event.target.value;
+		setFName(firstName)
+	Similarly updateLName
+		
+   If we type first name adds to Hello, then adds last name
+	<h1>Hello {fName} {lName}</h1>
+
+5) What disadvantage of this way? 2 different functions and constant to update firstname and lastname
+	What if fName and lName belonged to same JS object
+		i.e Complex piece of state needed
+
+import React, { useState} from "react";
+	const [fName, setFName] = useState("")		   // <h1>Hello {fName}</h1>
+	const [lName, setLName] = useState("")		   // <h1>Hello {lName}</h1>
+
+function updateFName(event) {
+  const firstName= event.target.value;
+  setFName(firstName);
+}
+
+function updatLName(event) {
+  const firstName= event.target.value;
+  setLName(lastName);
+}
+
+
+function App() {
+  return (
+    <div className="container">
+      <h1>Hello {fName} {lName}</h1>
+      <form>
+        <input name="fName" onChange= {updateFName} placeholder="First Name" value={fName}/>
+        <input name="lName" onChange= {updateLName} placeholder="Last Name" />
+        <button>Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
+
+______________________________________________________________________

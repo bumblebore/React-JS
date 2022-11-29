@@ -1,0 +1,123 @@
+We handled simple events: click/hover
+
+Complex events?for ex events in forms
+Input event attribute: onChange
+
+Objective: Get what user has typed in input form
+________________________________________________
+1) use onChange in input , create function handleChange() that triggers when input is changed (by passing)
+	Check console when type in input field to see: Changed
+
+2) When input element triggers onChange -> it also passes an object to function named: event
+What is this event? the event that triggered onChange'
+What is target? element that triggered the event
+What is value? value of some of the attributes
+How to access this event object from onChange to triggered function?
+	console.log(event.target.value);
+				event.target.placeholder or event.target.type					
+
+3) TRY TYPING IN INPUT FIELD	"A"
+	every time new letter typed -> get all 3 console logs
+A
+What's your name
+text
+
+4) every time we type -> handle change triggers
+we might get
+A
+An
+Ang
+Ange
+Angel
+Angela
+
+5) how to use the user typed value?
+	for ex change h1 Hello ---> whatever typed in input
+
+  5a) Create destructured state var 
+	 const [name, setName] 
+	//keep starting value as nothing
+  5b) Use state var name in h1
+  5c) In HTML -> elements handle their own state
+	for ex value is handled by input propery
+     //in react we shoudl set value to var that comes from event.target.value  / name
+ 
+ <div className="container">
+      <h1>Hello {name}</h1>				//State var in h1 
+	//The below is called CONTROLLED COMPONENT
+      <input 
+	onChange = {handleChange} 
+	type ="text" 
+	placeholder="What's your name?" />
+	value = {name}					//in react value should be set to var 
+						//Also keeps single source of truth
+
+----------------------------------------------------------------------------------
+Objective: Get user inputs from input element and display in heading when button click
+	//i.e detect events in submit button
+1) Add onClick listener to button
+2) trigger function handleClick() when button clicked
+	does handleClick need to see event data? NO -> just have to trigger
+3) Use state varable heading text
+4) When button clicked -> set Heading to value of name
+	setHeading(name);	//NOTE inside function : can use name of variable without {}
+			for ex console.log({name}) -> gives entire object { name: "sdfsdf"...}
+			           console.log(name)   ->			sdfsdf
+
+5) After we setHeading -> setHeading(name)
+
+6) Type Angela -> Submit ->Shows Hello Angela
+	
+7) //Normally input and submit button are in form component
+	even if button type = submit not present 
+	When we add button in form -> Click -> Adds to h1 -> quickly refresh app (renders to Hello)
+		a) Why app refresh?	form components refresh to submit/post/get request --> refresh page
+		b) What actually happens?
+		 <form onSubmit = {handleClick}>		//A method onSubmit is triggered on the form
+     		<button type = "submit">Submit</button>	//What to do when button gets clicked
+	
+		c) Flow: button clicked -> on submit triggered -> handleClick() function called
+		d) catch event 
+			function handleClick(event) {
+		  setHeading(name);
+		  event.preventDefault();			//Refreshes the page
+		}
+		e) type name: Angela -> Submit ->Hello Angela
+			//added without default behaviour of refreshing the page
+		
+App.jsx 
+import React from "react";
+
+function App() {
+ 
+ const [name, setName] = useState("")
+const [headingText, setHeading] = useState("");
+ 
+function handleChange(event) {
+ console.log(event.target.value);			//O/p A
+ //console.log(event.target.placeholder);		//What's your name
+ //console.log(event.target.type);			//text
+  setName(event.target.value);			//use State method setName in handleChange only to update state of name variable -> add to h1			
+}
+
+function handleClick() {
+	setHeading(name);
+	console.log({name});
+}
+
+  return (
+    <div className="container">
+      <h1>Hello {name}</h1>				//State var in h1 
+       <form>					//Normally input and submit button are in form component
+      <input 
+	onChange = {handleChange} 
+	type ="text" 
+	placeholder="What's your name?" />
+	value = {name}  // or value=  {event.target.value}
+      <button type = "submit"	onClick={handleClick}>Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;

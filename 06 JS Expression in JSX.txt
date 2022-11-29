@@ -1,0 +1,64 @@
+HTML-JS INCEPTION
+We learnt how to write html inside js file? JSX
+
+What else?How to write JS code inside that HTML
+
+JS
+  HTML
+    JS
++++++++++++++++++++++++++++++++++
+i.e for ex
+const name = "Angela"
+ReactDOM.render(<h1> Hello Person </h1>, document.getElementById("root")); 
+
+2) How to print variable "name" inside html? Direct = string
+	CURLY BRACES	{}		//how many curly braces can be used? as many
+		What do they do? evaluate JS expression
+		//Write any JS expression		 //for ex {3 + 4}
+						 //Math.floor{Math.random() * 10}}
+		//CANNOT write JS Statment		//if(name === "Angela"){ return 7}	
+
+	What is difference between statement and expression? youtube video: intro to js es6 programming course
+		expression is evaluated to a VALUE
+		Statement asks to do some work
+						
+ReactDOM.render(<h1> Hello {name} </h1>, document.getElementById("root")); 
+
+
+3) How to concat 3 JS expressions ? +(concat operator of JS) OR space of html OR String Interpolation/template literals
+const fName = BABEL
+const lName = SINGH
+
+	<h1> Hello {fName + " " +  lName}</h1>	//Better
+		OR
+	<h1> Hello {{fName} {lName}}</h1>		//Better
+		OR	
+4) String interpolation / template literals		String in as JS in as String in as JS	//inception //confusing
+	Ijecting strings into a piece of JS
+	<h1> Hello {'${fName} $(lName)'}</h1>
+
+
+
+
+5) Create 2 paragraph elements
+	Created by YOURNAME
+	Copyright CURRENTYEAR  
+Dont want hardcoded
+//How to not hardcode this
+Use JS new Date()  method to get date and then year using .getFullYear()
+
+--------------------------------------
+import React from "react"
+import ReactDOM from "react-dom"
+
+const  name = "Angela"
+const currentDate = new Date();
+const year = currentDate.getFullYear();
+
+ReactDOM.render(
+<div>
+<p>Created by {name} </p>
+<p>Copyright {year} </p>		//use JS with {} curly braces		//can also write JS expression in{} like {currentDate.getFullYear()}
+</div>,
+document.getElementById("root")
+)

@@ -1,0 +1,86 @@
+Note: imp to give a property : key for every component in map function
+	Our contact.js has id property though, so we use that as key
+Objective: 
+	instead of different card component for each element of array
+	<Card
+	   name={contact[0].name}
+	   img={contact[0].imgURL
+  	   tel={contact[0].phone}
+  	   email={contact[0].email}
+	/>
+	);
+	}
+-----------------------------------------------
+get all js object from contact.js as props to custom card component
+	<Card
+	   key = {contact.id}
+	   name={contact.name}
+	   img={contact.imgURL
+  	   tel={contact.phone}
+  	   email={contact.email}
+	/>
+	);
+	}
+
+
+We create card components
+we pass custom props to components
+
+What is in contacts array? 3 JS objects
+			 same properties , different values
+When passing props from a contacts array	=> repetitive
+Solution? Loop / Mapping components
+
+0) What is JS map function? handles arrays.
+    What map function does? loops through array of contacts
+
+1) Create a createCard function(contact) 
+	pass what? single contact to function
+			//single JS object.Why not array?
+	Set name property of card component = contact.name (single object's name)
+
+2) pass createCard function into map function
+    Why map? createCard function is called for all items in contacts array one by one	
+    Why createCard? 1st JS object iteration : CreateCard(contact_JS_object_1)
+			JS_object1_name property  passed to Card component
+
+
+function CreateCard(contact) {
+  return( 
+   <Card 
+  	name={contact.name} 
+  	img={contact.imgURL
+  	tel={contact.phone}
+  	email={contact.email}
+/>
+);
+}
+App.jsx
+
+function App() {
+return (
+<div>
+  <h1 className="heading">My Contacts</h1>
+{contacts.map(createCard)}
+)
+}
+
+
+
+-----------------------------------------------------
+Try to render key prop as paragraph tag above h2
+Can we access key? NO 
+	Error: key is not a prop
+	Check dom tree: there is no key prop		//key is special property //just cant name key
+How to show instead?
+	Create custom prop id = {contact.id}
+Card.jsx
+
+function Card(props) {
+  return (
+	<div className="card">
+	 <div className="top"
+	<p>{props.key} </p>	//doesnt work
+	<p>{props.id} </p>	//works
+)
+}

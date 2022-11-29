@@ -1,0 +1,137 @@
+Objective: render all notes as an array of components
+	Add new entry in notes.js => new entry pop up
+
+
+1)  App.js
+Pass custom props title and content
+	Check DOM tree to cross check what props=>
+		App
+		   Header
+		   Note	:props: 
+				title: This is the new note
+				content: this is the description
+			rendered by:
+				Appp
+		   Footer
+	
+
+function App() {
+  return (
+    <div>
+      <Header />
+      <Note  				//Note function called from app,js
+	title ="This is the note title"
+	content="This is the note content"
+/>
+      <Footer />
+    </div>
+);
+}
+
+export default app;
+
+
+2) Receive properties from note function in app.js to note component
+	how to receive? props.title & props.content
+		Check DOM Tree
+				App
+		  			 Header
+		   			Note	:props: 
+						title: This is the new note
+						content: this is the description
+						rendered by:
+		
+		  			 Footer
+	
+			
+Note.js
+function Note() {
+  return (
+	<div className="Note">
+	<h1>{props.title}</h1>	
+	<p>{props.content}</p>
+	<div>
+);
+}
+export default Note:
+//Note rendering custom content via props
+
+3) Figure out how to render multiple notes
+
+	3.1) either create lots of <Note title="" content="" /> components in App.js
+
+	3.2) Map through notes.js file
+
+4) Map through note.js file
+	note remember to export default notes from note.js
+
+App.js
+import notes from"./Notes"
+
+
+function App() {
+  return (
+    <div>
+      <Header />
+      <Note  				//Note function called from app,js
+	title ="This is the note title"
+	content="This is the note content"
+/>
+      <Footer />
+    </div>
+);
+}
+
+export default app;
+
+
+console.log(notes);
+
+
+5) Map the notes array
+	Pass createNotes function in map function
+		What map function will do? loop through notes.jsx objects
+		What create notes does? creating note one by one for current item in map function ->
+			How will it create notes from that file? get title and item one by one and return custom <Note /> component
+function createNotes(noteItem){
+  return <note 
+   key = title={noteItem.key}		//make react happy
+   title= {noteItem.title}
+   content=noteItem.content
+/>
+}
+
+function App() {
+  return (
+    <div>
+      <Header />
+     {notes.map(createNotes)};
+      <Footer />
+    </div>
+);
+}
+
+6) NOTES RENDERED
++++++++++++++++++++++++++
+How to simplify using arrow function?
+1) move createNotes function inside map
+2) delete name of function-> turn anonymous
+3) Since single item delete return keyword
+
+function App() {
+  return (
+    <div>
+      <Header />
+     {notes.map((noteItem) =>	//delete name , make anon
+<note 
+   key = title={noteItem.key}		//make react happy
+   title= {noteItem.title}
+   content=noteItem.content
+/>
+})}
+      <Footer />
+    </div>
+);
+}
+
+export default App;
