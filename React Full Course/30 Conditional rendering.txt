@@ -1,0 +1,120 @@
+‘id: 1, F32: :11
+title: "Life Lessons with Katie Zaferes", Al‘l, (I?
+description: "I will share with you what I call \"Positively Impactful Moments of ii?" 152‘"
+Disappointment.\" Throughout my career, many of my highest moments only came after setbacks
+and losses. But learning from those difficult moments is what gave me the ability to rise
+above them and reach my goals.",
+price: 136,
+coverImg: "katie—zaferes.png",
+stats: {
+rating: 5.0,
+reviewCount: 6
+},
+location: "Online",
+openspots: 0,
+
+
+
+a) //We have a property open spots in our data
+
+
+b) Objective: render a badge conditionally if this openspots: 0
+
+
+	Where is <Card/> component called
+
+  b.1) pass the additional "openSpots" prop into Card Component	//alternative way exists , where dont have to pass props individually 												when too many in data.js array element
+	test out by console.log(props.openSpots)
+
+  b.2)Create a badge to float in upper left inside card component Card.js
+  b.3)Conditionally render the badge
+		{props.openSpots === 0 <div className="card——P>SOLD OUT</div>}	
+
+  b.4) Another way
+		dynamically
+	let badgeText
+
+if (props.open$pots === 0) {
+badgeText = "SOLD OUT"
+
+} else if (props.location === "Online") {
+badgeText = "ONLINE"
+
+.}
+
+{badgeText && <div className="card--badge">{badgeText}</div>}	
+
+
+ConclusioN: can use plain JS (algorithmic) --> determine how things will be displayed
+-------------------------------------------------------------------------	
+Main.js
+
+import React from "react"
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+import Card from "./components/Card"
+import data from "./data"
+
+export default function App() {
+
+console.log(props.openSpots)
+
+const cards = data.map(item => {
+return (
+<Card
+key = {item.id}
+img={item.coverImg}
+rating={item.stats.rating}
+reviewCount={item.stats.reviewCount}
+location={item.location}
+title={item.title}
+price={item.price}
+openSpots={item.openSpots}
+/>
+)
+})
+
+let badgeText
+
+if (props.open$pots === 0) {
+badgeText = "SOLD OUT"
+
+} else if (props.location === "Online") {
+badgeText = "ONLINE"
+}
+
+return (
+ <div>
+   	<Navbar />
+	<section className="cards-list">
+	  {cards}	
+
+)
+
+
+c) Card.js
+
+import React from "react"
+export default function Card(props) {
+console.log(props.open$pots)
+
+return (
+<div className="card">
+
+{badgeText && <div className="card--badge">{badgeText}</div>}	
+//{props.openSpots === 0 && <div className="card——P>SOLD OUT</div>}		//trick: if statement1 is true --> statement2 will run
+													   if statement1 is false--> statement2 will not run
+
+<img src={‘../images/${props.img}‘} className="card-—image" />
+<div className="card—-stats">
+<img src="../images/star.png" className="card-—star" />
+<span>{props.rating}</span>
+<span className="gray">({props.reviewCount}) . </span>
+<span className="gray">{props.location}</span>
+</div>
+<p className="card——title">{props.title}</p>
+<p className="card——price"><span className="bold">From ${props.price}</span> /
+person</p>
+</div>
+)
+}

@@ -1,0 +1,38 @@
+1) if array is empty --> h1 "vou have - unread messagesz"' should not be displayed
+
+App.js
+
+import React fron "react"
+export default function App() {
+const [nessages, setuessages] = React.use$tate(["a", "b"])
+
+return (
+<div>
+<h1>you have - unread messages </h1> >
+</div>
+)
+}
+
+
+
+2) Solution
+	2.1) "__" = messages.length		//state variable
+	if messages.length > 0 is false ==> h1 wont render
+
+	2.2) test: You have 2 unread messages
+
+
+
+App.js
+
+import React fron "react"
+export default function App() {
+const [nessages, setuessages] = React.use$tate(["a", "b"])
+
+return (
+<div>
+ {messages.length > 0 && } <h1>you have {messages.length} unread messages </h1> }
+</div>
+
+)
+}

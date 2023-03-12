@@ -1,0 +1,45 @@
+a) Objective: react feature:
+	if array input ---> what rendering from component ---> react will map and turn array into element
+
+	//How to change from strings to jsx elements
+a.1)
+
+import React from "react"
+
+import Joke from "./Joke"
+
+export default function App() {
+const colors = [kRed'u "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"]
+return (
+[
+	{						//Usually the object might contain mixed data	//we keep simple
+		<div>
+	{["Red'L, "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"]}		//this will be blank text
+	{colors}												//same thing , no difference
+		</div>
+	}	
+
+]
+
+
+
+a.2)
+import React from "react"
+import Joke from "./Joke"
+export default function App() {
+
+const colors = [
+	<h3>Red</h3>,			//What is this? jsx elements
+	<h3>0range</h3>,
+	<h3>Yellow</h3>,
+	<h3>Green</h3>,
+	<h3>Blue</h3>,
+	<h3>Indigo</h3>,I
+	<h3>Violet</h3>
+]
+
+return (
+	<div>
+		{colors}
+	</div>
+)

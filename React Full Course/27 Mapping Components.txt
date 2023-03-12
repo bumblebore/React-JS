@@ -1,0 +1,55 @@
+1) What achieved? all data in jokesData.js now gets returned (how? map) and is stored in jokeElements variable
+	We just return js element jokeElments
+
+	//Separate component experience
+	//getting data from file instead of hardcoding
+
+
+a) App.js
+
+import React from "react"
+import Joke from "./Joke"
+import jokesData from "./jokesData"T
+
+export default function App() {
+return (
+const jokeElements = jokesData.map(joke => {			//use .map to apply a function that returns the component<Joke /> , apply to 											every element of jokeElements
+	return <Joke setup={joke.setup} punchline={joke.punchline} />
+})
+    return(
+	<div>
+		{jokeElements}
+	</div>
+ )
+)
+}
+
+
+b) jokesData
+//All joke data in an array
+
+export default [
+{setup: "I got my daughter a fridge for her birthday.", punchline: "I can't wait to see her face
+light up when she opens it."}, {setupz "How did the hacker escape the police?", punchline: "He just ransomware!"},
+
+{setup: "I got my daughter a fridge for her birthday.", punchline: "I can't wait to see her face
+light up when she opens it."}, {setupz "How did the hacker escape the police?", punchline: "He just ransomware!"},
+
+{setup: "I got my daughter a fridge for her birthday.", punchline: "I can't wait to see her face
+light up when she opens it."}, {setupz "How did the hacker escape the police?", punchline: "He just ransomware!"}
+]
+
+
+c) Joke.js
+
+
+import React from "react"
+export default function Joke(props) {
+	return (
+		<div>
+			{props.setup && <h3>Setup: {props.setup}</h3>}
+			<p>Punchline: {props.punchline}</p>
+			<hr />
+		</div>
+)
+}

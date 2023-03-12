@@ -1,0 +1,304 @@
+1) What is derived state?
+ Created new state inside each of our box components
+	based on incoming prop
+
+What is this created state (based on incoming prop called) ? Derived state
+
+
+2) We dont need derived state		//not recommended 
+
+//why? weirdness happens when we pass prop to a component --> take that prop --> set state based on prop
+
+
+3) What weirdness?
+	3.1) Ex :  we created state in App.js to maintain all squares
+	3.2) When we set state in each box	
+	3.3) Set state in each box
+
+	-> box when updating the state, is only updating its own local state,---> not parent's
+			
+
+	3.4) Hence there were multiple sources of truth
+
+//Conclusion: We will use different approach : than putting state and setter inside each component
+
+import React from "react"
+import boxes from "./boxes"
+import Box from ".lBox"
+export default function App() {
+gonst (squares, setSquares] = React.use$tate(boxes)		//created state
+const squareElements = squares.map(square => (
+(Box
+key={square.id}
+on={squarc.on)
+/>
+))
+return (
+<main>
+(squareElements)
+<lmain>
+)
+}
+			<App />
+		/	/	\	\
+	<Box/>  <Box/>   <Box/>   <Box/>
+
+
+
+What we will do?
+1) Use state that is inside <App/>
+2) Create function toggle() inside App Component
+3) pass the toggle() to each <Box/> component
+4) when toggle() runs? when <Box/> component is clicked
+5) when box component clicked --> toggle() tells <App/> component --> that state needs to be changed
+
+
+for ex
+	if first object changes true --> false ==> React will re-render the app component	//Why re-render? state changed
+	[{on:true},{onzfalso),(on:truo},{onztruo})
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Get Started
+1) Create toggle() in App.js
+2) pass function to each boxes
+3) Add onClick custom prop to <Box/> component	//note: this is not event listner (Since Custom prop)
+	//ex of name: handleClick --> makes sure we are talking about handling an event
+			  toggle 	  --> same as function name	//we choose this
+	3.1) Pass down toggle() inside it
+
+4) Receive a prop called "toggle" in Box.js
+		4.1) Receive it using proper syntax: onClick
+
+5) Test: 
+	Everytime we click the div box --> onClick runs --> toggle runs --> console logs "Clicked"
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+6) What was better when each box was initializing its own state?
+	easy to know which box was flipping its value
+
+	6.1) now we have toggle()
+		toggle function doesnt know which box ran code
+		//earlier
+	6.2) 
+		const [squares, setSquares] = React.useState(boxes)
+		sqaures: is an array that contains items
+		have to find which item in array triggered  setSquares()
+			
+		How to find which item triggered setSquares? trick
+
+	6.3) 
+		Objective: give toggle function ability --> so it can know which box was clicked
+		//Why we want toggle function to know which box was clicked? so we can update state only for that box (where will we update? in array) 
+
+		6.3.1) toggle function --> input: box id
+			
+		
+	6.4) In App.js give input id to toggle()
+
+			function toggle(id) {
+				console.log("Clicked!")
+			}
+		//Doesnt work though.
+		Why? in Box.js --> onClick() //we cant decide what parameter to pass to function
+		
+		By default: browser passes an event to event handler  function
+		//What is event? event object -->.. contains information about the event
+		//example try console logging id in 
+
+			function toggle(id) {
+				console.log(id)
+			}
+
+	6.5)	
+
+		In Box.js	
+	
+			<div
+				style={styles}
+				className-"box"
+				onClick={props.toggle}
+			>
+		
+			</div>
+
+		> Output: SyntheticBaseEvent
+		//Why we are not getting id of box that was clicked?
+
+		//Solution? instead of props.toggle ---> run our own function --> which will run props.toggle
+		//this function will receive the event (However we wont use it, so delete)
+		In Box.js	
+	
+			<div
+				style={styles}
+				className-"box"
+				onClick={()=>props.toggle()}	//onClick={(event)=>props.toggle}
+			>
+		
+			</div>		
+			
+		//now can pass whatever we want
+		//lets pass id of box
+		//for that we need to receive id first
+		//Dont we have a key prop in App.js? Yes, but that is completely different
+		<Box
+			key=(square.id}
+			on={square.on}
+			toggle ={toggle}
+		/>
+		))	
+		//We can try console logging it in Box.js --> but will output undefined
+		//add another prop : id = {sqaure.id}
+		
+	Box.js
+	import React from "react"
+	export default function Box(props) {
+		console.log(props.id)
+		const styles = {
+		backgroundColor: props.cn ? "n222222" : "transparent"
+		...
+		
+		>Undefined	//We dont have access to props.key of the component		
+
+	App.js
+
+	6.5) 	
+	<Box
+	key=(square.id}
+	id={square.id}
+	toggle ={toggle}
+	/>
+
+	//Now we have access to id inside our box
+	//try console logging again
+	//Box.js
+	>Output: 6
+	//Now we can pass props.id to toggle function
+
+	import React fron "react"
+	export default function .Box(props) {
+	console.log(props.id)
+	const styles = {
+	backgroundColor: props.cn ? "n222222" : "transparent"
+	}
+	return (
+	<div		
+	style={styles}
+	className-"eox"
+	onClick={()=>props.toggle(props.id)}
+	>
+	</diV>
+	)
+
+
+	//console.log(id) in app.js
+	//Click a square ==> Output: 3	//click a box and its id pops up	//we clicked 3rd
+	
+	//Why is the above great news? can use this id to update the correct square in setSquares
+
+
+	6.6) Lets update setSqaures
+		//using setSquares() update correct square in array
+		//Given: we are receiving id   //i.e function toggle(id) in App.js
+		//Objective: flip on : true --> false
+		//note: do this without changing the state directly
+
+
+		//How do we update our array item? should we use .splice()? 	//NO . Why? it will modify state directly
+	
+	//In App.js
+		inside toggle() use setSquares()	//we need access to old version of squares
+			Create a new array
+			for loop
+			//look at each square in array of squares
+				if id = id that toggle function got --> flip the on value
+					//updatedSquare = object that has all properties of my current square except on property
+					//pusht he new object to newSquares array
+
+			//else if id is not same		//push the currentSquare to new squares array
+
+		//When for loop ends --> we will have an array identical to prevArray(just one item has flipped value for its on property)
+		//return newSquares array
+
+
+		//Test it out:
+		Click black tile--> turns white
+		Click white tile--> turns blackS
+
+		//What is happening?
+		One of the squares is running  onClick event handler. (in Box.js)		//onClick={() => props.toggle(props.id)}
+		// onClick --> runs toggle()
+		// pass in id
+	
+		//
+
+
+		function toggle() {
+			console.log(id)
+			setSquares(prevSquares => {		
+			const newSquares = []
+				for(let i =0; i< prevSquares.length; i++) {
+					const currentSquare = prevSquares[i]
+					if(currentSquare.id === id) {
+						const updatedSquare = {
+							...currentSquare,
+							on: !currentSquare.on
+						}
+						newSquares.push(updatedSquare)
+					} else {
+						newSquares.push(currentSquare)		
+					}
+				}
+			   return newSquares
+			})	
+		}	
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1) App.js
+import React fron "react"
+import boxes froa "./boxes"
+import Box from ".lBox"
+export default function App() {
+const [squares, setSquares] = React.useState(boxes)
+
+
+
+function toggle() {
+	console.log(id)
+	setSquares(prevSquares => {		
+		const newSquares = []
+		for(let i =0; i< prevSquares.length; i++) {
+			const currentSquare = prevSquares[i]
+		}
+	})
+}
+
+const squareElements = squares.map(square => (
+<Box
+	key=(square.id}
+	id={square.id}
+	toggle ={toggle}
+/>
+))
+
+
+2) Box.js
+
+import React from "react"
+export default function Box(props) {
+const styles = {
+	backgroundColor: props.cn ? "n222222" : "transparent"
+}
+return (
+	<div
+		style={styles}
+		className-"box"
+		onClick={() => props.toggle(props.id)}
+	>
+	</div>
+)
+}
+
+
+

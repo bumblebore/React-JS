@@ -1,0 +1,105 @@
+a) scroll all cards in horizontal
+
+	a.1) make a flex container	//items wont grow or shink as container got bigger/smaller
+	a.2) Set CSS to scroll
+
+
+Note: when using map on data --> to create jsx element
+//face a warning
+//Add key = {} prop
+
+	a.3) items in data.js all have an id
+
+
+Main.js
+
+import React from "react"
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+import Card from "./components/Card"
+import data from "./data"
+
+export default function App() {
+
+const cards = data.map(item => {
+return (
+<Card
+key = {item.id}
+img={item.coverImg}
+rating={item.stats.rating}
+reviewCount={item.stats.reviewCount}
+location={item.location}
+title={item.title}
+price={item.price}
+/>
+)
+})
+
+
+
+b) CSS
+
+.card {
+width: 175px;
+font-size: 12px;
+flex: 0 0 auto; /x ADD x/
+display: flex; /* ADD */
+flex-direction: column; /* ADD */
+}
+.card-~image {
+width: 100%;
+border-radius: 9px;
+margin-bottom: 9px;
+}
+/5 ADD x/
+.card--title {
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.card--stats {
+display: flex;
+align-items: center;
+}
+.nav-~title {
+color: #DEEBF8;
+font-weight: 600;
+}
+.nav--icon {
+height: 30px;
+margin-right: 7px;
+}
+
+
+c) data.js	//As data gets updated --> page changes
+export default [
+{
+id: 1,
+title: "Group Mountain Biking",
+description: "Experience the beautiful Norwegian landscape and meet new friends all while
+conquering rugged terrain on your mountain bike. (Bike providedl)",
+price: 50,
+coverImg: "mountain-bike.png", R
+stats: {
+rating: 4.8,
+reviewCount: 2
+} 5
+location: "Norway",
+openSpots: 3,
+},
+{
+{
+id: 2,
+title: "Group Mountain Biking",
+description: "Experience the beautiful Norwegian landscape and meet new friends all while
+conquering rugged terrain on your mountain bike. (Bike providedl)",
+price: 50,
+coverImg: "mountain-bike.png", R
+stats: {
+rating: 4.8,
+reviewCount: 2
+},
+location: "Norway",
+openSpots: 3,
+},
+}
+]

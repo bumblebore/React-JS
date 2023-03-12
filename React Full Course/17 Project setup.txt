@@ -1,0 +1,167 @@
+0) Get the Figma file
+
+a) Components Folder
+
+		a.1) Navbar.js			//Navbar component contains logo,with title ReactFacts and another heading: React Course - Project1
+		import React from "react"		//below Navbar component Main component
+		export default function Navbar() {
+			return (
+				<nav>
+					<img src="../images/react-icon-small.png" className = "nav--">
+					<h3 className="nav--logo_text">ReactFacts</h3>
+					<h4 className="nav--title">React Course - Project 1</h4>
+				</nav>
+				)
+		}
+
+
+		a.2) Main.js				//Main component tells Fun facts about React
+		import React from "react"
+		export default function Main() {
+			<h1 className="main--title">Fun facts about React</h1>
+				<ul>
+					<li>Was first released in 2013</li>
+					<li>Was originally created by Jordan Walke</li>
+					<li>Has well over 100K stars on GitHub</li>
+					<li>Is maintained by Facebook</li> S
+					<li>Powers thousands of enterprise apps, including mobile apps</li>
+				</ul> 
+
+
+		return <h1>Main component</h1>
+
+}
+
+	
+b) App.js	
+	<Navbar/>
+	<Main/>
+
+c)  index.js
+
+	import React from "react"
+	
+	import ReactDOM from "react-dom"
+
+	import App from "./App"
+	
+	ReactDOM.render(<App />, document.getElementById("root"))
+
+
+d) index.html
+	<link>CDN for fonts </link>
+	import styles.css link
+
+
+
+<html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=1nter:wght@400;GOO;700&display=swap"
+rel="stylesheet"> h
+<link rel="stylesheet" href="style.css"> O f: Cflmwmel
+</head>
+(my) Navbar
+<div id="root"></div>
+<scri pt src="index . pack . j s"></scri pt> component
+</body> .
+</html> Mam
+
+
+
+e) Styles.css
+*{
+box-sizing: border-box;
+}
+body {
+	margin: 0;
+	font-family: Inter, sans-serif;
+	height: 100vh;
+	background-color: #282D35
+}
+nav {
+	display: flex;
+	align-items: center;
+	background-color: #21222A;
+	height: 90px;
+	padding: 30px 25px;
+} 
+
+.nav--logo_text, .nav--title {
+	margin: 0;
+}
+
+nav > h3, nav > h4 {
+	margin: 0;
+
+}
+
+nav > h3 {
+	margin-right: auto;
+	color: #61DAFB;
+	font-weight: 700;
+	font-size: 22px;
+
+}
+
+nav > h4 {
+	color: #DEEBF8;
+}
+
+.nav--logo_text {
+	margin-right: auto;
+	color: #61DAFB;
+	font-weight: 700;
+	font-size: 22px;
+
+}
+
+.nav—-title {
+	color: #DEEBF8;
+	font—weight: 600;
+
+}
+
+.nav--icon {
+	height: 30px;
+	margin-right: 7px;
+}
+
+main {
+	padding: 57px 27px;
+	height: 100%;
+	color: white;
+	background-image: url(./images/react-icon-large.png);
+	background-repeat: no—repeat;
+	background-position-x: right;
+	background-position-y: 75%;
+y
+}
+
+h1 {
+	margin: 0;
+}
+
+.main--title {
+	margin: 0;
+	font-size: 39px;
+	letter-spacing: ~0.05em;
+
+}
+
+
+.main--facts {
+	margin-top: 46px;
+}
+
+.main--facts > li {
+	line—height: 19px;
+padding-block: 10px;
+}
+
+.main--facts > li::marker {
+font-size: 1.4rem;
+color: #GlDAFB;
+
+}

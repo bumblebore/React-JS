@@ -1,0 +1,67 @@
+1) Refacator our code a little
+
+	Similar to how we can access the useState hook on top of react object
+	//const [starWarsData, setStarWarsData] = React.useState({})
+	
+	Do same for useEffect()
+
+	1.1) Create a side effect	//React.useEffect()
+		parameter 1 = required --> callback function		//write a function declaration (using arrow function)
+	
+		parameter 2 = optional
+
+	1.2) put the side effect code inside it (fetech request(outside code(why?)) --> reaching out of react ecosystem + 																		setStarWarsData(modifying the state)
+	
+	1.3) Basically any code that interacts  with systems outside react (outside systems)
+		to keep them in sync with local state  --> put inside useEffect()
+		
+	1.4) try to uncomment setStarWarsData() --> still infinite loop //problem still not solved
+													Why? 2nd parameter not added  //else works like normal code	 													only
+
+	1.5) Add a 2nd parameter
+		
+
+	Q) When the code inside useEffect() will run?
+		After the UI is painted to screen --> callback function will run		
+		This doesnt solve our problem (Code will still run)
+
+
+	1.6) Run a sample code to test //
+	//below code has add button	
+
+	import React from "react"
+	export default function App() {
+	const [starWarsData, setStarWarsData] = React.useState({})
+	const [count, setCount] = React.useState(O)
+	console.log("Component rendered")
+	// side effECIS
+	React.useEffect(function() {
+	console.log("Effect ran")
+	})
+	
+
+	1.7)
+
+
+import React from "react"
+export default function App() {
+const [starWarsData, setStarWarsData] = React.useState({})
+// console.log("Component rendered")
+// fetch("https:/fswapi.dev/apifpeople/l")
+// .then(res => res.json{))
+// .then(data => setStarWarsDatafdatalj
+// side effects
+
+
+React.useEffect(function() {
+	fetch("httpsz/lswapi.dev/api/people/l")
+	.then(res => res.json())
+	.then(data => setStarWarsData(data))	
+	}, ???)
+
+return (
+<div>
+<pre>{JSON.stringify(starWarsData, null, 2)}(/pre>
+</div>
+)
+}

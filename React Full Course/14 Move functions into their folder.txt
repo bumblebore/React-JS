@@ -1,0 +1,105 @@
+a) Create separate file Header.js
+b) Move function Header() {} code from index.js to Header.js
+c) dont forget to import React,			//import React from "react"
+    dont forget to export Header function		//export default Header	
+d) dont foret to import Header into index.js
+
+Similarly move Footer and MainContent() into their own files
+
+Header.js
+-----------------------------------------------------------------------------------------------
+import React from "react"
+function Header() {			//can also write here itself export default function Header() {}
+	<>
+	<header>
+		<nav>		
+			<img src="./react-logo.png" width= "40px" />
+			<ul className="nav—items">
+				<li>Pricing</li>
+				<li>About</li>
+				<li>Contact</li>
+			</ul>
+
+		</nav>
+
+	</header>
+
+	<>
+}
+
+export default Header
+
+index.js
+------------------------------------------------------------------------------------------------
+import Header from "./Header.js"
+function Footer() {
+	<>
+	<footer>
+		<small>© 2021 Ziroll development. All rights reserved. </small>
+	</footer>
+</>
+}
+
+function MainContent() {
+	<>
+	<h1>  Reasons I am excited to learn React </h1>
+		<ol>
+			<li> Its popular library </li>
+			<li> frontend sikho fir backend sikho </li>
+		</ol>
+	</>
+}
+
+function Temp() {
+	return (	
+		<>
+		<Header />
+		<MainContent />
+		<Footer />
+		</>
+		)
+ 	}
+
+ReactDOMrender(<Temp />, document.getElementById("root"))
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+After moving everything finally index.js will look like
+
+import React from "react"
+import ReactDOM from "react-dom"
+import Header from "./Header"
+import Footer from "./Footer"
+import MainContent from "./MainContent" >
+	function App () {						//Usually we call this index.js function as App, and we render App() in ReactDOM.render()
+		return (
+			<div>
+				<Header />
+				<MainContent />
+				<Footer />
+			</div>
+		)
+}
+ReactDOM.render(<App />, document.getElementById("root"))
+
+-------------------------------------------------------------------------------------------------
+styles.css
+.nav {
+display: flex;
+justify-content: space-between;	//puts space between logo and list
+align-items: center;			//fixes aspect ratios of the image
+}
+
+.nav-logo {
+	width: 60px;
+}
+
+.nav-items {
+list-style: none;
+display: flex		//gives items in a row		//note flex containers might stretch logo
+}
+
+
+.nav-items > li {			//how to select li which is inside nav items class
+	padding: 10px;		//each item gets a padding
+	
+}

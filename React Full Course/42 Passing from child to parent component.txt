@@ -1,0 +1,116 @@
+Objective: Move star element into its own component
+		Star component should receive prop : isFilled
+		internal logic in star component will decide: whether to display filled.png OR empty.png
+Challenge: change isFavourite from false --> true		
+	
+1.1) Create Card component, Pass isFavourite prop to it
+	Also import Star
+
+//i.e replace below with <Card />
+<img
+	src={‘../images/${starIcon}‘}
+	className="card——favorite"
+	onClick={toggleFavorite}	
+/>
+	
+
+1.2) import Star
+
+1.3) Create Star.js file for star component
+
+1.4) Add internal logic to display png conditionally
+	set starIcon = c9ntact.isFavorite ? "star-filled.png" : "star—empty.png"
+	//no access to contact state, since contactState is not being passed right now
+	//however isFilled is part of props
+
+1.5) const starIcon = props.isFilled ? "star-filled.png" : "star-empty.png"
+1.6) Change isFavourite to true //star gets filled
+1.7) What problem facing?
+		Given: a child component <Star>, receiving value of isFavourite through props
+	
+		//but how to change this state if child component <Star> that is in parent component <App/>?
+		Add onClick event listener on star component		
+		
+ 		//<Star isFilled={contact.isFavorite} onClick={toggleFavorite} />
+		//Will above work? No
+		//Since we are passing custom properties, just putting onClick wont register it as event listener
+		//Where is onClick attribute? native DOM elements	
+		//to be usable with onClick: the attribute should exist on native dom elements Ex <img src= " ">
+		//But <Star isFilled={}> is custom component //not a real dom element
+		//<Star isFilled={contact.isFavorite} onClick={toggleFavorite} />  //here onCLick is a custom prop with same name //rename to 			=> handleClick
+		//
+		
+1.8) Add real onClick in Star.js
+	What value in this {props.handleClick}		//
+
+	What is flow? toggleFavourite (App.js) --> handleClick -> Star.js
+	//Context or scope of toggleFavourite ----> in Parent App.js
+		means? toggleFavourite function can change state inside the parent
+	
+1.9) Refresh --> click star --> star gets filled
+
+Conclusion:
+	create toggleFavourite() --> pass it to custom component in custom prop(handleClick) --> receive props in Star.js --> register onClick event listener (value = function we received through props (handleClick) ---> basically setContact() got passed to child component
+
+App.js
+
+import React from "react"
+import Star from "./Star"
+
+export default function App() {
+	const [contact, setContact] = React.use$tate({
+		firstName: "John",
+		lastName: "Doe",
+		phone: "+1 (719) SSS-1212",
+		email: "itsmyrealname@example.com",
+		isFavorite: false
+	})
+
+let starIcon = contact.isFavorite ? "star-filled.png" : "star-empty.png"
+
+function toggleFavorite() {
+	setContact(prevContact => ({
+	...prevContact,
+	isFavorite: !prevContact.isFavorite
+	}))
+}
+
+return (
+	<main>
+		<article className="card">
+			<img src="./images/user.png" className="card—-image" />
+			<div className="card——info">
+		<Star isFilled={contact.isFavorite} handleClick={toggleFavorite} />
+		
+		/*
+			<img
+			 	src={‘../images/${starIcon}‘}
+			 	className="card——favorite"
+			 	onClick={toggleFavorite}
+			/>
+		*/
+		
+		<h2 className="card—-name">
+			{contact.firstName} {contact.lastName}
+		</h2>
+		<p className="card——contact">{contact.phone}</p>
+		<p className="card——contact">{contact.email}</p>
+     		</div> 
+	</main>
+)
+
+-------------------------------------------------------------------------
+Star.js
+
+import React from "react"
+
+export default function Star(props) {
+	const starIcon = props.isFilled ? "star-filled.png" : "star-empty.png"
+	return (
+		<img
+			src={‘--/‘imageS/${star1con}‘}
+			className="card—-favorite"
+			onClick={props.handleClick}
+		/>
+	)
+}

@@ -1,0 +1,47 @@
+Obejctive: display correct thing on page
+	if no unread messages --> display you're all caught up
+	if any messages	    --> you have n unread messages
+
+
+1) How ? using ternary operator
+	1.1) Use ternary operator inside a div
+	
+	1.2)	How to find no. of unread messages? messages.length
+		//right now it shows 2
+		//try changing items inside array // React.use$tate(["a", "b"]) -->  React.use$tate([])		//it will show: you're all 																			caught up
+			//note: avoid doing nested ternaries
+		// to display message(s)
+		method 1	//not advised
+		//	<h1>You have {messages.length} unread messages{messages.length > 1 && "S"} </h1> 
+			
+		method 2	//better method
+		//	<h1>vou have {messages.length} unread {messages.length > 1 ? "messages" : "message") </h1>
+
+	1.3) What we can learn? many ways to do conditional rendering
+	React is just Javascript
+	//many ways to solve a problem in React & JS
+
+	1.4) test for React.use$tate(["a"])  :  You have 1 unread messages
+							    
+								
+	
+
+import React from "react"
+export default function App() {
+const (messages, setflessages] = React.use$tate(["a", "b"])
+' Challenge:
+' ~ If there are no unread messages, disolay "You're all caught up!"
+. m If there are > 0 unread wessages, display "You have <n> unread
+' mcggdgt($)"
+n If lhurc'n exactly 1 unread aessagc, it should read "message"
+- (singular)
+'/
+return (
+<div>
+{ 
+messages.length === 0 ? 
+	<h1>You're all caught up! </h1> :
+	<h1>You have {messages.length} unread messages{messages.length > 1 && "S"} </h1> 
+	
+}
+</div>

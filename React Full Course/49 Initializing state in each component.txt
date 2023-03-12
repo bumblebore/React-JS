@@ -1,0 +1,84 @@
+Intermediate react topics:
+
+
+2 ways to structure project
+
+		<App />			//tracks array of data
+
+	  /    |	    |	      \
+<Box/>     <Box/>    <Box/>    <Box/>	//using array we create box component for every item	
+
+//on:true	on:false	on:true	on:true	//pass props
+
+determine background color based on props
+
+
+1) How can these components modify the incoming props?
+	We know: component should not modify its props
+		i.e should not props.equals
+
+
+2) How to make changes to background color then?
+
+	2.1) initialize state in each of these box components
+		set intial value = (incoming) props.on			//why good method? allows each box to update its own state
+	2.2) Create event listener
+			if div is clicked //can flip value true --> false
+	2.3) update style  in ternary, instead of props.on it should look at local state
+
+
+3) Practice:
+3.1)
+const [on,setOn] = React.useState(props.on)		//Create and initialize new state, also have a setter function
+									//initial value based on props.on
+									//we want it to look at new state value of on
+
+3.2) update styles to look at new state value of on
+
+const styles = {
+	backgroundColor: on ? "9222222" : "transparent"
+}
+
+
+
+3.3) Create a toggle function . What it does? uses the setOn() setter			
+						//Outputs opposite of whatever prevOn
+						//
+function toggle() {
+	setOn(prevOn => !prevOn)
+}
+
+3.4)  setup click even listener
+	Runs toggle function
+
+3.5) try clicking on the boxes, value changes
+//given each of the boxes its own state (i.e control over its value)
+
+
+//Can apply the same example to a to-do list
+	each item = todo-item
+	//replace prop on --> completed
+
+	//every item will be incharge of knowing if it has completed or nto
+
+
+Box.js
+
+import React from "react"
+export default function Box(props) {
+
+const [on,setOn] = React.useState(props.on)		//Create and initialize new state, also have a setter function
+									//initial value based on props.on
+									//we want it to look at new state value of on
+
+const styles = {
+backgroundColor: props.on ? "3222222" : "transparent"
+)
+
+function toggle() {
+	setOn(prevOn => !prevOn)
+}
+
+return (
+	<div style={styles} className="box" onClick={toggle}>	</div>
+)

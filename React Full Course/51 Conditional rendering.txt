@@ -1,0 +1,63 @@
+1) What is conditional rendering
+
+Ex. Given: Joke component from previous section
+
+1.1) v imp and can be seen everywhere in react code
+
+1.2) Test:
+	1.2.1) Create a state : isShown : default value false
+			//What will this state decide? Whether to show punchline or not in the joke component
+			//Also add button below the paragraph --> will toggle isShown() value back and forth
+
+
+2) Solution
+	2.1) Create state isShown, setIsShown 		
+		set it to React.useState
+		  pass default value false
+
+	2.2) Add a button in Joke.js
+	2.3) Create function toggleShown()
+		//What will this do? toggle isShown value back and forth
+		//console.log(isShown)
+		//How to toggle value back and forth?
+			using setIsShown()
+			 What setIsShown() will do? flip prevShown:  set prevShown => !prevShown
+	2.4) Add onClick event listener to button
+
+3) Test : 
+	3.1) Click Show punchline button
+	>Output: false
+
+	3.2) Click agian
+	>Output: true
+
+4) What we learnt?
+	Conditional rendering
+---------------------------------------
+5) Make the paragraph only display if isShown is boolean: true
+	5.1) Surround : <p>{props.punchline}</p>
+		in curly brackets : 
+	enter the JS expression: if isShown = true ++ paragraph
+	
+	5.2) Test : all paragraphs are gone
+		Click Show Punch line button --> Paragraph displays
+Joke.js
+
+import React fron "react"
+export default function Joke(props) (
+	const [isShown, setIsShown] = React.useState(false)
+function toggleShown() {
+	setIsShown(prevShown => !prevShown)
+}
+return (
+<div>
+	{props.setup ea <h3>{props.sctup}</h3>}
+	{isShown && <p>{props.punchline}</p>}		//if both true only then executed		//trick: can use console.log here to p																	print here itself if true
+	<button onClick={toggleShown}>Show Punchline </button>
+	<hr />
+</div>
+)
+}
+
+6) Conclusion: when you have an element that you have to display conditionally : display using &&
+

@@ -1,0 +1,35 @@
+1) Practice ternary operator
+Given: basic JS
+
+ 1.1) Clean up basic code using ternay operator
+	
+	const isGoingOut = false
+	//let answer = isGoingOut === true ? "Yes": "No"
+	//OR
+	  let answer = isGoingOut ? "Yes": "No"
+
+
+	if(isGoing0ut === true) {
+		answer = "Yes"
+	
+	} else {
+		answer = "No"
+	}
+
+1.2) Move ternary inside h1
+
+
+import React from "react"
+
+export default function App() {
+	const isGoingOut = false
+
+	return (
+		<div className= "state">
+			<h1 className="state-title"> Do I feel like going out tonight? </h1>
+			<div className="state--value">
+				<h1> {isGoingOut ? "Yes" : "No"} {answer} </h1>			//can put JS expression in jsx using {}
+			</div>
+		<div>
+	)
+}

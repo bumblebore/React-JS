@@ -1,0 +1,82 @@
+How to make card ccomponent reusable? Props
+We hardcoded data 
++++++++++++++++++++++++++++++++++++++++++++=
+Given: HTML
+a) Ex of HTML
+   <a> needs <a href> to redirect
+   <img> needs <img src > to specifiy exactly what image
+   <input placeholder="Firstname" />				//textbox			
+   <input placeholder="Firstname" type="submit"/>		//button	
+
+//Conclusion: element totally changes by changing property
+
+b) Similarly Ex of JS
+
+function addTwoNumbersTogether(a, b) {		//Dynamically add
+return a fl ‘
+}
+
+VS
+function addTwoNumbersTogether() {
+return 1 + 2
+}
++++++++++++++++++++++++++++++++++++++++++++=
+
+Ex of places that have multiple components: Youtube, Airbnb, Amazon
+
+inside {inside} ==> treated as javascript
+outside{} 	    ==> treated as JSX			//special JSX syntax	//Note: JSX = javscript xml
+
+Use case: can do JS operations
+
+
+a) Try to dynamically change the variable first
+import React from "react"
+import ReactDOM from "react-dom"
+function App() {
+const firstName = "Joe"
+const lastName = "Schmoe" >»
+return (
+<h1> Hello !</hl>
+<h1> Hello {firstName} {lastName}!</hl>
+<h1>It is currently about {new Daté().getHours() 96 12} o'clock!</h1>|l
+)
+}
+ReactDOM.render(<App />, document.getElementById("root"))
+
+
+
+b) 
+import React from "react"
+import ReactDOM from "react—dom"
+function App() {
+const date = new Date()
+const hours = date.getHours()
+let timeOfDay
+if (hours < 12) {
+timeOfDay = "morning"
+} else if (hours >= 12 && hours < 17) {
+timeOfDay = "afternoon"
+} else {
+timeOfDay = "night"
+}
+
+
+return (
+	<h1> Good Afternoon {timeOfDay}! </h1>
+)
+
+
+
+
+
+
+<html>
+<head></head>
+<body>
+<a>This is a link</a>
+<img />
+<input />
+</body>
+< /htm1>I
+

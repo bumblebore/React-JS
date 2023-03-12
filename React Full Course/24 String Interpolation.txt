@@ -1,0 +1,36 @@
+a)
+<img src={‘ . ./images/ star.png‘I} className="card-—image" />	//this wouldnt work	//What we want
+
+<img src={‘ . ./images/ + {props.img}‘I} className="card-—image" />				//this wouldnt work
+			//what props.img outputs? star.png
+			{} converts to JS expression
+
+<img src={‘ . ./images/${props.img}‘I} className="card-—image" />
+
+
+
+b) ${} vs {}
+
+
+b.0) Template literal
+What is template literal? Denoted by ` `
+Using template literal can use Strings inside JS expression
+const name = "John";
+console.log(`Hello, ${name}!`);
+
+
+
+
+b.1)
+${}		//embed JS expression in template literals
+
+const name = "John";
+console.log(`Hello, ${name}!`);
+
+
+b.2)
+{}		//embed JS expressions in JSX code
+
+function Greeting(props) {
+	return <h1> Hello, {props.name}! </h1>
+}

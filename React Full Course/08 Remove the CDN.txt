@@ -1,0 +1,36 @@
+dependecies needed: react, react-dashDOM
+
+Since we dont have CDNs, have to use -->
+Q) What part is react in the below index.js? Wherever jsx code is , react is needed
+
+
+---------------------------------------------------------------------------------------------------------
+index.js
+
+import React from "react"		//dont have to import from react version 17 for jsx to work
+import ReactDOM from "react-dom"
+
+const navbar =  {
+<nav>
+	<h1>Bob's Bistro</h1>
+	<ul>
+		<li>Menu</li>
+		<li>About</li>
+		<li>Contact</li>
+	</ul>
+</nav>
+	
+	}
+
+--------------------------------------------------------------------------------------------------------
+index.html
+
+<html>
+	<head>
+		<link rel="stylesheet" href="index.css">
+	</head>
+	<body>
+		<div id="root"></div>
+		<script src="index.pack.js"></script>		//<script src="index.js"></script>
+	</body>
+</html>

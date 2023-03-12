@@ -1,0 +1,164 @@
+a) What are checkboxes?
+	not just html element on their own
+
+b) checkbox hold 	boolean values
+	
+b.1) Create input of type checkbox
+b.2) Add a label "Are you friendly" in front of that checkbox
+	: <label htmlFor="isFriendly">Are you friendly? </label>
+What is htmlFor?
+	if label clicked --> click propogates to input
+	//we are keeping label as separate element, and point it using htmlFor to id=isFriendly
+
+	
+//What do you use in plain html? 
+<label for="i~sFr‘iendly">Are you friendly?</label>
+
+//under the hood : element is called htmlFor	//javascript property
+
+b.3) What we have till now?
+		form, Checkbox , label
+
+b.4) How to maintain this in state?
+	
+	b.4.1) insert isFriendly: true	
+			const [formData, setFormData] = React.useState(
+		{firstName: "", lastName: "". email: "", comments: "", isFriendly: true}
+	)
+
+	b.4.2) use checked{} property instead of value{} property in <input />
+			
+
+			//checked={""}  //false
+			//checked={"Hi"}  //True
+
+			checked={formData.isFriendly}
+		
+	b.4.3) Test: Hit refresh --> text box is checked (Why? default value is true)(isFriendly: true)
+
+		//	checked={formData.isFriendly}
+		//React Dictates to the box --> that it is checked (based onstate)
+
+	b.4.4) Bug: How to uncheck the box?
+
+	b.4.4.1) Check handleChange()	//we are only looking at event.target.value
+					//But for checked box we are not looking at "value" property
+					//we are looking for "checked" property
+
+	function handleChange(event) {
+		setFormData(prevFormData => {
+			return {
+				...prevFormData,
+				[event.target.name]: event.target.value
+				}
+			})
+		}
+		
+
+	b.4.4.2)
+		What solution?
+			1) create a separate handleCheckboxChange()
+
+			2) reuse same onChange = {handleChange}
+
+			2.1) do some change in handleChange()	//Advised
+					destructure name and value from event.target
+				instead of [event.target.name]: event.target.value
+				use	  :
+			2.2)	
+				function handleChange(event) {
+					const {name, value} = event.target
+					setFormData(prevFormData => {
+						return {
+							...prevFormData,
+							[name]: value
+						}
+					})
+				}
+	
+			2.3) Since we are handling a checkbox, we have to pass few more things
+				What properties? type="checkbox"
+					type 	//property on all our inputs
+						
+					add type in const {name, value, type}
+				//this will check if input that is running handleChange() is type of checkbox
+			//if it is -->we will need checked property
+			//checked will be true/false	//depending on how user interacts with checkbox
+
+			2.4) trick:
+				while setting form data, we want everything else to be same
+				What piece of state we want to update if its a check box? isFriendly: true
+					--> hence it should not take on "value" but value of "checked"
+							[name]: type === "checkbox" ? checked : value
+
+			2.5) Test:
+			refresh -> hit checkbox -> can check / can uncheck
+
+
+Note: Forms can be hard
+			
+			
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+	import React fron "react"
+	export default function Form() {
+	const [formData, setFormData] = React.useState(
+		{firstName: "", lastName: "". email: "", comments: "", isFriendly: true}
+	)
+
+	console.log(formData.comments)		//makes
+
+	function handleChange(event) {
+		const {name, value, typep = event.target
+		setFormData(prevFormData => {
+			return {
+				...prevFormData,
+				[name]: type === "checkbox" ? checked : value
+				}
+			})
+		}
+
+
+	return (
+		<form>
+		<input
+			type="text"
+			placeholder="First Name"
+	 		onChange={handleChange}
+			name="firstName"
+			value={formData.firstName}
+		/>
+		<input
+			type="text"
+			placeholder="First Name"
+	 		onChange={handleChange}
+			name="lastName"
+			value={formData.lastName}
+		/>
+		<input
+			type="email"
+			placeholder="Email"
+			onChange={handleChange}
+			name="email"
+			value={formData.email}
+		/>
+		<textarea 
+			value={formData.comments}
+			placeholder= "Comments"
+			onChange={handleChange}
+			name="comments"		//assign same name that we have in state
+		/>
+		<input 
+			type="checkbox" 
+			id="isFriendly"
+			checked={formData.isFriendly}
+			onChange={handleChange}
+			name="isFriendly"		//
+		/>
+
+		<label htmlFor="isFriendly">Are you friendly? </label>
+		<br>
+
+		
+	</form>

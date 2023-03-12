@@ -1,0 +1,42 @@
+a) We learnt how we can use html like jsx in .js files using ReactDOm and React
+What about importing styles.css? 
+ All styles in a folder styles.css
+	webpack instance runs create-react-app
+	webpack instance uses "style loader" --> import styles directly into index.js
+
+
+When building the project, wont have lots of files and folders in src directory
+	webpack bundles evthing into 1 GIANT JS file
+
+	-----> In end 
+	we have 
+			index.html	
+			index.css
+			index.js	//Bundled up
+
+
+
+
+b) Can avoid hardcoding image, inistead import
+	Helps webpack bundle also
+	everything when has a reference isntead of hardcoding	// no broken link between component and image
+
+import React from "react"
+import reactLogo from "../images/react—icon-small.png"
+export defauht funCtion Navbar() {
+return (
+<nav>
+<img
+src="reactLogo"
+alt="React Logo"
+className="nav—-icon"
+/>
+<h3 className:"nav-—logo_text">ReactFactss/h3>
+<h4 className:"nav—-title">React Course - Project 1
+</nav>
+)
+}
+
+
+
+c) Note : Where to keep styles and images to avoid problem? Public		//cautioned againstt though

@@ -1,0 +1,173 @@
+Objective: reinforce past topics
+
+
+
+1)  Create array of objects in boxes.js
+
+export default [
+{
+id: 1,
+on: true
+1.
+{
+id: 2,
+on: false
+)5
+{
+id: 3,
+on: true
+}.
+{
+id: 4,
+on: true
+}.
+{
+id: 5,
+on: false
+}
+{
+id: 6,
+on: false
+},
+]
+
+
+2) initialize state inside app component	//default value boxes array
+
+	2.1) map that state array, display each one, just empty square on screen with black border (transperent background) 	//transperent background color
+
+	2.2) using .map() boxes are created (array of elements)
+		 {squareElements}
+		.box {
+			height: 100px;
+			width:  100px;	
+			border: 1px solid black;
+			display: inline-block
+			margin-right: 4px;
+		}
+
+	    //Add CSS for box
+
+	2.3) Dynamic styles
+		2.3.1)
+			in html -> there is style prop
+			<div id="root" style=""> </div>
+
+			Similarly in React: can change style of element dynamically depending on value of state (value of incoming props)
+			Add style prop to the div that is being mapped
+
+		2.3.2) 	
+			<div style={{}} className="box" key={square.id}> </div>	
+		
+			Why {{}} ?
+				internal {} represent javascript object
+				external {} represent "enable javascript"
+
+			To avoid confusion
+				create separate variable styles
+				//note Styles are camel cased		,	background-color will be incorrect, write 
+
+				//change background color
+			const styles = {
+				backgroundColor: "black"
+			}
+
+			const squareElements = squares.map(square =>(
+				<div style={styles} className="box" key={square.id}> </div>		//if we take out key property --> react will 																//give error
+			))
+
+
+		2.3.3) Every square --> now color black is applied
+				
+		2.3.4) Modify properties of dom element	//Set style attribute of dom element, set it to an object (using dot syntax)
+
+				document.getElementById("something").style.backgroundColor = 
+				//What we did? we set the style attribute of DOM element --> to be an object 	//thats Why able to use dot syntax
+				//Why ":" in front of backgroundColor?	//it is javascript object // have to use":" to give key: value
+				//Set property to black
+
+				//get rid of 	document.getElementById("something").style.backgroundColor = 
+				//we not doing manual dom javsccript
+		2.3.5) black color is applied on each box in grid
+
+		2.3.6) Why using: <div style={styles} className="box" key={square.id}> </div> is beneficial? >> using CSS
+
+
+		const styles " { '
+			backgroundColor: "black"
+		} is hardcoded black
+
+		Imagine our Appcomponent, receiving a prop darkMode = {true}
+		>ReactDOM.render(<App darkMode={true} />, document.getElenentById()
+
+		Use the prop in App.js
+		if props.darkMode were true --> we would have wanted black #222222
+		if props.darkMode were false--> we would have wanted white #cccccc
+		We can write using ternary
+		->
+		const styles = {
+		 backgroundColor: props.darkMode ? "#222222" : "#cccccc"		//Note #222222 will be strings , since we using JS
+		}
+		
+		const squareElements = squares.map(square => (
+			<div style={styles} className="box" key= {square.id}
+		))
+
+		2.3.7) Test //Change darkMode value from true to false
+		ReactDOM.render(<App darkMode={true} />, document.getElenentById()
+
+		2.3.8) Similarly can play around with other properties
+	
+
+App.js
+
+import React fron "react" (30111130116
+import boxes fron "./boxe5"
+
+export default function App() { 
+
+const[squares, setSquares] = React.useState(boxes)
+props.darkMode							//Use the prop
+
+//document.getElementById("something").style.backgroundColor
+
+const styles = {
+	 backgroundColor: props.darkMode ? "#222222" : "#cccccc"
+}
+
+
+const squareElements = squares.map(square =>(
+	<div style={styles} className="box" key={square.id}> </div>		//if we take out key property --> react will give error
+))
+
+return (
+	<main>
+		//<h1>Boxes will go here</h1>
+		{squareElements}
+	</main>
+ )
+}
+
+---------------------------------------------------------------------
+style.css
+* {
+	box-sizing: border-box;
+}
+.box {
+	height: 100px;
+	width:  100px;	
+	border: 1px solid black;
+	display: inline-block
+	margin-right: 4px;
+	border-radius: 5px;
+}
+------------------------------------------------------------------------
+index.js
+
+import React from "react"
+
+import ReactDOM from "react-don"
+
+import App from ".lApp"
+
+ReactDOM.render(<App darkMode={true} />, document.getElenentById()

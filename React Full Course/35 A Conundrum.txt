@@ -1,0 +1,422 @@
+We got urls from Api and statically displayed by mapping an array
+
+How to interact with these items?
+
+a) 
+a.1) Solve a challenge
+
+Map over an array and generate a paragraph element for every item in array
+
+index.js
+-----------------
+function App() {
+const thingsArray = ["Thing 1", "Thing 8"]
+const thingsElements = thingsArray.map(thing =><p key={thing}> {thing} </p> )	//array contains string, returns jsx wrapped version of that string	//Add key to get rid of warning
+
+return (
+<div>
+	<button>Add Item</button>
+	{thingsElements}
+</div>
+)
+}
+ReactDOM.render(<App />, document.getElementById('root'));
+
+
+a.2) Hit refresh
+   button in index.js not doing anything
+
+
+index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+function App() {
+const thingsArray = ["Thing 1", "Thing 2"}
+const thingsElements = thingsArray.map(thing => <p key={thing}>{th
+return (
+<div>
+<button>Add Item</button>
+{thingsElements}
+</div>
+)
+}
+ReactDOM.render(<App />, document.getElementById('root'));
+
+
+
+a.2) Objective 2:
+
+	Click Add Item button --> to add thing3, thing4... in things array
+	How will we add items by clicking a button?
+		Add event listener to button
+	What no. to add to?thingsArray.length
+	console log at the end	//page wont update right away
+
+	
+
+	Create addItem() function that will log item
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+function App() {
+const thingsArray = ["Thing 1", "Thing 2"}
+const thingsElements = thingsArray.map(thing => <p key={thing}>{th
+
+
+function addItem() {
+	const newThingText = 'Thing ${thingsArray.length + 1}'		//Thing #
+	thingsArray.push(newThingText)						//push Thing # into thingsArray
+	console.log(thingsArray)
+	
+
+}
+
+return (
+<div>
+<button>Add Item</button>
+{thingsElements}
+</div>
+)
+}
+ReactDOM.render(<App />, document.getElementById('root'));
+	
+
+
+a.3) Why not visible on screen?
+
+React not looking at local arrays (within component)	 	//What to render, What not to render //react not looking in local array
+										//What re-rendering means? return() executes again with updated value of  {thingsElements}
+										//What is happening? const thingsElements = thingsArray.map(thing => <p key={thing}>{thing}</p>) 
+											//this line is running only once
+											//when it runs once --> <App /> component is rendered
+										//What if inside addItem() --> we dont just update array but : (select element on screen + find where the container for t																						these items is + push paragraph element to that list
+
+										//This is Why React being declarative library helps
+										Solution: React State : state allows us to hook into component , Whenever we update state(values saved inside component) 																					--> React will update UI with values saved in state
+
+										//How any React website interacts?
+												a) update its state with your action
+												b) 
+
+function App() {
+const thingsArray = ["Thing 1", "Thing 2"]
+const thingsElements = thingsArray.map(thing => <p key={thing}>{thing}</p>)
+function addItem() {
+const newThingText = ‘Thing ${thingsArray.length + 1}‘
+thingsArray.push(newThingText)
+document.getElementById()
+console.log(thingsArray)
+}
+return (
+<div>
+<button onClick={addItem}>Add Item</button>
+{thingsElements}
+</div>
+)
+}
+
+
+
+a.4) How to make it working (Add items)
+
+	What is props? properties passed into component
+				//Component receiving props cant modify	//Immutable props
+				//Similar to function receiving parameters, we dont want props to modify properties passed to it
+				//Summary: props shouldnt change from within component body		//since there is use case to it also	
+
+
+
+
+Ex How to change values that we pass to component then?
+		if within the body not allowed
+		do from outside the function body
+
+
+function addTwoNumbers(a, b) {
+	a = 42		//Dont do this
+	return a + b
+}
+console.log(addTwoNumbers(1, 2))
+function Navbar(props) {
+
+props.coverImage = "something else"
+}
+
+<Navbar darkMode={true} coverImage="some—image2" />
+
+
+
+	What is state?
+				value defined within a component, changing	//Similar to function declaring its own variable
+
+Ex
+	Objective: function takes input name, return Hello "name". Good Morning/ Good Afternoon / Good night
+
+	How to get time of day?
+
+
+function greeting(name) {
+	const date = new Date()			//Data object
+	const hours = date.getHours()		//We only need hours for now
+
+	let timeOfDay
+
+if(hours >= 4 && hours < 12) {
+timeOfDay = "morning"
+
+} else if(hours >= 12 && hours < 17) {
+timeOfDay = "afternoon"
+
+} else if(hours >= 17 && hours < 20) {
+timeOfDay = "evening"
+
+} else {
+timeOfDay = "night"
+}
+
+return 'Good ${timeOfDay}, ${name}!'
+
+}
+console.log(greeting("Bob"))
+
+
+>
+Hello Bob. Good Morning/ Good Afternoon / Good night
+
+
+What learnt from above?
+	Function receiving a parameter name		//dont want to change this inside greeting()
+								//but for our purpose we can create values inside the function
+
+
+
+a.5) Conclusion: React doesnt watch local variable changes
+
+
+App.js
+
+
+import React from "react" I
+export default function App() {
+const state = "Yes" 					//Basically cant expect from React to monitor this variable, and whenever it changes , change UI(re-render component)
+								//for ex array of items button didnt update		
+return (
+<div className="state">
+<h1 className="state——title">Is state important to know?</h1>
+<div className="state--value">
+<h1>Yes</h1>
+</div>
+</div>
+)
+}
+
+
+	1) Declare state inside component
+
+App.js
+
+import React, {useState} from "react" 		//Where us useState() method coming from? //Can also destructure useState in directly		//get useState method from React
+export default function App() {
+	//const result = React.useState()
+	//console.log(result)				//What useState() returns? array , what inside array? 1st value = undefined	//[undefined, f()]
+
+	  const result = React.useState("Yes")		//pass "Yes" in useState	//what is passed parameter in useState? default value for state variable
+	  console.log(result)					//What output? array: [Yes, f()]
+
+	return (
+		<div className="state">
+			<h1 className="state--title">Is state important to know?</h1>
+			<div className="state-—value">
+				<h1>{result[0]}</h1>		// >Output: [Yes, f()]	//why important? we passed in a parameter in useState --> and printed that inside render
+			</div>
+		</div>
+)
+}
+
+
+
+	1.1) Conclusion: Whatever passed into useState() page updates it
+
+	1.2) What problem? using the array output from useState() is cumbersome
+
+
+2) UseState array destructuring
+	 How we get our value(to be saved) from this array? array[0]
+
+	Any other method? Array destructuring (Destructure as soon as received)
+	How to destructure an array? const[result, func] = React.useState("Yes")
+	What if we used object destructuring?need property name of object returned by React.useState()
+	But since using array destructuring can call it anything
+
+	
+	import React from "react" 
+	export defaullt function App() {
+		const [whateverWeWant, func] = React.useState("Yes");		//instead of storing in 1 variable, we store it in
+		console.log(whateverWeWant)
+
+		return(
+			<div className="state">
+			<h1 className="state——title">Is state important to know?</h1>
+			   <div className="state—-value">
+			     <h1> {whateverWeWant} </h1>	 			//>Output: Yes
+			  </div>
+			</div>
+
+		)	
+
+
+	}
+
+
+
+3) Change state (using useState() )		//Hooks in React
+	Summary:
+	//normal variable --> //can be changed
+	//destructured variable --> //cannot make changes directly
+	//instead change inside a function handleClick()
+
+	//normal variable vs destructured
+	//run this function on click event
+	3.1) 
+	export default function App() {
+	let isImportant = "Yes"							//normal variable
+	isImportant = "No"								//can be changed
+	const [isImportant, setIsImportant] = React.useState("Yes")	//destructured variable				//setIsImportant is the function used to make changes 	//can name anything, 												//cannot make changes directly
+	
+	function handleClick() {						//instead change inside a function handleClick()
+		setIsImportant("No")						//run this function on click event
+	}										//State changed from Yes --> No	//when button clicked
+
+
+	return (
+		<div className="state">
+			<h1 className="state-—title">Is state important to know?</h1>|
+			<div className="state——value" onClick={}>
+				<h1>{isImportant}</h1>
+		</div>
+	</div>
+)
+}
+
+
+
+4) Practice changing state	
+	Create counter with + and - button
+	if + --> counter++
+	if o --> counter--
+	
+4.1) catch what React.useState(0) returns in a variable
+4.2) return {count} as js
+4.3) declare add function inside App
+	how functino will increment {count}? using setCount to whatever value earlier
+		setCount(count + 1)
+
+		//What if we did count++ ? never modify state directly, we just want to provide updated value
+
+4.4) Note: still not following best practice while using this state value
+
+	//Any another way to update state value? Yes! : setCountSetter
+
+import React from "react"
+export default function App() {
+
+
+const[count, setCount] = React.useState(0);
+
+function add() {
+	console.log("Add")
+	setCount(count + 1)
+	}
+
+function subtract() {
+	console.log("Add")
+	setCount(count - 1)
+	}
+
+return (
+	<div className = "counter"> 
+		<button className="counter--minus">		</button>
+		<div className="counter--count">
+			<h1>{count}</h1>
+		</div>
+		<button className="counter++plus">		</button>
+	</div>	
+
+)
+
+
+
+5) How to change state using callback function?
+
+	5.1) const [count setCount]		//earlier we set count directly using setCount
+	     How? use setCount() , pass count variable 
+
+import React from "react"
+export default function App() {
+const [cquntL setCount] = React.use$tate(0)
+function add() {
+setCount(count + 1) 
+} 
+
+function subtract() {
+setCount(count - 1)
+}
+return (
+<div className="counter">
+<button className="counter——minus" onClick={subtract}>—</button>
+<div className="counter-—count">
+<h1>{count}</h1>
+</div>
+<button className="counter——plus" onClick={add}>+</button>
+</div>
+
+	5.2) try to Set using callback function as parameter
+		pass callback function as parameter inside setCount()
+			What value to pass? return count + 1
+				What function parameter? oldValue		//React will pass
+		How providing function change old state value to new state value helps?
+		//What was the count when function called? oldValue
+
+
+	Conclusiom: whenever using oldValue to determine a newValue for state
+			pass a function to setCount()
+	//note simplify using arrow function
+
+
+import React from "react"
+
+export default function App() {
+const [count, setCount] = React.use$tate(0)
+/*function add() {
+setCount(function(oldValue) {
+	return  count+ 1
+})*/
+
+function add() {
+	setCount(prevCount => prevCount + 1)	//
+}
+
+}
+function subtract() {
+	setCount(prevCount => prevCount - 1)
+}
+
+return (
+<div className="counter">
+<button className="counter-—minus" onClick={subtract}>—</button>
+<div className="counter--count">
+<h1>{count}</h1>
+</div>
+<button className="counter——plus" onClick={add}>+</button>
+</div>
+)
+
+
+	5.3)Unanswered questions
+		What values can be passed in state setter function
+		a) New value: setCount(42)			//use this method : when dont need previous value of state , to determine new value
+		b) return value from callBack function

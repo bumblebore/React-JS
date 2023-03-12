@@ -1,0 +1,65 @@
+What problem we were facing in meme generator?
+
+cant update UI with image (React not listening to local variables)
+
+Objective: Add image to meme generator using state
+
+
+1) Create state memeImage
+
+2) do we need old state to determine the new string? no 
+	directly update inside setter //setMemeImage()
+	//update with what? new url from the memesArray: ImemesArray[randomfiumber].url
+
+3) Create a image element using the new image
+		<img src={memeImage}>
+
+4) When we click Get a new image --> we get a large image
+	Add styles.css for that element
+
+.meme—-image {
+max-width: 100%fl
+}
+
+
+
+
+import React from "react"
+import memesData from "../memesData.js"
+
+export default function Meme() {
+	const [memeImage, setMemeImage] = React.useState("")		//Destructuring
+
+
+	function getMemeImage() {				//show the new image with newly fetched url
+		const memesArray = memesData.data.memes	
+		const randomNumber = Math.floor(Math.random() * memesArray.length)
+		setMemeImage(memesArray[randomNumber].url)
+	}
+
+	return (
+		<main>
+			<div className="form">
+				<input
+					type="text"
+					placeholder="Top text"	
+					className="form——input"
+				/>
+				<input
+					type="text"
+					placeholder="Bottom text"
+					className="form——input"
+				/>
+				<button
+					className="form——button"
+					onClick={getMemeImage}
+				>
+					Get a new meme image;
+				</button>
+			</div>
+				<img src={memeImage} className="meme--image">			//notice how updating element directly with memeImage
+		</main>
+	)
+
+
+}

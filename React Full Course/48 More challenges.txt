@@ -1,0 +1,104 @@
+1) Move div into separate component "box"
+	replace div with <Box />
+
+
+2) while mapping squares render that box component
+
+3) box component should receive prop : "on"
+		What is "on"? value of square.on from box.js
+
+4) Create dynamic style inside the box
+	based on value of prop:
+		if on -->  background color of box : #222222
+		if off-->  background color of box : "none"
+
+import React fron "react"
+import boxes fron "./boxes"
+export default function App() {
+const [squares, setSquares] = React.use$tate(boxes)
+const squareElements " Lquares.map(square -> (
+<div className="box" key={square.id}></div>
+))
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1) Create box.js
+	setup
+	import Box in App.js
+	make it receive props
+	pass the key on box component
+	pass prop called on	//What value? square.on 	//individual square
+
+	console.log(props.on) in Box.js
+	//Check if getting 6 values
+	//Can see Output: > false
+
+2) use props.on to determine hex value
+	2.1) use dynamic styles
+			create var styles
+			conditionally based on props.on , set backgroundColor
+	2.2) return style
+		<div style={styles} className="box"> </div>	//note difference styles vs style
+
+	2.3) test: 
+		wherever on property = true --> color black
+
+3) Lets flip the value when clicking the box  in next lesson
+	
+Box.js
+-------------------------------------------------------------
+import React from "react"
+export default function Box(props) {
+	const styles = {
+		backgroundColor: props.on ? "#22222" : "none"
+	}
+	console.log(props.on)
+
+	return (
+		<div style={styles} className="box"> </div>
+	)
+}
+
+-------------------------------------------------------------
+App.js
+
+import React from "react"
+import boxes from "./boxes"
+import Box from "./Box"
+
+export default function App() {
+export default function App() {
+const (squares. setSquares] = React.use$tate(boxes)
+const squareElements ‘ squares.map(square -> (
+	<Box className="box" key={square.id} on={square.on}> />		//already handled on div, box is rendering
+))
+
+return (
+	<main>
+	)
+
+}
+--------------------------------------------------------------
+boxes.js
+
+export default [
+{
+	id: 1,
+	on: true
+},
+{
+	id: 2,
+	on: false
+},
+{
+	id: 3,
+	on: true
+},
+{
+	id: 4,
+	on: true
+},
+{
+	id: 5,
+	on: false
+}

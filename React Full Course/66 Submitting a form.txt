@@ -1,0 +1,212 @@
+1) How to submit a form?
+
+ 1.1) We have gathered all info from user
+ 1.2) Submit the form
+	1.2.1) Create input of type submit	//just a button
+	1.2.2) change submit button value "Send it in"		//notice how value is just text of the button
+	1.2.3) Add a few line breaks
+	Alternativeto <input type= "submit" value ="Send it in" />
+	1.2.4) Create a button element	//acts like submit button
+		 type = "submit
+		
+		<button type="button">Submit</button>		//if we dont want it to act like submit button
+
+		<button >Submit</button>				//default type =  submit
+										//this will trigger the form		
+
+	1.2.5) Click this button --> triggers form's onsubmit event handler
+
+	1.2.6) 
+ 		<form onSubmit={} >
+	earlier instead of onSubmit handler , earleir we had method post	//this will be post request 
+		//Also some action --> what this action does? leads to xyz.php
+		//What php will do? takes data, process it
+		<form method="POST" action="somePhp.php" >
+
+		//no we bypass the entire system
+		//use: onSubmit event handler //What this event handler will do? call handleSubmit()	
+
+	1.2.7) What happening now instead?
+			we dont go through all inputs and gather value	in end before submitting to an api
+					
+		Given: we have a submitToApi() in handleSubmit()
+		//we have been updating state on every change of input elements in form		
+
+	1.2.8) pass the formData object into submitToApi
+			why passing formData ? it is already updated (after every change) of form
+
+	1.2.9) In vanilla JS
+		once we have built form and gathered data in JS
+		--> Click this submit button --> Refreshes the page --> All form values put --> As form of query string in url
+	//This is the original way forms were submitted in vanilla js (using action property)
+	
+	1.3.0)In React instead
+			1.3.1) take the event object passed to event handler handleSubmit()
+			1.3.2) Run event.preventDefault()	//What this will do? wont refresh our page, re-render App with default values and 										//state 
+									//We can then run code --> the way we want to
+			1.3.3) for now since we dont have submitToApi(formData)
+				instead just console.log(formData)
+
+			1.3.4) Refresh -> Test:
+					First Name: Bob
+					Last Name : Ziroll
+					Email	    :
+					Comments
+
+					Current employment status
+						Full Time
+
+					Fav color
+						Blue
+
+					--> Submit
+
+			What output? we can see state object
+			FirstName: "39b", lastName: "Zirgll", email: "", comments: "lsladkfjhasdf", isFriendly: true,	//What our state object	 																			looks like
+
+			//Why we are able to see?
+				console.log(formData)
+			//formData is the state variable		//
+				
+			1.3.5) now try to comment out event.preventDefault()
+			type things in form --> submit --> form refreshed --> url updated
+
+			index.html?‘firstName=asdasd&lastName=asdasd&emai l=&comm|			//url took property values and sticked as query 															strings
+
+
+
+
+
+
+	import React fron "react"
+	export default function Form() {
+	const [formData, setFormData] = React.useState(
+		{firstName: "", lastName: "". email: "", comments: "", isFriendly: true, employment: "", favColor: ""}
+	)
+
+	console.log(formData.favColor)		//makes
+	
+	function handleChange(event) {
+		const {name, value, typep = event.target
+		setFormData(prevFormData => {
+			return {
+				...prevFormData,
+				[name]: type === "checkbox" ? checked : value
+				}
+			})
+		}
+
+function handleSubmit() {
+	event.preventDefault()
+	console.log(formData)
+}
+
+
+return (
+<form onSubmit={handleSubmit} > 
+
+<input
+	type="text"
+	placeholder="Firat Hann"
+	onChange={handleChange)	
+	name="firstfiawe"
+	value={formoata.firstName}
+/>
+
+<input
+typo="toxt"
+placeholder="Lda: "nor"
+onChango=£handlcChango}
+name=" i atzttmmn"
+value={fornoata.lastNaue}
+/>
+
+<input
+type="km.:i l"
+placeholdor="Eruil"
+onChange=£handloChangc)
+nome="vmail"
+valuc={form0ata.onail}
+
+/>
+
+<textarea
+value={forwata .coments}
+placeh01der="COUmvntu"
+onChange=£handleChange}
+namel"ccnnent5"
+
+/>
+<input
+type="checkbox"
+id="isFriendly"
+checked={formData.isFriendly}
+onChange-{handleChange)
+name =isFriendly"
+/>
+<label htanor="é,~:inndlv‘>Arc you friendly?<llabel>
+<br />
+<br />
+
+<fieldset>
+<legend>Curront enployacnt status<legend>
+<input
+type-"radio"
+id="um:mpi.oycd"
+nameIMQmpLoymnnt"
+valuc="unrrployvd"
+chocked={form0ata.employmont === "unemployed"}
+onChangez£handleChange)
+/>
+<label htalFor="unenploycd">Unenploycd</Iabel>
+<br />
+
+<input
+type="radio"
+id="part-time"
+name-"employment"
+value="part'tirc"
+chockod={form0ata.employment === "part-time")
+onChange={handleChange}
+
+/>
+
+<label htmlFor="part-time">Part time </label>
+<br />
+
+<input>
+type="radio"
+id="unemployed"
+name="employmnnt"
+value="unemployed"
+checked={formData.employment === "unemployed"}
+onChango=£handleChange}
+/>
+<label htmlFor="unenploycd">Unenployod<llabel>
+<br />
+
+ </fieldset>
+<br />
+<label htmlFor="favColor">What is your favorite color?<
+<br />
+<select
+id="favColor"
+value={formoata.favColor}
+onChangea£handleChange}
+name: "favColor"
+
+>
+<option value="rud">Rcd</option>
+<option value:"ornngv">0rango</option>
+<option value:‘yolicw">vellow</option>
+<option value:‘grurn">Grcon</option>
+<option value="blue">8lue(/option>
+<option value="indigo">1ndi30(/option>
+<option value="vwoiet">Violet(/option>
+
+</select>
+</br>
+</br>
+<input type"submit" value="Send it in" />
+<button type= "submit"> Submit </button>
+</form>

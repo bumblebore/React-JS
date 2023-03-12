@@ -1,0 +1,282 @@
+Create separate components folder
+
+a) build  a header component
+	What is a header?
+
+ a.1) Header.js	
+
+	import React from "react"
+	export default function Header() {
+		return (
+
+		  <header className= "header">
+			<img 
+				src="./images/troll-faces.png"
+				className="header--image"
+			 /> 
+			<h2 className="header-title"> Meme Generator 	</h2>		
+			<h4 className="header-project> React Course- Project 3 </h4>
+		  </header>
+		//Header done, Form to be done		
+
+	}
+
+
+
+ a.2)	style.css	
+	
+	*{
+		box-sizing: border—box;
+	}
+	body {
+		font-family: "Karla", sans-serif;
+	margin: 0;
+	}
+	.header {
+		display: flex;
+		align-items: center;
+		height: 65px;
+		background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+		color: white;
+		padding: 20px;
+	}
+
+	.header--image {
+		height: 100%;
+		margin-right: 6px;
+	}
+	.header--title{
+		font-size: 20px;
+		margin-right: auto;
+	}
+
+	.header-title {
+		font-size: 20px;	
+		margin-right: auto;
+	}
+
+	.header-project {
+		font-size: 12px;
+		font-weight: 500;
+	}
+	//header done till now
+	
+
+
+1) App.js
+	import React from "react"
+	import Header from "./components/Header"
+
+	export default function App() {
+	   return (
+		<header>
+			
+			<Header component />
+			//header done till now				
+		</header>
+	}
+		
+
+2) index.html
+
+
+
+3) index.js
+
+
+
+4) styles.css
+
+
+
+b) Build a form
+	We create form inside memeComponent 
+	b.1) Create Meme component in App.js and Meme.js in Components folder
+	b.2) insert form in Main() of Meme.js
+			//make a 2 col 2 row grid
+			//give form a className
+			//give input fields classNames and a placeholder	
+			//add CSS for class form
+	b.3) Add grid template:
+			grid-template: 40px  40px / 1fr 1fr;		//since 3 items 1st item in col1, 2nd item in col2 , 3rd item in col1
+			//add CSS for form--button
+		//Avoid everything butting up against edges
+		//Create CSS for main element
+		//add padding of 30px
+
+	b.4) placeholders not picking up the font
+		HOw to make them pick? Add in form CSS
+	
+	b.5) get background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%); ffrom Figma file	//gives purple gradient
+		
+
+c) We learnt about event listeners
+
+  c.1) we already got data from api into data.js
+	when button click -->select one url from data -->just log on console
+
+
+	//note: change form element --> div element. (Why? if button inside form --> submits that form	//refreshes the page
+  c.2) const memesArray = memesData.data.memes			//in data.js memes = array
+	 const randomNumber = Math.floor(Math.random() * memesArray.length	)	
+	
+Create paragraph in meme.js
+
+ d) Now we can log url
+	But if we refresh --
+	URL declared inside getMemeImage() function	
+	Why declare outside?
+
+	let url
+	function getMemeImage() {
+	const memesArray = memesData.data.memes
+	const randomNumber = Math.floor(Math.random() x memesA
+	url = memesArray[randomNumber].url
+	console.log(url)
+}
+
+
+
+
+
+
+
+ 0) Meme.js
+
+	import React from "react"
+	
+	export default function Meme() {
+
+	function getMemeImage() {
+		console.log("Clicked")
+		const memesArray = memesData.data.memes						//gets data from memesArray
+		
+	 	const randomNumber = Math.floor(Math.random() * memesArray.length)	//gets a random index of memes array	//
+		console.log(randomNumber)								//random number generated everytime button clicked
+		
+		const url = memesArray[randomNumber].url						//use the random number generated to select that random url
+															//If we use {url}? //can be used for object destructuring
+		console.log(url)										//Print that random url
+	}
+		return (
+		<main>
+			<div className="form">
+					<input type="text" 
+						placeholder="Top Text"
+						className="form--input"/>
+
+					<input type="text"
+						placeholder="Bottom Text"
+						className="form--input" />
+					<button
+						className="form--button">
+						onClick={getMemeImage}
+						Get a new meme image EE
+					</button>
+			</div>
+		</main>
+		)
+	}
+
+ 1) Header.js	
+
+	import React from "react"
+	export default function Header() {
+		return (
+
+		  <header className= "header">
+			<img 
+				src="./images/troll-faces.png"
+				className="header--image"
+			 /> 
+			<h2 className="header-title"> Meme Generator 	</h2>		
+			<h4 className="header-project> React Course- Project 3 </h4>
+		  </header>
+		//Header done, Form to be done
+
+	}
+1) App.js
+	import React from "react"
+	import Header from "./components/Header"
+	import Meme from "./components/Meme"
+
+	export default function App() {
+	   return (
+
+			
+			<Header/>
+			//header done till now			
+			<Meme />	
+	}
+		
+
+2) index.html
+
+
+
+3) index.js
+
+
+
+4) styles.css
+
+	style.css	
+	
+	*{
+		box-sizing: border—box;
+	}
+	body {
+		font-family: "Karla", sans-serif;
+	margin: 0;
+	}
+	.main {
+		padding: 36px;
+	}
+
+	.header {
+		display: flex;
+		align-items: center;
+		height: 65px;
+		background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+		color: white;
+		padding: 20px;
+	}
+
+	.header--image {
+		height: 100%;
+		margin-right: 6px;
+	}
+	.header--title{
+		font-size: 20px;
+		margin-right: auto;
+	}
+
+	.header-title {
+		font-size: 20px;	
+		margin-right: auto;
+	}
+
+	.header-project {
+		font-size: 12px;
+		font-weight: 500;
+	}
+	//header done till now
+	
+	.form {
+		display: grid;
+		grid-template: 40px  40px / 1fr 1fr;		//40px row, 40px col, evenly divide columns
+		gap: 17px;
+	}
+	.form--button {
+		grid—column: 1 / —1;
+		font-family: "Karla", sans—serif;
+		border—radius: 5px;
+		background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
+		color: white;
+		border: none;
+		cursor: pointer;		
+
+	.form--inputs {
+		font-family: "Karla", sans-serif;
+	}
+	

@@ -1,0 +1,52 @@
+Important questions
+
+1) Given: vanilla JS app
+   When data gathering takes place from filled out form? at the end of form filling and during submission
+
+
+2) When form data gathering takes place in react? while the form is being filled out
+
+	//Where is all that data? in local state
+	//How? form elements dont maintain their own internal state
+	//What does then? component that houses the entire form	//has some react state which gets updated on every change
+
+3) property name in state should be  = which attribute? 'name'		
+
+function handleChange(event) {
+const {name, value, type, checked} = event.target
+setFormData(prevFormData => {
+return {
+...prevFormData,
+[name]: type === "checkbox" ? checked : value		//whenever a change happens , which property to update is decided using this
+}
+})
+}
+
+
+4) Checkbox vs other elements
+//Checkbox --> uses checked property
+		What is checked property used for? what to save in state
+//In other form elements --> uses value property
+		What is checked property used for? what to save in state
+
+
+5) How to watch for form submit?
+	Add onSubmit handler on form element	//Runs whenever form is submitted
+	//pass handleSubmit() to onSubmit handler , what handleSubmit() does?
+		event.preventDefault()
+		console.log(formData)
+
+
+		<form onSubmit={handleSubmit} > 
+
+
+6) How to trigger form Submit? button click
+
+
+7) If button element inside a form --> by default acts like submit button for the form
+What used to be used earlier?
+	input with type=  submit
+	<input type="submit" />		//no benifit to using this
+			
+
+	

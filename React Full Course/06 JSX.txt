@@ -1,0 +1,101 @@
+
+a) Why JSX?
+	
+	What is JSX? Javascript XML -- syntax for react
+
+
+ReactDOM.render(<h1>Hello , React </h1>,document.getElementById("root"))
+
+
+	//What value ReactDOM.render("", document.getElementById("root")) takes?
+	
+
+	const element = <h1 className="header">This is JSX</h1>		//notice how we are able to write html in JS //How? JSX
+	ReactDOM.render("element", document.getElementById("root")) takes?
+	console.log(element);				//What is output? JSON:  How JSX interprets our provided input html in terms of JS objects and then internally converts and puts back into actual html root
+		{
+		type: "hl",
+		key: null,
+		ref: null,
+		props: {className: "header", children: "This is JSX"},
+		_owner: null,
+		_store: {}
+		}	
+
+
+
+
+// will look like this
+{type: "div", key: null, ref: null, props: {childrenz [{type: "hl", key: null, ref: null, props;
+className: "header" children: "This is JSX" owner: null store: {}}, {type: "p", key: null}
+ref: null, props: {children: This is a paragraph }, _owner: null, _store: {}}]}, _owner: null,
+store: {}
+
+
+
+
+	//Also we define dom element h1.what value?
+
+	const h1 = document.createElement("h1")	//notice how we are able to write html in JS imperative way. How? Vanilla JS
+	h1.textContent = "Hello world"
+	h1.className = "header"
+	console.log(h1)
+
+	Output:						//What output? html element
+		<h1 class = "header">
+
+
+
+b) Cannot render 2 or more open html elements side by side in ReactDOM.render
+	//always wrap them in parent elements  //ex <div>   <div>
+
+
+ReactDOM.render(										//Warning : error: side by side elements in JSX
+<h1 className="header">This is JSX</h1><p>This is a paragraph</p>,
+document.getElementById("root")
+
+)
+
+
+ReactDOM.render(										//Ok:  2 elements in 1 parent
+<div>
+	<h1 className="header">This is JSX</h1>
+	<p>This is a paragraph</p>
+</div>,
+document.getElementById("root")
+)
+
+OR
+
+const page =  (
+	<div>
+		<h1 className="header">This is JSX</h1>
+		<p>This is a paragraph</p>
+	</div>
+)
+ReactDOM.render(										//Ok:  2 elements in 1 parent
+page, document.getElementById("root")
+)
+
+
+c) What if we console.log(page)? get JS object
+
+const page =  (
+	<div>
+		<h1 className="header">This is JSX</h1>
+		<p>This is a paragraph</p>
+	</div>
+)
+ReactDOM.render(										//Ok:  2 elements in 1 parent
+page, document.getElementById("root")
+)
+
+
+{type: "div", key: null, ref: null, props: {childrenz [{type: "hl", key: null, ref: null, props;
+className: "header" children: "This is JSX" owner: null store: {}}, {type: "p", key: null}
+ref: null, props: {children: This is a paragraph }, _owner: null, _store: {}}]}, _owner: null,
+store: {}
+
+
+
+

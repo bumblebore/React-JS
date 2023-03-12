@@ -1,0 +1,57 @@
+//why use .map?
+If data changes, no additional changes needed
+
+a) What Array.map does? run the function ono each array element
+			returns an array
+
+Given: const nums = [1,2,3,4,5]
+
+
+const squared = nums.map(function(item) {
+	return item*item
+})
+
+[1,4,9,16,25]
+
+
+
+//common scenario::
+
+	take array of data, map over it, turn each of those into some kind of jsx element
+
+	//what can we do with that jsx element? display on  page	
+
+
+
+
+b) another way to call
+
+
+const squared = nums.map((name) => {
+	return name[0].toUpperCase
+})
+
+
+
+const squared = nums.map((name) => {
+	return `${name[0].toUpperCase()}${name.slice(1)}`
+})
+
+>
+["A lice", "B ob", "C harlie", "D anielle"]
+
+
+
+
+c)Convert strings to elements using map	//can also do using .innerHTML
+
+const pokemon = ["Bulbasaur", "Charmander", "Squirtle"]
+
+const elements = pokemon.map(mon => {
+
+["<p>Bulbasaur</p>", "<p>Charmander</p>", "<p>Squirtle</p>"]
+
+console.log(elements)
+
+>
+["<p>Bulbasaur</p>", "<p>Charmander</p>", "<p>Squirtle</p>"]

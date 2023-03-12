@@ -1,0 +1,48 @@
+a) What object spread operator looks like? (...object)
+
+b) What it does? include all properties of that object
+ex
+
+	const obj1 = {foo : 'bar', baz:'qux'};
+	const obj2 = {...obj1, quux:  'corge'};
+
+ How object spread operator used in our component?
+
+
+b.1) Use spread operator to get all properties of item object as separate props
+
+const cards = data.map(item => {
+return (
+<Card
+	key={item.id}
+	{...item}
+/>
+)
+})
+
+
+b.2) Still breaks : remove "item"
+
+Main.js
+
+import React from "react"
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+import Card from "./components/Card"
+import data from "./data"
+
+export default function App() {
+
+const cards = data.map(item => {
+return (
+<Card
+key = {item.id}
+img={item.coverImg}
+rating={item.stats.rating}
+reviewCount={item.stats.reviewCount}
+location={item.location}
+title={item.title}
+price={item.price}
+/>
+)
+})

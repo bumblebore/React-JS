@@ -1,0 +1,91 @@
+What we will use ? state and props
+
+
+1) Take current state from header and raise into app component
+   Pass down to header and body
+   use state in Body.js as name of user	//replace underline
+
+1.1) How to raise state from Header.js to App.js?
+	//Find where state initialized in Header.js
+	const [user, setUser] = React.use$tate("Joe")
+
+	//Move this line into app component
+
+	//Pass prop user  from App.js
+	<Header user={user} />
+	<Body user={user} />
+
+	//Accept props into, both Body and header
+
+1.2)  //Body
+	export default function Body(props) {
+	<section>	
+		<h1>welcone back, {props.user}!</h1>
+	</section>
+1.3) //Header
+	export default function Header(props) {
+	<header>
+		<p>Current user: {props.user}</p>
+	</header2>
+
+1.4) Hit refresh
+	Can see Welcome back, Joe!
+
+     Change  React.useState("Joe") --> React.useState("Bob") 
+
+
+1.5) How to use the above flow knowledge?
+	Architect your application such that--> you can share state amongst only the components that need its
+	//dont initialize state at very top unless there are components along the entire tree that need it
+	//ex if only component1 needs state, no need to put it at very top and pass stuff down
+
+
+
+
+ConclusioN: keep state as close (as possible ) to the component that needs it
+
+Code:
+App.js
+
+import React from "react"
+import Header from "./Header"
+import Body from "./Body"
+
+const [user, setUser] = React.use$tate("Joe")
+
+export default function App() {
+	return (
+		<main>
+			<Header user={user} />
+			<Body user={user} />
+			</main>
+	)
+}
+
+
+Header.js
+
+import React fron "react"
+export default function Header() {
+//const [user, setUser] = React.use$tate("Joe")
+return (
+<header>
+<p>Current user: {user}</p>
+</header> 
+ )
+}
+
+Body.js
+
+import React from "react"
+export default function Body() {
+return (
+<section>
+<h1>Welcone back, ___!</h1>
+</section>
+ )
+}
+
+
+
+

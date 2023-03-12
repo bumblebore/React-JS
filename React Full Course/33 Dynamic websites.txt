@@ -1,0 +1,25 @@
+what we created? static websites in react
+
+No user interactivity yet
+
+
+a) how to create dynamic websites
+
+	What are static pages? read only, no changes allowed to data
+
+	
+
+Objective: build a meme websites
+	fetch memes from api
+	
+
+
+Concepts to learn for dynamic websites:
+
+	a.1) Event listeners
+	a.2) State
+	a.3) Conditional rendering
+	a.4) forms	//gather data from users
+	a.5) Side effects in react
+
+	

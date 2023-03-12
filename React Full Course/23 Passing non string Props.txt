@@ -1,0 +1,34 @@
+How to pass non string props? {}
+
+
+export default function App() {
+return (
+		<div> 
+			<Joke 
+				punchline="It's hard to explain puns to kleptomaniacs because they always ‘things literally."
+			/> 
+			<Joke 
+				setup="I got my daughter a fridge for her birthday." 					//String prop
+				upvote = {10}
+				punchline="I can't wait to see her face light up when she opens it." 
+				upvotes={10}
+				downvotes={2}
+				comments={[{author: "", body: "", title: ""}, {...}]}
+				isPun={true}											//Non String prop
+			/> 
+
+	 )'
+
+
+
+import React from "react"
+export default function Joke(props) {
+console.log(props.commentsb
+return (
+<div>
+{props.setup && <h3>Setup: {props.setup}</h3>}
+<p>Punchline: {props.punchline}</p>
+<hr />
+</div>
+)
+} 

@@ -1,0 +1,57 @@
+right now we take all code put in a variable and React.render it
+HTML also did same.
+How to make components that we talked about?
+
+we have boiled down taking large html code --> 1 variable
+
+
+
+a) What functions used for? reusability of code
+	a.1) Create a temporary function
+		let that function return the html
+			instead of  variable, store that code in that function
+		Conclusion: what achieved? successfully rendered a function
+		now how to reuse it
+
+
+	
+
+	a.2) Convention: function name: Pascal case : first letter capital
+				<unction /> in ReactDOM.render
+
+	Code sstill working
+
+	a.3) Note: in function you still need <>  </> tags
+	
+	a.4) Still one monolithic component Why df!
+	How to compose different components together
+
+	
+
+import React from "react"
+import ReactDOM from "react-dom"
+
+function Temp() {
+	return (
+	
+		<>
+		<header>
+			<nav>		
+				<img src="./react-logo.png" width= "40px" />
+			</nav>
+
+		</header>
+		<h1>  Reasons I am excited to learn React </h1>
+
+		<ol>
+			<li> Its popular library </li>
+			<li> frontend sikho fir backend sikho </li>
+		</ol>
+		<footer>
+			<small>© 2021 Ziroll development. All rights reserved. </small>
+		</footer>
+		</>
+		)
+ 	}
+
+ReactDOMrender(<Temp />, document.getElementById("root"))

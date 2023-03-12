@@ -1,0 +1,33 @@
+Using ternary operator:
+
+1) We want to change the button "show punchline" ==> "hide punchline" after it is clicked
+
+How to?
+
+	1.1) Make a copy of the button
+	1.2) display show first, after clicked, hide it -> display other
+	
+2) Conditionally change button from show to hide
+
+3)Test by clicking button
+
+//Note: if conditions are more complex , and cant use ternary operator ---> use regular if statement
+
+
+Joke.js
+
+import React fron "react"
+export default function Joke(props) {
+const [isShown, setIsShown] = React.use$tate(false)
+function toggleShown(){
+	setIsShown<prevShown => !prevShown)
+}
+return (
+<div>
+{props.setup && <h3>{props.setup}</h3>}
+{isShown ea <p>{props.punchlinc}</p>}
+{!isShown <button onClick={toggleShown}>{isShown ? "Hide" : "Show"} Punchline </button>
+<hr />
+</div>
+)
+}

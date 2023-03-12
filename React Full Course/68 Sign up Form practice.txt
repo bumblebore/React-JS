@@ -1,0 +1,212 @@
+Objective: connect existing form to some local state --> update the state whenever use interacts with form
+
+
+1) What form looks like?
+
+I dchicaiza2@gmail.com |
+*********
+Confirm password
+
+I want to join the
+newsletter
+
+
+1.1) Who will manage the state of all 4 inputs? handleChange()
+		What it does? Update the state , whenever user interacts with form
+	
+	
+1.2) When user clicks sign up button
+	--> logic checks if password and password confirmation matches each other
+	--> if does --> console.log("successfully logged")
+
+	else --> console.log("passwords do not match")
+
+	//logic also checks if checkbox for newsletter was checked or not
+	if so --> log " thanks for signing up"
+	else --> dont console.log anything
+
+
+
+2) Solution:
+
+	2.1) create a state : "formData"
+		How? using React.useState({})
+		//this will create an object
+
+		//provide this object --> properties, and default values
+	
+	2.2.) All these object properties of state --> Add them as name field in each of the inputs
+	//notice: how name field value = state property value
+		<input
+			type="email"
+			placeholder="Email address"
+			className="form--input"
+			name="email"
+			value={}
+		/>
+
+	2.3) Add onChange property to all the inputs
+		What this onChange does? points to a function handleChange
+
+	2.4) Add value property
+			value = {formData.}
+		<input
+			type="email"
+			placeholder="Email address"
+			className="form--input"
+			name="email"
+			onChange ={handleChange}
+			value={}
+		/>
+			
+	2.4) instead of value , add checked={formData.joinedNewsletter} to checkbox  input	//Why add? makes element controlled
+			if formData.joinedNewsletter  = true		//Checked
+			if formData.joinedNewsletter  = false		//Not Checked
+			
+		
+	2.5) Create handleChange()
+
+			pull out name,value , type property types	//const {name, value, type, checked} = event.target
+					Why? to check if it is the checkbox that made the change		
+			const {name, value, type, checked} = event.target	//What is target? event that was modified
+											
+			setFormData(prevFormData => ({			//Why? this helps access previous form data
+							//return object by surrounding in parenthesis	//use implicit return without opening body of 																function
+							//return an object, 
+
+				...prevFormData,	//(object should have all previous form data properties)
+				[name]: type === "checkbox" ?  checked
+									//Also Update the property based on name value
+									//how to get name value? from the input that made this change
+									//What is[]? computed property syntax
+									//What is [name] set to? 
+										first check if type === "checkbox"
+											if so -> set checked property of checkbox(true/false)
+											else ->just update the state using value property
+								
+			}))	
+
+	2.6) How to update our state?
+			console.log(formData)			//
+
+log our formData
+Test
+	I want to join newsletter button is already clicked	//means it is directly connected to state (since default was set to true)
+	//try to uncheck it --> output: false
+	//Output:
+	type in username and password	//joinedNewsletter is showing in log
+
+	{email: "", password: "", passwordConfirm: "", joinedNewsletter: true}
+	{email "", password: "", passwordConfirm: "", joinedNewsletter: false}
+	{email: "a", password: "", passwordConfirm: "", joinedNewsletter: false}
+	{email: "as", password: "", passwordConfirm: "", ioinedNewsletter: false}
+
+	2.7) handleSubmit()
+	what this function contains?
+	vanilla JS logic : 
+		how is handleSubmit called? onSubmit calls it
+		 onSubmit={handleSubmit}
+
+	//Since button inside form element --> acts like submit button by default
+	//How will submit event be triggered? Sign Up Button --> handleSubmit()
+	//remember how event.preventDefault() to prevent from form being submitted old way (php-backend)	//submits as query strings in 																		  url
+	//contains logic for (if password matches with confirm password --> proceed further)
+	//make sure to return , and not show that signed up for newsleetter if not matching passwords
+	if(formData.password = formData.passwordConfirm) {
+		console.log("Successfully signed up")
+	}else {
+		console.log("passwords do not match")
+	}
+	if(formData.joinedNewsletter) {
+		console.log("Thanks for signing up for our newsletter!")
+		}
+	}
+
+	2.8) Give a test:
+		Add email
+		Add password
+		Confirm password
+
+	-> Click Sign Up
+	"Thanks for signing up for our newsletter"	//outputs
+
+	
+
+				
+import React from "react"
+export default function App() {
+
+export default function App() {
+	const [formData, setFormData] =React.useState({
+		email: " ",
+		password: ' ",
+		passwordConfirm: " ",
+		joinedNewsletter: false				//if you are a good marketer, this will be true :P
+		
+	})
+	
+function handleChange(event) {
+	const {name, value, type, checked} = event.target
+	setFormData(prevFormData => ({
+	...prevFormData,
+	[name]: type === "checkbox" ? checked : value
+}))
+}
+console.log(formData)
+
+function handleSubmit(event) {
+	event.preventDefault()
+	if(formData.password = formData.passwordConfirm) {
+		console.log("Successfully signed up")
+	}else {
+		console.log("passwords do not match")		
+		return
+	}
+	if(formData.joinedNewsletter) {
+		console.log("Thanks for signing up for our newsletter!")
+		}
+	}
+
+
+return (
+<div className="form-container">
+<form className="form" onSubmit={handleSubmit}>
+<input
+type="email"
+placeholder="Email address"
+className="form--input"
+onChange={handle}
+value={formData.email}
+
+/>
+<input
+type="password"
+placeholder="Password"
+className="form-—input"
+onChange={handle}
+value={formData.password}
+/>
+
+<input
+type="password"
+placeholder="Confirm password"
+className="form--input"
+onChange={handle}
+value={formData.passwordConfim}
+/>
+
+<div className="form——marketing")
+	<input
+		id="okayToEmail"
+		type="checkbox"
+		name="joinedNewsletter"
+		onChange={handleChange}
+		checked={formData.joinedNewsletter}
+/>
+
+<label htmlFor="okayToEmail">I want to join the newsletter</label>
+</div>
+<button 
+	className="form--submit"
+> 
+	Sign up

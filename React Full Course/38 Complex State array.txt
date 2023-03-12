@@ -1,0 +1,79 @@
+
+1) What understood? saving local variable , dont update UI
+2) Soln: state
+
+3)Convert code below: to use an array held in state
+
+		3.1) const thingsArray = ["Thing1", "Thing2"]		//initialize state with an array with these 2items
+			destructure thingsArray
+		
+		3.2) 	const thingsArray, setThingsArray] = React.useState(["Thing1", "Thing2"])
+
+		3.3) Add item to thingsArray when button clicked
+//Why this wont work?	Directly modifying state		//.push() modifies the original array
+		
+		function addItem() {
+			thingsArray.push("Test")	
+		}	
+
+		//How to modify state? setThingsArray()
+		//2 options? our new state is determined based on old state , hence callback function
+		function addItem() {
+			setThingsArray(<new value> || <callback function>)	
+		}	
+
+		3.4) 
+		function addItem() {
+			setThingsArray(prevThingsArray => prevThingsArray.push())	//Also not ccorrect way, since prevThingsArray is still 														//reference to thingsArray
+		}											//
+		}
+
+		3.5) Solution: use spread operator
+
+		function addItem() {
+			setThingsArray(prevThingsArray => {
+		return [...prevThingsArray, 'Thing ${prevThingsArray.length + 1}'])
+		})
+
+		3.6) Try adding items 1 by 1, Can see Thing 1 , Thing 2 ,THing 3 ... getting added when clicked button Add Item
+			//Similarly array Spead operator is used a lot in react
+			//There are other ways to make copy of original array/return new array	//ex for loop, loops over array + pushes items
+
+		3.7) Summary of what was done?
+	
+		import React from 'react';
+		import ReactDOM from 'react-dom';	
+	
+		function App() {
+			const[thingsArray, setThingsArray] = React.useState(["Thing1", "Thing2"])
+			
+			function addItem() {
+				setThingsArray(prevState => {
+					return [...prevState, 'Thing ${prevState.length + 1}']
+			})
+			
+			const thingsElements = thingsArray.map(thing => <p key={thing}> {thing} </p> )
+
+			return(
+				<div>
+					<button onClick={addItem}> Add Item </button>
+					{thingsElements}
+				</div>
+			)
+		}
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function App() {
+	const thingsArray, setThingsArray] = React.useState(["Thing1", "Thing2"])		//initialize state with an array with these 																//2items
+	
+	function addItem() {
+		setThingsArray(prevThingsArray => {
+			return [...prevThingsArray, 'Thing ${prevThingsArray.length + 1}'])
+		})
+	}
+
+	const thingsElements = thingsArray.map(thing => <p key = {thing}> {thing} </p>)
+}

@@ -1,0 +1,39 @@
+index.js
+----------------------------------------------------------------------------------------------------
+
+const navbar = (
+
+	<nav>
+		<h1> Abhi shop </h1>
+		<ul>
+			<li> Pricing  </li>
+			<li> About  </li>
+			<li> Contact  </li>
+			
+		</ul>
+
+	</nav>
+)
+
+
+
+ReactDOM.render(navbar, document.getElementById("root"))
+
+
+
+
+Index.html
+=========================================================
+<html>
+<head>
+<link rel="stylesheet" href="index.css">
+<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script crossorigin
+src="https://unpkg.com/react-dom@l7/umd/react—dom.development.js"></sc
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></scri 0 CI C "Wflflfiml
+</head>
+<body> > his is JSX
+<div id="root"></div>
+<script src="index.js" type="text/babel"></script> hbksapmagaph
+</body>
+</html>I

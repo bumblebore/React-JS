@@ -1,0 +1,62 @@
+Given:
+
+add lists
+add style
+
+
+a) How to add style to components?
+a.1) add a className
+		how added in html? class
+		how to add in jsx? className
+			Why className? class in html, className in Vanilla JS and React
+
+a.2) add style in style.css
+
+Note: Whatever you want to style as a separate component, give it a className
+
+
+a.3) code is still not cleaned up? Why? every component is stuffed up in 1 index.js
+	
+next Objective: clean components function codes and move into their own folders
+
+
+index.js
+-------------------------------------------------------------------------------------------------
+const ul=  document.createElement("ul")
+ul.className=  
+
+function Header() {
+return ( I
+	<header>
+		<nav className = "nav">
+			<img src="./react—logo.png" className= "nav-logo" />
+			<ul className= "nav-items">
+				<li>Pricing</li>
+				<li>About</li>
+				<li>Contact</li>
+			</ul>
+		</nav>
+	</header>
+)
+-------------------------------------------------------------------------------------------------
+styles.css
+.nav {
+display: flex;
+justify-content: space-between;	//puts space between logo and list
+align-items: center;			//fixes aspect ratios of the image
+}
+
+.nav-logo {
+	width: 60px;
+}
+
+.nav-items {
+list-style: none;
+display: flex		//gives items in a row		//note flex containers might stretch logo
+}
+
+
+.nav-items > li {			//how to select li which is inside nav items class
+	padding: 10px;		//each item gets a padding
+	
+}

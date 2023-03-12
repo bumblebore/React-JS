@@ -1,0 +1,37 @@
+
+	c.1) Add event listener to button 
+	How to add events to application?
+	
+	1) .addEventListener("click", function(){})						//click event
+	2) <div onclick="myFunction()" id="root"> </div>					//click event by accessing dom properties of object	//properties in jsx --> accessing properties in JS
+														
+
+	Ex add onClick to <button>		//onClick = dom property of object
+							//Why Camelcase? //JSx --> Javascript object (describing dom element that should be created)
+							//if we select this button using document.getElementById() ---> output: dom element with property: onClick 	//camel case is standard for JS 								elements
+
+	function handleClick() {
+		console.log("I was clicked!")
+	}
+
+	function handleMouseOver() {
+		console.log("MouseOver")
+	}
+	return (
+		<div className="container">
+			<img src="https://picsum.photos/640/360"
+			onMouseOver={handleOnMouseOver}
+			 />
+			<button onClick={function() {}}>Click me</button>	//can define this way also
+			<button onClick={handleClick()}>Click me</button>	
+												//Other event listener functions
+			<button onClick={handleClick}>Click me</button>		//if remove parenthesis : wont run function as soon as program reads this particular line	
+												//here pass funciton by value	//react adds function as event handler 	//in case click happens on this button
+			<button onMouseEnter>Click me</button>			//95% of events : mouseEvents						
+			<button onMouseOver>Click me</button>						
+			<button onMouseEnter>Click me</button>						
+			
+
+
+		</div>)
+

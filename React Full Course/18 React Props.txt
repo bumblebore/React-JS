@@ -1,0 +1,90 @@
+Only worked on static things till now
+
+a) Props
+
+
+
+
+b) Creating components from an array of data
+
+How to create designs like Airbnb ?
+a) Design a nav bar
+
+
+
+b) Hero component (photogrid and h1)
+
+
+b.1) App.js
+import React from "react"
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+/x
+Challenge: Build the Hero component.
+Check the Figma file for the design specific:
+,/
+export default function App() {
+return (
+<div>
+<Navbar />
+<Hero />7
+</div>
+)
+l —
+
+
+
+
+
+
+b.2) Hero.js
+
+import React from "react"
+export default function Hero() {
+return (
+	<section className="hero">
+	<img src="../images/photo-grid.png" className="hero--photo" />
+	<h1 className="hero--header">Online Experiences</h1>
+	<p className:"hero—-text">Join unique interactive activities led by
+	one-of-a-kind hosts—all without leaving home.</p>
+	</section> 
+ )
+}
+
+
+b.3) Styles.css
+
+* {
+box-sizing: border-box;
+}
+body {
+margin: 0;
+font-family: 'Popping', sans-serif;
+}
+nav {
+height: 70px;
+display: flex; ,fi
+padding: 20px 36px; {J
+box-shadow: 0px 2.98256px 7.4564px rgba(®, 0, O, 6.1);
+} 4
+.nav--logo {
+max-width: 100px;
+}
+y
+section {
+padding: 20px;
+}
+.hero {
+display: flex;
+flex-direction: Cq
+}
+
+.hero--photo {
+max-width: 400px;
+align-self: center;
+
+}
+
+.hero--header {
+margin-bottom: 16px;
+}

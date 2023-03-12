@@ -1,0 +1,40 @@
+1) Objective: save value in a state, and flip values back and forth
+
+1.1) initialize state
+	set it to true
+	//store in a variable
+	//destructure the array
+
+1.2) Do you need old value to determine new value? Yes
+	Use callback function
+
+	
+	function changeMind() {
+		setIsGoingOut(prevState => !prevState)	//setIsGoingOut(prevState => prevState? false: true)
+	}
+
+	<div onClick={() => setIsGoingOut()} className="state--value">
+		<h1> {isGoingOut ? "Yes": "No"}</h1>
+	</div>
+
+
+1.3) Now try clicking on Yes button : Toggles to NO -> Toggle to Yes ...
+
+import React from "react"
+
+export  default function App() {
+	const[isGoingOut, setIsGoingOut] = React.useState(true)
+	
+	function changeMind() {
+		setIsGoingOut(prevState => !prevState)
+	}
+
+	return(
+		<div className="state">
+			<h1 className="state--title">Do I feel like going out tonight </h1>
+			<div onClick={() => setIsGoingOut()} className="state--value">
+				<h1> {isGoingOut ? "Yes": "No"}</h1>
+			</div>
+		</div>	
+	)
+}

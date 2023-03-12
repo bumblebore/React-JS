@@ -1,0 +1,66 @@
+Objective: Add email field + state to the form
+
+1) 	How was all state saved previously as ?stored as strings
+	 
+	HOw did we add new state? Create new variables + Create new event handler functions
+
+
+2)	Objective: just add a field to state object: {firstName: " ", lastName: " "})
+		2.1) add a email property
+		2.2) handleChange() no change needed
+		2.3) Add another input field	
+				//note property :name --> should match --> name chosen in state	
+3)   	Test
+	//type in 3 boxes, see it reflected in console.log
+	//Conclusion: State is updating using all3 properties
+
+4) Are our inputs controlled?
+	What are controlled inputs? What are controlled components? next lecture
+
+
+Code:
+
+Form.js
+
+import React fron "react"
+export default function Form() {
+
+	const [formData, setFormData] = React.use5tate(
+			{firstName: " ", lastName: " ", email: " "})
+		)
+	console.log(formData)				
+
+	function handleChange(event) {	
+		console.log(event.target.name)
+		console.log(event.target.value)	//value that we want to change to
+		setFormData(prevFormData => {
+			return {
+			  ...prevFormData,
+
+				
+			}	
+		})
+	}
+	return (
+		<form>
+			<input
+				type: text "
+				placeholder="First Name"
+				onChange=(handleChange}
+				name="firstName"
+			/>
+
+			<input
+				type= "text"
+				placeholder="Last Name"
+				onChange={handleChange)
+				name="lastName"
+			/>
+			<input
+				type= "email"
+				placeholder="Email"
+				onChange={handleChange)
+				name="email"
+			/>
+		</form>
+)

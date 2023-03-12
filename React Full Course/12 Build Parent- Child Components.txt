@@ -1,0 +1,116 @@
+a) What are react Components?
+	function
+		What function has / returns? React elements (jsx)
+
+
+
+	NOTE: This piece of code in function in React : is called the UI
+	UI == What user is seeing on screen
+	FunctionName = 	needs to be Pascalcase
+
+
+import React from "react"
+import ReactDOM from "react-dom"
+
+function Temp() {
+	return (
+	
+		<>
+		<header>
+			<nav>		
+				<img src="./react-logo.png" width= "40px" />
+			</nav>
+
+		</header>
+		<h1>  Reasons I am excited to learn React </h1>
+
+		<ol>
+			<li> Its popular library </li>
+			<li> frontend sikho fir backend sikho </li>
+		</ol>
+		<footer>
+			<small>© 2021 Ziroll development. All rights reserved. </small>
+		</footer>
+		</>
+		)
+ 	}
+
+ReactDOMrender(<Temp />, document.getElementById("root"))
+
+
+
+b) How are these components reused? 		Also called creating different intances of a function
+
+	Parent Child Components
+
+	b.1) Create separate function Header() for separate component
+	b.2) import Header() as --> <Header/> inside Temp function
+	b.3) Finally render <temp> in ReactDOM.render(temp, document.getElementById("root"))
+	b.4) successfully rendered Header() inside --> Temp() 
+					Temp()   inside --> ReactDOM.render()
+
+	Similarly do for footer() and render <Footer/>in Temp()
+	Similarly do for MainContent()
+
+
+	b.5) Successfully named parent child components
+	many child components in a parent componet
+	....rabbit hole
+
+
+
+	This looks like HTML but using Components
+
+
+import React from "react"
+import ReactDOM from "react-dom"
+
+
+function Header() {
+	<>
+	<header>
+		<nav>		
+			<img src="./react-logo.png" width= "40px" />
+		</nav>
+
+	</header>
+
+	<>
+}
+
+function Footer() {
+	<>
+	<footer>
+		<small>© 2021 Ziroll development. All rights reserved. </small>
+	</footer>
+</>
+}
+
+function MainContent() {
+	<>
+	<h1>  Reasons I am excited to learn React </h1>
+		<ol>
+			<li> Its popular library </li>
+			<li> frontend sikho fir backend sikho </li>
+		</ol>
+	</>
+}
+
+function Temp() {
+	return (	
+		<>
+		<Header />
+		<MainContent />
+		<Footer />
+		</>
+		)
+ 	}
+
+ReactDOMrender(<Temp />, document.getElementById("root"))
+
+
+
+
+
+
+

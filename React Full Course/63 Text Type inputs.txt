@@ -1,0 +1,125 @@
+Form has different types of inputs except type = "text"
+text inputs
+radio buttons
+checkboxes
+text areas
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+
+1) Each has special considerations before using in react
+
+
+1.1) Create textarea (not self closing)
+
+	//= value
+	<textarea>Whatever you put inside </textarea>
+1.2)  React team made text area much more similar to text based input
+		//user can adjust this text area
+		//
+1.3) React team has made: <textarea />
+		add a value property
+		//no need to include a type property
+		//		
+			<textarea value={} />
+
+
+2) Challenge: Add text area for comments to form
+	//update our state //i.e include comments in our state //as user is typing into text area	
+	
+	2.1) Add a comments property to state object, initialize as empty string
+		{firstName: "", lastName: "". email: "", comments: ""}
+
+	2.2) render text area element at bottom of form	
+
+	2.3) Add a value={formData.comments}		//this will make it a controlled component
+		
+	2.4) Add a placeholder = "Comments"
+
+	2.5) Use same onChange handler
+		onChange={handleChange}
+
+	2.6) Add some styling directly to inputs
+			add text area to styles also
+
+	2.7)	Also add a console.log(formData.comments)		//makes sure it is hooked up correctly to state
+
+	2.8) Test: type "zsd" in Comments
+		logs out
+		
+	2.9)	 
+
+3)
+				
+3)
+
+	import React fron "react"
+	export default function Form() {
+	const [formData, setFormData] = React.useState(
+		{firstName: "", lastName: "". email: "", comments: ""}
+	)
+
+	console.log(formData.comments)		//makes
+
+	function handleChange(event) {
+		setFormData(prevFormData => {
+			return {
+				...prevFormData,
+				[event.target.name]: event.target.value
+				}
+			})
+		}
+	return (
+		<form>
+		<input
+			type="text"
+			placeholder="First Name"
+	 		onChange={handleChange}
+			name="firstName"
+			value={formData.firstName}
+		/>
+		<input
+			type="text"
+			placeholder="First Name"
+	 		onChange={handleChange}
+			name="lastName"
+			value={formData.lastName}
+		/>
+		<input
+			type="email"
+			placeholder="Email"
+			onChange={handleChange}
+			name="email"
+			value={formData.email}
+		/>
+		<textarea 
+			value={formData.comments}
+			placeholder= "Comments"
+			onChange={handleChange}
+			name="comments"		//assign same name that we have in state
+		/>
+		<textarea> Whatever we put inside </textarea>
+	</form>
+
+
+4)   
+Styles.css
+
+*{
+box-sizing: border-box;
+}
+
+body{
+margin: 0;
+padding: 26px;
+
+}
+
+input, textarea {
+margin-bottom: 15px;
+height: 36px;
+text-indent: 16px;
+border: 1px solid c444;
+border-radius: 5px;
+display: block;
+
+}

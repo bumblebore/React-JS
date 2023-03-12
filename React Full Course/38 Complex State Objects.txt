@@ -1,0 +1,60 @@
+Object in state
+
+Given: Contact card
+1)values filled using properties from state	//hardcoded for now
+
+2) In images folder
+	star-empty.png
+	star-filled.png
+	user.png
+
+3) Objective: 
+	Use ternary operator to determine which image (multiple star image filenames) to use
+			based on contact.isFavourite
+	Also add star icon
+
+	3.1)	Add ternary logic above toggleFavourite()
+			this will determine starIcon variable
+
+	3.2) 	Add {starIcon} interpolated value in img element as src
+
+	3.3) Try changing isFavourite property to true, in our hardcoded card values
+	
+
+App.js
+
+import React from "react"
+
+export default function App() {
+	const [contact, setContact] = React.useState({
+		firstName: "Jane"
+		lastName:  "Doe"
+		phone: "+1 (719) 555-1212",
+		email: "itsmyrealname@example.com",
+		isFavourite: false			
+
+	})
+
+let starIcon = contact.isFavourite ? "star-filled.png" : "star-empty.png"
+
+function toggleFavorite() {
+	console.log("Toggle Favorite")
+}
+
+return (
+	<main>
+		<article className="card">
+		<img src="./images/user.png" className="card--image" />
+		<div className="card-—info">
+		<img
+			src={‘../images/${sstarIcon}‘}
+			className="card——favorite"
+			onClick={toggleFavorite}
+/>
+		<h2 className="card——name">
+			{contact.firstName} {contact.lastName}
+		</h2>
+
+		<p className="card--contact"> {contact.phone}</p>
+		<p className="card--contact"> {contact.email}</p>
+}

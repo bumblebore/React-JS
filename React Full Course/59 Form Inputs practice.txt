@@ -1,0 +1,86 @@
+1) Objective: Add last name input to form
+
+Given:
+
+ import React fron "react"
+
+ export default function Form() {
+	 const [firstName, setFirstName] = Reac
+ 
+ function handleChange(event) {
+	 setFirstName(event.target.value)
+ }
+
+ return (
+ 	<form>
+ 		<input
+		type="text"
+		placeholder="First Name"
+		onChange={handleChange}
+		/>
+
+	</form>
+
+
+
+1.1) Create a state for lastName
+1.2) duplicate input field
+	//Change placeholder
+1.3) What handleChange() does?
+		setFirstName(event.target.value)	//only changes the firstName
+		
+	instead create 2 functions
+		handleFirstNameChange(event)
+
+		handleSecondNameChange(event)
+
+
+
+
+1.4) console.log(firstName, lastName) at top of function declaration
+	//runs every time re-rendered
+1.5) Test: Type : Joe  Schmoe
+
+	>Output: "Joe"	"Schmoe"
+
+2) What if our form had crazy 20-30-40 input boxes? Not suitable having separate handle functions
+
+SOlution? Combine state into an object
+	//using "event" parameter --> Find which property of state object to update 
+
+ => Learn in Form state object
+
+
+
+
+ import React fron "react"
+
+ export default function Form() {
+	 const [firstName, setFirstName] = React.useState("")
+ 	 const [lastName, setLastName] = React.useState("")
+
+
+console.log(firstName, lastName)
+
+ function handleFirstNameChange(event) {
+	 setFirstName(event.target.value)
+ }
+
+function handleLastNameChange(event) {
+	 setLastName(event.target.value)
+ }
+
+ return (
+ 	<form>
+ 		<input
+			type="text"
+			placeholder="First Name"
+			onChange={handleChange}
+		/>
+		<input
+			type="text"
+			placeholder="Last Name"
+			onChange={handleChange}
+		/>
+
+	</form>

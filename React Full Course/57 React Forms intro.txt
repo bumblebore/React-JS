@@ -1,0 +1,79 @@
+Form = weakness in React	
+	//Other libraries ot manage forms
+
+1) Why form
+	1.1) How forms worked in html? 
+		create form
+		give form an action (in php file)
+			provide method = post
+			form gets submitted 	
+		php will process data from form
+
+<html>
+	<head>
+		<link rel="stylesheet" href:"style.css">
+	</head>
+	<body>
+		<form
+			action="http$://my-php-backend.ccm"
+			method="POST"
+			id="my-form"
+		>
+		<label for "first—name">First Name: </label>
+		<input
+			type="tcxt"
+			id="first-name"
+			name:"firstName"
+			class="input"
+		/>	
+		<br />
+		<label for "first—name">First Name: </label>
+		<input
+			type="text"
+			id="first-name"
+			name="firstName"
+			class="input"
+		/>
+		<br />
+</html>
+
+	1.2) How forms worked in Javscript (vanilla JS)?
+		
+		document.getElementById selector gets the form ---> Adds a submit event listener ---> a function() runs when form is submitted
+		What function() does?
+			gather all values together
+			submits it an api
+				submitViaAPI() doing? just console logging data we input into form
+
+
+index.js 
+	document.getElementById("ny-form").addEventListner("submit", function(event)){
+		event.preventDefault() 
+		const formElements = event.target.elements
+		const {firstName, lastName} = formElements 
+		submitViaAPI ({
+			firstName: firstName.value
+			lastName:  last.Name.value
+		})
+	}) 
+
+	function submitViaAPI(data) { 
+		console.log(data)
+		console.log("Submitted!")
+}
+
+		//takeaway: form immeidately gathers data
+		
+	1.3) How forms work in React
+
+		instead of waiting till end of process then gathering and then sending data to api
+		
+		1.3.1) Create state
+		1.3.2) Update state, whenever keyboard change, checkbox change,radio button change etc
+		1.3.3) When time to submit comes (No more work to be done --> already gathered data) --> just submit it api
+		1.3.4) pass in state 	//we have been tracking it anyways
+
+
+	
+		
+ 

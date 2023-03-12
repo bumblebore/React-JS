@@ -1,0 +1,113 @@
+ What if our form had crazy 20-30-40 input boxes? Not suitable having separate handle functions
+
+SOlution? Combine state into an object
+	//using "event" parameter --> Find which property of state object to update 
+
+ => basically we will save state in an object instead of separate variables in separate functions
+means what?
+	-> we will have 1 setter function : What use? update correct piece of state in object
+
+	
+1.1) Remove extra functions
+	update onChange to use handleChange()
+1.2) Just use 1 state
+		inside that state --> save an object as default in that state
+		//What object?firstName , lastNamme 	//2 objects
+		//What properties will the object have?
+			firstName  : " "
+			lastName   : " "
+		//Change state variable name: formData	
+1.3)	We are receiving event in handleChange() event listener function
+
+	What event contains? event.target object
+	What is console.log(event.target)? <input type="text" placeholder="First Name">
+			//What is this? html element/  DOM object (under hood)
+		
+	//we used event.target.value earlier --> to get typed input value
+
+	//Now we have an object saved in state: {firstName: " ", lastName: " "}	
+	//What will happen if we set form data to --> event.target.value?	erase the object and replace with whatever string 
+
+1.4)Objective:
+	1.4.1) how will handlechannge know which input was triggered
+		//give name property to each input field
+	set name property -> = firstName and lastName	//same name as object properties. Why same name?
+			
+			We now have access to event.target.name
+Test:		what value? console.log(event.target.name) 
+		
+		if we type in input box1 : "asd" --> >Output: "firstName"
+		if we type in input box2 : "ved" --> >Output: "lastName"
+
+	--> Conclusion: We have access to property of state that we want to change
+
+	
+	1.4.2) What value we want to change? event.target.value	
+	
+	1.4.3) Set form data -> update object 
+			//we care about what previous input of string was	//a large form has dependent values	//hence use a callback()s
+			//use an arrow function to open the body of that function
+		//return a new object, keep old object intact(use spread operator)
+		//			  event.target.name: event.target.value
+					//key				//value
+
+		//We will use ES6 feature: computed properties
+			//can surround key in square brackets --> allows us to use a dynamic string as a property name for my object	//basically solves the syntax problem
+
+	1.4.4) Add a console.log() , so we can look at our state every time it changes
+
+	1.4.5) Test: 
+		{firstName: "", lastName: ""}
+
+		type "a" 	" "
+		{firstName: "a", lastName: ""}
+		type "a" 	" q"
+		{firstName: "a", lastName: "q"}
+
+
+//Conclusion: Entire state stays intact
+//Most difficult part of forms in react
+		
+Code:
+Form.js
+
+import React fron "react"
+export default function Form() {
+
+	const [formData, setFormData] = React.use5tate(
+			{firstName: " ", lastName: " "})
+		)
+	console.log(formData)				
+
+	function handleChange(event) {	
+		console.log(event.target.name)
+		console.log(event.target.value)	//value that we want to change to
+		setFormData(prevFormData => {
+			return {
+			  ...prevFormData,
+
+				
+			}	
+		})
+	}
+	return (
+		<form>
+			<input
+				type: text "
+				placeholder="First Name"
+				onChange=(handleChange}
+				name="firstName"
+			/>
+
+			<input
+				type= "text"
+				placeholder="Last Name"
+				onChange={handleChange)
+				name="lastName"
+			/>
+		</form>
+)
+			
+
+
+

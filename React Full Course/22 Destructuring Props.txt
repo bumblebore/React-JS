@@ -1,0 +1,65 @@
+<Contact
+		img="./images/mr—whiskerson.png"
+		name="Mr. Whiskerson"
+		phone="(212) 555-1234"
+		email="mr.whiskaz@catnap.meow"
+		/>
+
+a) Given prop
+const person = {
+		img="./images/mr—whiskerson.png"
+		name="Mr. Whiskerson"
+		phone="(212) 555-1234"
+		email="mr.whiskaz@catnap.meow"		
+}
+
+
+b) 
+
+const {img, name} = person			//very common to destructure incoming props
+
+
+c.1)	//Once destructured , dont ahve to access by the common prop name		//both way work
+
+import React from "react"
+export default function Contact({img, name, phone, email)) {
+return (
+<div className="contact—card")
+<img src={props.img}/>
+<h3>{name}</h3>					//<h3>{props.name}</h3>
+<div className="info-group">
+<img src="./images/phone-icon.png" />
+<p>{props.phone}</p>
+</div>
+<div className="info—group">
+<img src="./images/mail-icon.png" />
+<p>{props.email}</p>
+</div>
+</div>
+)
+} 
+
+c.2)				
+function App() {
+return (
+<div className="contacts">
+<Contact
+" img="./images/mr—whiskerson.png"
+
+name="Mr. Whiskerson"
+phone="(212) SSS-1234"
+email="mr.whiskaz@catnap.meow"
+
+/)
+
+<Contact
+img="./images/fluffykins.png"
+name="Fluffykins"
+phone="(212) SSS—2345"
+email="fluff@me.com"
+
+
+
+c) Use case props
+
+<h3 style={{display: props.setup ? "block" : "none"}}>Setup:			//Can use ternary operator

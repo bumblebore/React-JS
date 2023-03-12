@@ -1,0 +1,44 @@
+
+b) index.js
+	b.1) Create  component Navbar
+	b.2) Create  component  MainContent
+
+Conclusion: we made 2 reusable components:
+	Navbar
+	Maincontent
+
+---> composability
+	
+b) index.js
+b.1) function()
+
+b.2) function()
+
+b.3) ReactDOM.render()
+
+==============================
+index.js
+
+function Navbar() {
+	return (
+		<nav className="">
+			</div>
+			      <form>
+				
+			     </form>
+			</div>
+		</nav>
+	)
+}
+
+function MainContent() {
+return ( <h1> I am learning react </h1>)
+}
+
+ReactDOM.render(
+   <div>
+	<Navbar />
+	<MainContent />
+   </div>
+,document.getElementById("root")
+)

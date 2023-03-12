@@ -1,0 +1,85 @@
+Why react? //Rely on react to figure our what we wrote declaratively
+
+ReactDOM.render(<h1>Hello , React </h1>,document.getElementById("root"))
+
+Also
+a) Composable code
+		What is composable code?
+
+				    scrulpture  <----- Big Rock 
+		small brick ---> sculpture
+
+Ex if nav bar = xyz html code
+	earlier 10 nav bars = 10 times html code 		//not easy to maintain
+	now    10  nav bars = 10 nav bar components		//easy to maintain
+
+<body>
+<MyAwesomeNavbar />	//component
+<MainContent />		//component
+<MyAwesomeFooter />	//component
+</body>
+	
+
+
+Objective: Build a static page using React
+
+
+by writing reusable components
+
+
+a) get Figma design //can use and edit
+
+
+
+b)
+	b.1) Get CDN link paste in html
+	b.2)  use ReactDOM to render some html inside index.js file
+	b.3)  use ReactDOM to specify where to render : document.getElementById("root")		//what is root? id of element = entire website is inside this
+												//What is document.getElementById() ? regular DOM API
+		b.3.1) Other things you can render
+			ReactDOM.render(<p> Hi my name is hasabullah </p>)
+			//entire <p> .. </p> element --> is placed inside ---> <div> </div>
+
+		b.3.2) Alternative that can be used? document.querySelector("#root")
+				//What this does? helps to get dom nodes
+							What are dom nodes? singe point in dom tree ex elements,text,comments
+
+		b.3.3) 
+
+	b.4) Conclusion: in 1 line Using React We were able to insert html inside DOM element.
+			How? ReactDOM.render. 
+				ReactDOM.render('What to render', Where to render)
+				How to be able to use ReactDOM? ReactDOM CDN 
+				
+
+
+
+index.html
+-------------
+<html>
+<head>
+
+<link rel="stylesheet" href="index.css">
+<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>		//What is this? react17
+<script crossorig in src="https:llunpkg. coalreact-doeélflmd/react-dom.developecnt. j s"><lscript>	//What is this CDN? reactDOM CDN
+<script src="https : //unpkg.com/babel-standalone@6/babel.min.js"> </script>				//What is this? CDN for babel standalone
+
+</head>
+
+<body>
+	<div id="root"> </div>
+	<h1>Hello, React!</h1>	
+	<script src="index.js" type="text/babel"></script>								//have to change text type of index.js to babel
+</body>
+<div>
+
+
+</div>
+</html>
+
+
+
+c) index.js
+
+ReactDOM.render(<h1>Hello, everyone! </h1>, document.getElementById("root"))		//We use ReactDOM global variable to render 	//can write html inside JS
+

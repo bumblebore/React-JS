@@ -1,0 +1,88 @@
+a) We have a contact card
+
+export default function Contact() {
+return (
+	<div className="contact-card")
+		<img src="./images/fluffykins.png"/>
+		<h3>Fluffykins</h3>
+		<div className="info-group">
+		<img src="./images/phone—icon.png" />
+		<p>(212) 555—2345</p>
+		</div>
+		<div className="info—group"> ‘
+		<img src="./images/mail—icon.png" />
+		<p>fluff@me.com</p>
+	</div>
+</div>
+)
+}
+
+b) We want multiple instances of contact card but not of this code
+
+b.1) write contact.js
+
+b.2) In App.js 	//We have to pass data into separate component --> and dynamic generate output usinf function Contact()
+//Passing props in a component"
+	
+function App() {
+	return a,
+	<div className="contacts">
+		<Contact
+		img="./images/mr—whiskerson.png"
+		name="Mr. Whiskerson"
+		phone="(212) 555-1234"
+		email="mr.whiskaz@catnap.meow"
+		/>
+		<Contact
+		img="./images/fluffykins.png"
+		name="Mr. Whiskerson"
+		phone="(212) 555-1234"
+		email="fluff@me.com"
+		/>
+		<Contact />
+		<Contact />	
+	</div>
+	)
+}
+
+
+b.3) Receive props into your Component function
+
+export default function Contact(props) {
+console.log(props)
+return (
+	<div className="contact-card")
+		<img src={props.img}/>
+		<h3>{props.name}</h3>
+		<div className="info-group">
+		<img src="./images/phone—icon.png" />
+		<p>{props.phone}</p>
+		</div>
+		<div className="info—group"> ‘
+		<img src="./images/mail—icon.png" />
+		<p>{props.email}</p>
+	</div>
+</div>
+)
+}
+
+
+
+c)
+Note: for 
+	actual html elements  like <button> etc : have to pass element's allowed props
+c.1) What props did? reusable component
+How? pass attributes in element
+
+c.2) What props can you receive? "props" in function, use in code (props.property)
+	function Navbar(props) {
+		console.log(props.blahblahblah)
+	return (
+		<header>
+		...
+		</header>
+	)
+}
+
+
+c.3) What is data type of props? object

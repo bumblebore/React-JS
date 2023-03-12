@@ -1,0 +1,165 @@
+When displaying separate data in components:
+
+	a) pass individual data as separate props
+
+	Drawback? Card component becomes lengthy
+	//doesnt contain things like description	
+
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+import Card from "./components/Card"
+import data from "./data"
+export default function App() {
+const cards = data.map(item => {
+return (
+<Card
+key={item.id}
+img={item.coverImg}
+rating={item.stats.rating}
+reviewCount={item.stats.reviewCount}
+location={item.location}
+title={item.title}
+price={item.price}
+openSpots={item.openSpots} b.
+/>
+)
+})
+
+
+
+	b) Pass an item object instead with a key		//have to include everytime using map
+		b.1) Since structure of card being broken in Card.js, everything breaks down
+		//we dont understand props properly
+		//try to fix it
+		//try console.log(props)
+	
+
+	c) //change props.img --> props.item.img	//change everywhere
+
+		problem: 	props.item.img
+				props.item.review
+				props.item.rating	//all these are not working
+		
+		c.1) Check data.js
+				fieldname is coverImg
+				just replace props.item.img ---> with props.item.coverImg 
+			Similarly reviewCount and rating is in stats
+				
+				stats: {
+					rating: 5.0,
+					reviewCount: 6
+				}
+
+			Hence change
+				props.item.rating --> props.item.stats.rating 
+				props.item.rating --> props.item.reviewCount.rating 
+				//Why did it work earlier?
+
+
+		c.2) Why badge still missing?	
+				In Card.js logic	
+			Add props.item there also
+					
+		import React from "react"
+		export default function Card(props) {
+			let badgeText
+			if (props.item.openSpots === 0) {
+				badgeText = "SOLD OUT"
+			} else if (props.item.location === "Online") {
+				badgeText = "ONLINE"
+			}
+
+		c.3) 
+			<Card
+				key={item.id}
+				item={...item}
+			/>
+
+
+
+		//Any alternate way? this method not clear
+			<Card
+				key={item.id}
+				item={item}
+			/>
+		//DOnt have to ccheck data.js	//to find what properties are there
+		//go to app
+
+
+App.js
+
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+import Card from "./components/Card"
+import data from "./data"
+export default function App() {
+const cards = data.map(item => {
+return (
+<Card
+key={item.id}
+itgm={item}
+/>
+)
+})
+
+
+// <Hero />
+return (
+<div>
+<Navbar />
+<section className="cards—list">
+{cards}
+</section>
+</div>
+)
+
+
+Card.js
+//This code is changing the structure of card
+
+import React from "react" '-
+export default function Card(props) {
+let badgeText
+if (props.open$pots === 0) {
+badgeText = "SOLD OUT"
+} else if (props.location === "Online") {
+badgeText = "ONLINE"
+.}
+
+
+/x
+Challenge: Fix our component! QT —
+x/ >
+return (
+<div className="card">
+{badgeText && <div className="card——badge">{badgeText}</div>}
+//change props.img --> props.item.img						//<img src={‘../images/${props.img}‘} className="card-—image" />
+<div className="card--stats">
+<img src="../images/star.png" className="card~~star" />
+<span>{props.img.rating}</span>	//<span>{props.rating}</span>
+<span className="grav">(props.item.reviewCountl) . </soan> //<span className="grav">(foroos.reviewCountl) . </span>
+
+
+
+-------------------------------------------------------------------------------------
+data.js
+
+‘ ' G C lindex.
+export default [
+{
+id: 1, @ oirbnb
+titlei "Life Lessons with Katie Zaferes",
+description: "I will share with you what I call \"
+Disappointment.\" Throughout my career, many of my :Oomme
+and losses. But learning from those difficult mome . , .
+Llfe Lessons wnth Kotne
+above them and reach my goals.", dees
+PFTC91 135, From5136/person
+coverImg: "katie-zaferes.png",
+stats: {
+rating: 5.0,
+reviewCount: 6
+},
+location: "Online",
+openSpots: 0,
+},

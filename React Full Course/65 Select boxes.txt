@@ -1,0 +1,104 @@
+Select & Option
+
+1) What form element we talking about? select box
+							options
+
+
+1.1) What does it look like?
+	Add a id to select box	//Why? to associate our label with it
+	each option has a value
+	How to grab a value of any selected option? property: selected 
+
+1.2)  Add value property in select
+1.3) Add favColor property in state //initialize as empty string
+1.4) set value property = {formData.favColor} 
+1.5) use onChange , set to {handleChange}
+	//make sure handleChange work correctly. How? mirror name property == "favColor" 	(property saved in state)
+1.6) Test: Click drop down -> select any of the different colors
+	since we cconsole.logged(formData.favColor) --> state will also update --> will console.log() favcolor
+1.7) What issue still?
+	hit refresh --> initial console.log --> " "		//initially state initialized as empty string for favColor
+	However we dont have an option representing this empty string
+		//Add a new option with empty string		
+		//		<option value="">-- Choose --</option>
+		//users will see "-- Choose --" as first option
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+	import React fron "react"
+	export default function Form() {
+	const [formData, setFormData] = React.useState(
+		{firstName: "", lastName: "". email: "", comments: "", isFriendly: true, employment: "", favColor: ""}
+	)
+
+	console.log(formData.favColor)		//makes
+	
+	function handleChange(event) {
+		const {name, value, typep = event.target
+		setFormData(prevFormData => {
+			return {
+				...prevFormData,
+				[name]: type === "checkbox" ? checked : value
+				}
+			})
+		}
+
+
+	return (
+		<form>
+		<input
+			type="text"
+			placeholder="First Name"
+	 		onChange={handleChange}
+			name="firstName"
+			value={formData.firstName}
+		/>
+		<input
+			type="text"
+			placeholder="First Name"
+	 		onChange={handleChange}
+			name="lastName"
+			value={formData.lastName}
+		/>
+		<input
+			type="email"
+			placeholder="Email"
+			onChange={handleChange}
+			name="email"
+			value={formData.email}
+		/>
+		<textarea 
+			value={formData.comments}
+			placeholder= "Comments"
+			onChange={handleChange}
+			name="comments"		//assign same name that we have in state
+		/>
+		<input 
+			type="checkbox" 
+			id="isFriendly"
+			checked={formData.isFriendly}
+			onChange={handleChange}
+			name="isFriendly"		//
+		/>
+
+		<label htmlFor="isFriendly">Are you friendly? </label>
+		<br>
+
+		
+	</form>
+	<select 
+		id = "favColor"
+		value={formData.favColor}
+		onChange={handleChange}
+		name = "favColor"
+	>
+		<option value="">-- Choose --</option>
+		<option value="red">Red</option>
+		<option value="orange">Red</option>
+		<option value="yellow">Red</option>
+		<option value="green">Red</option>
+		<option value="blue">Red</option>
+		<option value="indigo">Red</option>
+		<option value="violet">Red</option>
+
+	</select>

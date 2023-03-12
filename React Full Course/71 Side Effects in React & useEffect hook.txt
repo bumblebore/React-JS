@@ -1,0 +1,79 @@
+1) How to manage side effects in react
+
+	1.1) What are primary tasks of React?
+		a) Works with dom in browser --> to render UI	//how? jsx + html look alike elements
+			underhood --> React jsx ---> HTML
+
+		b) Managing state
+			 React remembers state value from one render to next
+				We can hook into this state. How? useState() hook
+
+		c) Keep UI updated whenever state change occcurs
+
+
+
+	1.2) What React cant handle on its own?
+			Things that are outside of React's reach
+			  a) local storage on browser
+
+			  b) api / database interactions	
+				where? in code
+				why? React not incharge of api code	// React doesnt know what api we are reaching out to
+
+			  c) Subscriptions
+				//What are websockets used for?
+					client -- server communication protocol
+					//used for real time connections (online games, chat apps, stock trading platforms)
+				//Why need websockets?
+					traditional http is stateless (each request = independent transaction))
+					//in efficient for applications that need constant connection between client and server
+
+				//What websocket does? push data real time
+								//client doesnt have to poll the server for updates	
+								//Ex tracking changes made by multiple users to a shared doc in real time
+
+
+				if we include websockets in App	
+				//what if we have 2 pieces of state that we have to sync
+				or lets say 1 sstate to react to a change in another piece of state
+
+				//What react will do?
+					manage state of each one behind the scenes
+				//
+					its not looking for crossover between both states
+			 
+			   d) Conclusion:
+				 when we comment out code
+				 React is still trying to manage state  + keep state and screen in sync
+				//react has no way to stop rendering	//What if App component receieved props
+											props also changing
+				
+
+			   e) Solution by React team: useEffect() hook  			
+		
+		
+2)
+	2.1) What is useEffect() hook?
+			Gives developers blank canvas
+			can use blank canvas to intereact outside of react ecosystem
+
+			What react ecosystem contains? state, props, UI	
+			
+			//What use effect does? helps sync state -- with -- outside systems 
+												//what outside systems? local storage/api/subscriptions
+
+	2.2) useEffect() hook documentation React
+		How to use useEffect hook?
+
+		2.1) get familiar with React class lifecycle methods
+			it contains componentDidMount , componentDidUpdate, componentWillUnmount hook
+			//these are class life cycle methods
+
+		2.2)  useEffect is like these lifecycle methods
+		//Dont stress if not understanding
+		//advice: dont think useEffect() as a way to hook into lifecycle methods
+		
+		2.3) 	//Advance topic useEffect() //can study later
+
+	2.3) 
+		

@@ -1,0 +1,61 @@
+jsx ---> returns plain JS object
+DOM cant understand plain JS object if using .append()
+
+when using ReactDOM.render() --> react converts JS output of jsx ---> DOM elements
+
+
+
+Note: if not using CDN, there is no ReactDOm
+How will you render if no ReactDOm since no CDN?
+
+import it
+========================================================================
+Objective: try using DOM method  document.getElementById().append() instead of ReactDOM.render()
+
+
+import React from "react"
+import ReactDOM from "react-dom"
+
+
+const page = (
+	<div>
+		<h1>My awesome website in React</h1>
+		<h3>Reasons I love React</h3>
+		<ol>
+			<li>It's composable</li>
+			<li>It's declarative</li>
+			<li>It's a hireable skill</li>
+			<li>It's actively maintained by skilled people</li>
+		</ol>
+	</div>
+
+document.getElementById("root").append(page)		//>object object
+document.getElementById("root").append(JSON.stringify(page))//object object		
+
+ReactDOM.render(page, document.getElementById("root").append(JSON.stringify(page)) 	//why works? usual way + ReactDOM imported , it can detect jsx -> json now --> convert to DOM elements
+)
+)
+
+
+> object object			//What is this? JSON , not yet stringified
+{"type":"div","key":null,"ref":null,"props":{"children":
+[{"type":"h1","key":nu|l,"ref":null,"props":{"children":"My aweSc
+website in React"},"_owner":null,"_store":{}},
+{"type":"h3","key":null,"ref":null,"props":{"children":"Reasons
+love React"},"_owner":null,"_store":{}},
+{"type":"ol","key":null,"ref":null,"props":{"children":
+[{"type":"li","key":null,"ref":null,"props":{"children":"lt's
+composable"},"_owner":null,"_store":{}},
+{"type":"li","key":null,"ref":null,"props":{"children":"lt's
+declarative"},"_owner":null,"_store":{}},
+["type":"li","key":null,"ref":null,"props":{"children":"lt's a hireal:
+skill"},"_owner":null,"_store":{}},
+{"type":"li","key":null,"ref":null,"props":{"children":"It's actively
+maintained by skilled people"},"_owner":null,"_store":
+{}}]},"_owner":null,"_store":{}}]},"_owner":null,"_store"m
+
+
+
+
+Concllusion:
+Why ReactDOM? jsx --> json --> DOM elements

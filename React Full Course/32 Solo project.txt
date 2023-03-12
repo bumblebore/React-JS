@@ -1,0 +1,50 @@
+What learnt?
+	props 
+	mapping data
+
+
+Build travel journal page
+		//fun places you have visited
+	
+// create array of data in separate JS file
+// array contains:
+		title Location
+		google maps link
+		start date of trip
+		description
+		image url
+
+//Objective: make react display the array
+//data.js		//use map() and props , //pass this data down to custom components	
+//
+
+
+export default t
+{
+title: "Mount Fuji",
+location: "Japan",
+googleMapsUrl: "https://goo.gl/maps/lDGMSWrWnATngNBs",
+startDate: "12 Jan, 2021",
+endDate: "24 Jan, 2021",
+description: "Mount Fuji is the tallest mountain in Japan, standing at 3,776 meters (12,3
+feet). Mount Fuji is the single most popular tourist site in Japan, for both Japanese and
+foreign tourists.",
+imageUrl: "https://unsplash.com/photos/WLvabMyfas"
+}
+J
+
+
+
+
+a) index.js
+
+import React from "react"
+import ReactDOM from "react-dom"
+ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById("root"))l
+
+
+b) i
+
+
+
+

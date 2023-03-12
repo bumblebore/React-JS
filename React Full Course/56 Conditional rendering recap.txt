@@ -1,0 +1,30 @@
+a) What is conditional rendering
+display something on page only if some condition true
+
+
+b) when to use &&?
+	Display or not display
+
+
+c) When to use ternary
+	decide what to displau
+
+d) if more than 2 options to decide
+	if...else if...else
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function App() {
+let someVar
+if(){
+	someVar = <$one35x />
+} else if() {
+	...	
+} else {
+	...
+}
+return (
+	<div>{someVar}</div>
+)
+}
+

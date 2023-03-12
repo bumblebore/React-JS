@@ -1,0 +1,79 @@
+
+Given:
+
+Objective : interact with api
+
+1) API lives outsidde of our application
+2) 
+	2.1)request information from api
+		How to request info from api in React?
+		a) GET the data (fetch)			//make a fetch request to star wars api	//contains information aobut star wars 											characters and planets and movies
+			//How to get data? (fetch/ tool like axios)
+			a.1) resolve the promise that we get back from fetch
+				convert json response --> javscript object that we can use
+
+			a.2) console.log() the data of the javascript object
+			//.then(data => console.log(data))
+			>Output:
+			{namez "Luke Skywalker", height: "172", mass: "77", hair_color: "blond", skin_color: "fair", eye_color: "blue",
+			birth_year: "lQBBY", gender: "male", homeworld: "httpszl/swapi.dev/api/planets/l/", films:
+
+	
+			a.3) stringify the entire object
+			Why stringify?
+				
+			a.4) put the stringified object in state
+
+		b) Save that data to state
+		c) do whatever you want with data saved in state
+
+		d) Test -> refresh
+		What we get? data from api as output
+		>{	
+		"name": "Luke Skywalker",
+		"height": "172",
+		"mass": "77",
+		"hair_color": "blond",	
+		"skin_color": "fair",	
+		"eye_color": "blue",
+		"birth_year" : " 19BBY " ,
+		...
+		}
+
+3) What is going behind the scenes?		
+ 3.1) console.log("Component rendered") just before fetching data from api
+		
+ 3.2) Every time app component will re-render / render
+	Refresh
+	"Component Rendered" shows repeatedly. (infinite loop)
+	Why console.log is running in infinite loop?
+	
+		fetch is at top level of App component
+ 		App component renders --> fetch gets called --> setStarWarsData(data) gets called --> state updated --> component  re-rendered -> fetch again called --> infinite loop
+		
+	How to solve this repeated fetching?
+	   	
+	3.2.1) comment out setState part
+			//setState is causing the issue
+	3.2.2) These are Side effects in React --> deal in next lesson			
+
+
+	import React from "react"
+	export default function App() {
+		const [starWarsData, setStarWarsData] = React.useState({})	
+		console.log("Component rendered")	
+		fetch ( "https://swapi.dev/api/people/l")
+			.then(res => res.json)
+			.then(starWarsData => console.log(data))
+		return (
+		<div>
+			<pre>{JSON.stringify(starWarsData, null, 2)} </pre>
+		</div>
+	)
+}
+
+	
+
+	2.2)submit information to api
+		
+	

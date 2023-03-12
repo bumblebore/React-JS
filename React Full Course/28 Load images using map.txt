@@ -1,0 +1,76 @@
+Objective: we wont have 1 file with all datas
+We will have to get data from different online resources
+
+a) How to load images usin .map()
+  a.1) import data
+  a.2) use map to return Card component, store in card
+  a.3) {card}
+  a.4) cards will be vertically stacked
+App.js	
+
+import React from "react"
+import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+import Card from "./components/Card"
+import data from "./data"
+console.log(data)
+
+
+export default function App() {
+T// <Hero />
+const cards = data.map(item => {
+	return (
+		<Card
+			img={item.coverImg}
+			rating={item.stats.rating}
+			reviewCount={item.stats.reviewCount}
+			location={item.location}
+			title={item.title}
+			price={item.price}
+		/>
+		)
+	})
+
+return (
+	<div>
+		<Navbar />
+		{cards}
+</div>
+)
+}
+
+b) 
+
+{
+id: 2, .3
+title: "Learn Wedding Photography",
+description: "Interested in becoming a wedding photographer? For beginner and experienced
+photographers alike, join us in learning techniques required to leave the happy couple with
+memories that'll last a lifetime.",
+price: 125,
+coverImg: "wedding-photography.png",
+stats: {
+rating: 5.0,
+reviewCount: 30
+},
+{
+id: 2, .3
+title: "Learn Wedding Photography",
+description: "Interested in becoming a wedding photographer? For beginner and experienced
+photographers alike, join us in learning techniques required to leave the happy couple with
+memories that'll last a lifetime.",
+price: 125,
+coverImg: "wedding-photography.png",
+stats: {
+rating: 5.0,
+reviewCount: 30
+},
+location: "Online",
+openSpots: 27,
+}
+
+c) data.js file
+array of objects
+
+Objective: map array data to <card> and ender array
+

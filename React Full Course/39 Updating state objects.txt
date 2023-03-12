@@ -1,0 +1,105 @@
+Objective: Updating state objects
+		Click star icon --> flip isFavourite: true --> false
+ 			//only isFavourite we want to change, rest everything keep same
+
+
+
+1) How? setContact() inside toggleFavourite()
+
+2) onClick={toggleFavorite}	//everytime toggleFavourite is called evtime <img> is clicked
+	//flip is Favourite value: isFavourite: !prevContact.isFavourite
+	//but how to keep remaining info same // this is only flipping isFavourite field
+	//other info will disappear from card, only star will be visible
+	//How to solve?
+		How to update keep all properties, and update only isFavourite
+
+	//THIS IS A BUG, if we have worked with classbased react 
+		meaning?
+		In class based react --> using this.setState() --> figures out how to combine old object + new property we replacing it with
+	//What problem now?
+		using hooks :  React.useState() --> does not do this
+				How to update keep all properties, and update only isFavourite
+				Spread all properties of old contact (..prevContact)	//note prevContact was a naming convention
+
+		Add 	...prevContact in toggleFavourite()
+			//This will bring in all properties (including isFavourite property)		
+			//isFavourite: !prevContact.isFavourite
+	
+
+3) Overwrite isFavourite property
+
+	function toggleFavorite() {
+		setContact(prevContact => {
+			return {
+			...prevContact,
+			isFavourite: !prevContact.isFavourite
+		}
+
+
+
+	})
+
+
+	Note: Above is equivalent to 
+		return {
+			firstName: "John",
+			lastName: "Doe",
+			phone: "+1 (719) SSS—1212",]
+			email: "itsmyrealname@example.com",
+			isFavorite: true,
+			isFavorite: !prevContact.isFavorite
+		}
+	   })
+	}
+
+	return (
+		<main>
+			<article className="card">
+			 <img src="./images/user.png" className="card--image" />
+			<div className="card--info">
+
+	)
+
+4)
+
+
+
+
+import React from "react"
+export default function App() {
+
+	const [contact, setContact] = React.use$tate({
+		firstName: "John",
+		lastName: "Doe",
+		phone: "+1 (719) 555-1212",
+		email: "itsmyrealname@example.com",
+		isFavorite: true
+	})
+
+	let starIcon = contact.isFavorite ? "star-filled.png" : "star—empty.png"
+	
+	function toggleFavorite() {
+		setContact(prevContact => {
+			return {
+			...prevContact,
+			isFavourite: !prevContact.isFavourite
+		}
+	})
+		
+}
+return (
+	<main>
+		<article className="card">
+			<img src="./images/user.png" className="card——image" />
+			<div className="card——info">
+
+		<img
+			src={‘../images/${starIcon}‘}
+			className="card-—favorite"
+			onClick={toggleFavorite}
+		/>
+		<h2 className="card—-name">
+			{contact.firstName} {contact.lastName}
+		</h2>
+		<p className="card--contact">{contact.phone}</p>
+		<p className="card--contact">{contact.email}</p>

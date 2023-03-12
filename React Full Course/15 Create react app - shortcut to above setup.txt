@@ -1,0 +1,52 @@
+We used CDNs and babel to setup earlier
+Now we trying to run locally
+a) Setup bundler using webpack
+
+
+	For react to work in browser ---> need babel and webpack
+
+
+
+
+b) Use create-react-app		//hides webpack implementation from us
++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+
+Create-react-app
+
+
+a) Node.js and npm install
+install using nvm		//helps switch node version easily
+				//https://github.com/nvm-sh/nvm
+nvm install 
+node -v
+v16.13.0
+b) npm
+
+
+npm -v
+8.0
+
+
+b) Create-react-app
+
+npx create-react-app my-appfolder
+cd my-appfolder
+npm start
+
+>compiled successfully
+
+
+
+
+c) Delete some files
+
+App.css
+
+App.js
+
+App.test.js
+index.css
+index.js
+logo.SVG
+reportWebVitals.js
+setupTests.js
